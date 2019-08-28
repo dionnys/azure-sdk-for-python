@@ -16,7 +16,7 @@ pr:
     - feature/*
     - hotfix/*
     - release/*
-    - 'restapi*/resource-manager'
+    - restapi*
   paths:
     include:
     - sdk/servicebus/

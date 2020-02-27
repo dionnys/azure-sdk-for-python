@@ -38,7 +38,7 @@ steps:
       sleep 100 &
       killall -SIGSEGV sleep
 
-      ls /cores
+      ls -R /cores
     displayName: 'Enable Core Dumps And Check Em'
 
   - task: PublishPipelineArtifact@0

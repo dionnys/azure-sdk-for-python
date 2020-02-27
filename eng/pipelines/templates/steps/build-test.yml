@@ -41,6 +41,11 @@ steps:
       ls /cores
     displayName: 'Enable Core Dumps And Check Em'
 
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: 'core_dumps' 
+      targetPath: /core
+
   - task: PythonScript@0
     displayName: 'Run Tests'
     inputs:

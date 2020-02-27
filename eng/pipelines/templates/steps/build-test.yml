@@ -32,6 +32,15 @@ steps:
     
   - ${{ parameters.BeforeTestSteps }}
 
+  - script: |
+      touch /cores/test && rm /cores/test
+      ulimit -c unlimited
+      sleep 100 &
+      killall -SIGSEGV sleep
+
+      ls /cores
+    displayName: 'Enable Core Dumps And Check Em'
+
   - task: PythonScript@0
     displayName: 'Run Tests'
     inputs:

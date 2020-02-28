@@ -41,8 +41,8 @@ steps:
 
       cp /bin/sleep /tmp/
 
-      /tmp/sleep 100 &
-      killall -SIGSEGV /tmp/sleep
+      /tmp/sleep 10 &
+      killall -SIGSEGV sleep
 
       sudo ls -R /Library/Logs/DiagnosticReports
       sudo ls -R ~/Library/Lobs/DiagnosticReports

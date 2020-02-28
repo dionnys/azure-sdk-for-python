@@ -32,7 +32,7 @@ steps:
     
   - ${{ parameters.BeforeTestSteps }}
 
-  - script: |
+  - bash: |
       defaults write com.apple.finder AppleShowAllFiles TRUE
 
       ulimit -c unlimited

@@ -33,11 +33,16 @@ steps:
   - ${{ parameters.BeforeTestSteps }}
 
   - bash: |
+      sudo chmod 1777 /cores
+
       defaults write com.apple.finder AppleShowAllFiles TRUE
 
       ulimit -c unlimited
-      sleep 100 &
-      killall -SIGSEGV sleep
+
+      cp /bin/sleep /tmp/
+
+      /tmp/sleep 100 &
+      killall -SIGSEGV /tmp/sleep
 
       sudo ls -R /Library/Logs/DiagnosticReports
       sudo ls -R ~/Library/Lobs/DiagnosticReports

@@ -33,12 +33,13 @@ steps:
   - ${{ parameters.BeforeTestSteps }}
 
   - script: |
-      touch /cores/test && rm /cores/test
+      defaults write com.apple.finder AppleShowAllFiles TRUE
+
       ulimit -c unlimited
       sleep 100 &
       killall -SIGSEGV sleep
 
-      ls -R /cores
+      sudo ls -R /cores
     displayName: 'Enable Core Dumps And Check Em'
     continueOnError: true
 

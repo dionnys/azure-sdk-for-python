@@ -39,10 +39,8 @@ steps:
 
       ulimit -c unlimited
 
-      cp /bin/sleep /tmp/
-
-      /tmp/sleep 10 &
-      killall -SIGSEGV sleep
+      python ./scripts/devops_tasks/crash_creator.py &
+      killall -SIGSEGV Python
 
       sudo ls -R /Library/Logs/DiagnosticReports
       sudo ls -R ~/Library/Lobs/DiagnosticReports

@@ -40,7 +40,7 @@ steps:
       ulimit -c unlimited
 
       python ./scripts/devops_tasks/crash_creator.py &
-      killall -SIGSEGV Python
+      killall -SIGSEGV python
 
       sudo ls -R /Library/Logs/DiagnosticReports
       sudo ls -R ~/Library/Lobs/DiagnosticReports

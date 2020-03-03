@@ -1,0 +1,10 @@
+parameters:
+  TargetUploadDirectory: 'azure-*'
+  TargetContainer: ''
+
+steps:
+  - pwsh: |
+      az storage blob upload-batch -d ${{ parameters.TargetContainer}} `
+        -s ${{ parameters.TargetUploadDirectory }} `
+        --sas-token "$env:CORE_DUMP_TOKEN"
+      

@@ -33,7 +33,7 @@ steps:
     
   - ${{ parameters.BeforeTestSteps }}
 
-  - bash: |
+  - script: |
       sudo chmod 1777 /cores
 
       defaults write com.apple.finder AppleShowAllFiles TRUE
@@ -44,23 +44,25 @@ steps:
       killall -SIGSEGV python
 
       ls -R /cores
-    displayName: 'Enable Core Dumps And Check Em'
-    continueOnError: true
 
-  - task: PythonScript@0
+      python scripts/devops_tasks/setup_execute_tests.py "${{ parameters.BuildTargetingString }}" ${{ parameters.AdditionalTestArgs }} ${{ parameters.CoverageArg }} --mark_arg="${{ parameters.TestMarkArgument }}" --service="${{ parameters.ServiceDirectory }}" --toxenv="${{ parameters.ToxTestEnv }}" --injected-packages="${{ parameters.InjectedPackages }}" ${{ parameters.ToxEnvParallel }}
     displayName: 'Run Tests'
-    inputs:
-      scriptPath: 'scripts/devops_tasks/setup_execute_tests.py'
-      arguments: >-
-        "${{ parameters.BuildTargetingString }}" 
-        ${{ parameters.AdditionalTestArgs }} 
-        ${{ parameters.CoverageArg }} 
-        --mark_arg="${{ parameters.TestMarkArgument }}" 
-        --service="${{ parameters.ServiceDirectory }}" 
-        --toxenv="${{ parameters.ToxTestEnv }}"
-        --injected-packages="${{ parameters.InjectedPackages }}"
-        ${{ parameters.ToxEnvParallel }}
     env: ${{ parameters.EnvVars }}
+
+  # - task: PythonScript@0
+  #   displayName: 'Run Tests'
+  #   inputs:
+  #     scriptPath: 'scripts/devops_tasks/setup_execute_tests.py'
+  #     arguments: >-
+  #       "${{ parameters.BuildTargetingString }}" 
+  #       ${{ parameters.AdditionalTestArgs }} 
+  #       ${{ parameters.CoverageArg }} 
+  #       --mark_arg="${{ parameters.TestMarkArgument }}" 
+  #       --service="${{ parameters.ServiceDirectory }}" 
+  #       --toxenv="${{ parameters.ToxTestEnv }}"
+  #       --injected-packages="${{ parameters.InjectedPackages }}"
+  #       ${{ parameters.ToxEnvParallel }}
+  #   env: ${{ parameters.EnvVars }}
 
   - ${{ parameters.PostTestSteps }}
 

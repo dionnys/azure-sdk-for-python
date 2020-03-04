@@ -93,6 +93,7 @@ jobs:
         ToxTestEnv: $(toxenv)
         ToxEnvParallel: ${{ parameters.ToxEnvParallel }}
         InjectedPackages: ${{ parameters.InjectedPackages }}
+        PostTestSteps: ${{ parameters.PostTestSteps }}
         BeforeTestSteps: 
           - task: DownloadPipelineArtifact@0
             inputs:

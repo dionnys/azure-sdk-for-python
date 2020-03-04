@@ -33,6 +33,13 @@ steps:
     
   - ${{ parameters.BeforeTestSteps }}
 
+  - pwsh: |
+      Write-Host "$(azure-sdk-core-dump-container)"
+      Write-Host "$(azuresdkartifacts-access-key)"
+      Write-Host "$(azure-sdk-artifact-account-name)"
+    displayName: 'Upload Found Core Dumps'
+    condition: succeededOrFailed()
+
   - script: |
       sudo chmod 1777 /cores
 

@@ -19,7 +19,6 @@ jobs:
             #   --account-key "$(azuresdkartifacts-access-key)"
             #   --account-name "$(azure-sdk-artifact-account-name)"
           displayName: 'Upload Found Core Dumps'
-          continueOnError: true
       ServiceDirectory: eventhub
       Matrix:
         MacOs_Python37:

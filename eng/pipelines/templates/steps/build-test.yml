@@ -65,7 +65,6 @@ steps:
         ${{ parameters.ToxEnvParallel }}
     env: ${{ parameters.EnvVars }}
 
-
   - ${{ parameters.PostTestSteps }}
 
   - task: PublishTestResults@2

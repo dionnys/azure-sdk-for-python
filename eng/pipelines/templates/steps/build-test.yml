@@ -60,6 +60,7 @@ steps:
   #   env: ${{ parameters.EnvVars }}
 
   - pwsh: |
+      ls -R /cores
       az --version
       $env:AZURE_STORAGE_ACCOUNT = '$(azure-sdk-artifact-account-name)'
       $env:AZURE_STORAGE_KEY = '$(azuresdkartifacts-access-key)'

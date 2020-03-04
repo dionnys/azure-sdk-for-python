@@ -11,6 +11,15 @@ jobs:
   - template: ../../eng/pipelines/templates/jobs/archetype-sdk-tests.yml
     parameters:
       AllocateResourceGroup: 'false'
+      PostTestSteps: 
+      - pwsh: |
+          az --version
+          # az storage blob upload-batch -d "$(azure-sdk-core-dump-container)" `
+          #   -s /cores `
+          #   --account-key "$(azuresdkartifacts-access-key)"
+          #   --account-name "$(azure-sdk-artifact-account-name)"
+        displayName: 'Upload Found Core Dumps'
+        continueOnError: true
       ServiceDirectory: eventhub
       Matrix:
         MacOs_Python37:
@@ -18,7 +27,6 @@ jobs:
           OSVmImage: 'macOS-10.15'
           PythonVersion: '3.7'
       EnvVars:
-        CORE_DUMP_TOKEN: $(azure-sdk-core-dump-sas)
         AZURE_STORAGE_ACCOUNT: $(python-eh-livetest-event-hub-storage-account)
         AZURE_STORAGE_ACCESS_KEY: $(python-eh-livetest-event-hub-storage-access-key)
         AZURE_STORAGE_CONN_STR: $(python-eh-livetest-event-hub-storage-conn-str)

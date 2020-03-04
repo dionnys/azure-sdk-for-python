@@ -44,6 +44,15 @@ stages:
 - template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
   parameters:
     ServiceDirectory: appconfiguration
+    PostTestSteps: 
+    - pwsh: |
+        az --version
+        # az storage blob upload-batch -d "$(azure-sdk-core-dump-container)" `
+        #   -s /cores `
+        #   --account-key "$(azuresdkartifacts-access-key)"
+        #   --account-name "$(azure-sdk-artifact-account-name)"
+      displayName: 'Upload Found Core Dumps'
+      continueOnError: true
     Artifacts:
     - name: azure_appconfiguration
       safeName: azureappconfiguration

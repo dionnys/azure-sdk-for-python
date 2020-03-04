@@ -3,6 +3,7 @@ parameters:
   EnvVars: {}
   MaxParallel: 0
   BeforeTestSteps: []
+  PostTestSteps: []
   BuildTargetingString: 'azure-*'
   AdditionalTestArgs: ''
   TestMarkArgument: ''
@@ -72,6 +73,7 @@ jobs:
             AZURE_RUN_MODE: 'Live' #Record, Playback
             ${{ insert }}: ${{ parameters.EnvVars }}
           BeforeTestSteps: ${{ parameters.BeforeTestSteps }}
+          PostTestSteps: ${{ parameters.PostTestSteps }}
           PythonVersion: $(PythonVersion)
           OSName: $(OSName)
           ToxTestEnv: "whl"

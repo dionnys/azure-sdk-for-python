@@ -6,6 +6,7 @@ parameters:
   PythonVersion: ''
   OSName: ''
   BeforeTestSteps: []
+  PostTestSteps: []
   CoverageArg: ''
   BuildTargetingString: 'azure-*'
   ToxTestEnv: ""
@@ -49,11 +50,6 @@ steps:
     displayName: 'Enable Core Dumps And Check Em'
     continueOnError: true
 
-  - task: PublishPipelineArtifact@0
-    inputs:
-      artifactName: 'core_dumps' 
-      targetPath: /cores
-
   - task: PythonScript@0
     displayName: 'Run Tests'
     inputs:
@@ -68,6 +64,9 @@ steps:
         --injected-packages="${{ parameters.InjectedPackages }}"
         ${{ parameters.ToxEnvParallel }}
     env: ${{ parameters.EnvVars }}
+
+
+  - ${{ parameters.PostTestSteps }}
 
   - task: PublishTestResults@2
     condition: always()

@@ -11,14 +11,6 @@ jobs:
   - template: ../../eng/pipelines/templates/jobs/archetype-sdk-tests.yml
     parameters:
       AllocateResourceGroup: 'false'
-      PostTestSteps: 
-        - pwsh: |
-            az --version
-            # az storage blob upload-batch -d "$(azure-sdk-core-dump-container)" `
-            #   -s /cores `
-            #   --account-key "$(azuresdkartifacts-access-key)"
-            #   --account-name "$(azure-sdk-artifact-account-name)"
-          displayName: 'Upload Found Core Dumps'
       ServiceDirectory: eventhub
       Matrix:
         MacOs_Python37:

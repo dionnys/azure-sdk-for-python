@@ -43,10 +43,7 @@ steps:
       python ./scripts/devops_tasks/crash_creator.py &
       killall -SIGSEGV python
 
-      sudo ls -R /Library/Logs/DiagnosticReports
-      sudo ls -R ~/Library/Lobs/DiagnosticReports
-
-      sudo ls -R /cores
+      ls -R /cores
     displayName: 'Enable Core Dumps And Check Em'
     continueOnError: true
 

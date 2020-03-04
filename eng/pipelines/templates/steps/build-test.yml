@@ -34,9 +34,9 @@ steps:
   - ${{ parameters.BeforeTestSteps }}
 
   - pwsh: |
-      Write-Host "$(azure-sdk-core-dump-container)"
-      Write-Host "$(azuresdkartifacts-access-key)"
-      Write-Host "$(azure-sdk-artifact-account-name)"
+      Write-Host '$(azure-sdk-core-dump-container)'
+      Write-Host '$(azuresdkartifacts-access-key)'
+      Write-Host '$(azure-sdk-artifact-account-name)'
     displayName: 'Upload Found Core Dumps'
     condition: succeededOrFailed()
 
@@ -68,7 +68,7 @@ steps:
 
   - pwsh: |
       az --version
-      az storage blob upload-batch -d "$(azure-sdk-core-dump-container)" -s /cores --account-key "$(azuresdkartifacts-access-key)" --account-name "$(azure-sdk-artifact-account-name)" --timeout 600
+      az storage blob upload-batch -d '$(azure-sdk-core-dump-container)' -s /cores --account-key '$(azuresdkartifacts-access-key)' --account-name '$(azure-sdk-artifact-account-name)' --timeout 600
     displayName: 'Upload Found Core Dumps'
     condition: succeededOrFailed()
 

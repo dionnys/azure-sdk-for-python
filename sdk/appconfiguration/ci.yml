@@ -52,6 +52,7 @@ stages:
           #   --account-key "$(azuresdkartifacts-access-key)"
           #   --account-name "$(azure-sdk-artifact-account-name)"
         displayName: 'Upload Found Core Dumps'
+        
     Artifacts:
     - name: azure_appconfiguration
       safeName: azureappconfiguration

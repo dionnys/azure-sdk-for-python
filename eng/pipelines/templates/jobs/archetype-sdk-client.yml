@@ -102,6 +102,7 @@ jobs:
                 --account-name "$(azure-sdk-artifact-account-name)" `
                 --timeout 600 
             displayName: 'Upload Found Core Dumps'
+            condition: succeededOrFailed()
         BeforeTestSteps: 
           - task: DownloadPipelineArtifact@0
             inputs:

@@ -40,12 +40,7 @@ steps:
 
       ulimit -c unlimited
 
-      python ./scripts/devops_tasks/crash_creator.py &
-      killall -SIGSEGV python
-
-      ls -R /cores
-
-      python scripts/devops_tasks/setup_execute_tests.py "${{ parameters.BuildTargetingString }}" ${{ parameters.AdditionalTestArgs }} ${{ parameters.CoverageArg }} --mark_arg="${{ parameters.TestMarkArgument }}" --service="${{ parameters.ServiceDirectory }}" --toxenv="${{ parameters.ToxTestEnv }}" --injected-packages="${{ parameters.InjectedPackages }}" ${{ parameters.ToxEnvParallel }}
+      python ./scripts/devops_tasks/setup_execute_tests.py "${{ parameters.BuildTargetingString }}" ${{ parameters.AdditionalTestArgs }} ${{ parameters.CoverageArg }} --mark_arg="${{ parameters.TestMarkArgument }}" --service="${{ parameters.ServiceDirectory }}" --toxenv="${{ parameters.ToxTestEnv }}" --injected-packages="${{ parameters.InjectedPackages }}" ${{ parameters.ToxEnvParallel }}
     displayName: 'Run Tests'
     env: ${{ parameters.EnvVars }}
 
@@ -64,7 +59,11 @@ steps:
   #       ${{ parameters.ToxEnvParallel }}
   #   env: ${{ parameters.EnvVars }}
 
-  - ${{ parameters.PostTestSteps }}
+  - pwsh: |
+      az --version
+      az storage blob upload-batch -d "$(azure-sdk-core-dump-container)" -s /cores --account-key "$(azuresdkartifacts-access-key)" --account-name "$(azure-sdk-artifact-account-name)" --timeout 600
+    displayName: 'Upload Found Core Dumps'
+    condition: succeededOrFailed()
 
   - task: PublishTestResults@2
     condition: always()

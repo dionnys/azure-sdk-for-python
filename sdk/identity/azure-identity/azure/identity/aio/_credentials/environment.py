@@ -9,6 +9,7 @@ from azure.core.exceptions import ClientAuthenticationError
 from ..._constants import EnvironmentVariables
 from .client_credential import CertificateCredential, ClientSecretCredential
 from .base import AsyncCredentialBase
+from .auth_file import AuthFileCredential
 
 if TYPE_CHECKING:
     from typing import Any, Optional, Union
@@ -31,6 +32,9 @@ class EnvironmentCredential(AsyncCredentialBase):
       - **AZURE_CLIENT_ID**: the service principal's client ID
       - **AZURE_CLIENT_CERTIFICATE_PATH**: path to a PEM-encoded certificate file including the private key The
         certificate must not be password-protected.
+
+    Azure Auth File:
+      - **AZURE_AUTH_LOCATION**: the full path to an Azure Auth File
     """
 
     def __init__(self, **kwargs: "Any") -> None:
@@ -50,6 +54,8 @@ class EnvironmentCredential(AsyncCredentialBase):
                 certificate_path=os.environ[EnvironmentVariables.AZURE_CLIENT_CERTIFICATE_PATH],
                 **kwargs
             )
+        elif os.environ.get(EnvironmentVariables.AZURE_AUTH_LOCATION):
+            self._credential = AuthFileCredential(EnvironmentVariables.AZURE_AUTH_LOCATION)
 
     async def __aenter__(self):
         if self._credential:

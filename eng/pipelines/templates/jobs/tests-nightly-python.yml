@@ -32,8 +32,22 @@ jobs:
           Get-ChildItem -R -Force -Path $installerFolder 
 
           tar -xvf "$installerFolder/local.tar.gz"
+        displayName: 'Install Py39-rc2'
+        continueOnError: true
 
+      - script: |
           ./setup.sh
+
+          echo $PATH
+        displayName: 'Install Py39 from script to avoid error?'
+        workingDirectory: $(Build.SourcesDirectory)/../py39installer
+        continueOnError: true
+
+      - pwsh: |
+          $installerFolder = "$(Build.SourcesDirectory)/../py39installer"
+          Get-ChildItem -R -Force -Path $installerFolder 
+
+          Write-Host $env:PATH
 
         displayName: 'Install Py39-rc2'
         continueOnError: true

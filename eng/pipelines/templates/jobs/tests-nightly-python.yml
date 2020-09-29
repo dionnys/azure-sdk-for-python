@@ -43,6 +43,11 @@ jobs:
         workingDirectory: $(Build.SourcesDirectory)/../py39installer
         continueOnError: true
 
+      - task: UsePythonVersion@0
+        displayName: 'Use Python 3.7 For Build Tools'
+        inputs:
+          versionSpec: '3.7'
+
       - pwsh: |
           $installerFolder = "$(Build.SourcesDirectory)/../py39installer"
           Get-ChildItem -R -Force -Path $installerFolder 

@@ -19,7 +19,7 @@ jobs:
           versionSpec: '3.7'
 
       - pwsh: |
-          $installerFolder = $(Build.SourcesDirectory)/../py39installer
+          $installerFolder = "$(Build.SourcesDirectory)/../py39installer"
           Write-Host "Starting Install to $installerFolder"
 
           mkdir $installerFolder

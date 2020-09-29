@@ -33,7 +33,8 @@ jobs:
 
           tar -xvf "$installerFolder/local.tar.gz"
 
-          Get-ChildItem -R -Force -Path $installerFolder 
+          ./setup.sh
+
         displayName: 'Install Py39-rc2'
         continueOnError: true
 

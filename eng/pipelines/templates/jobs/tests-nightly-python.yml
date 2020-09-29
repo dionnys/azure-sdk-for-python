@@ -31,7 +31,7 @@ jobs:
 
           Get-ChildItem -R -Force -Path $installerFolder 
 
-          tar -xdf "$installerFolder/local.tar.gz"
+          tar -xvf "$installerFolder/local.tar.gz"
 
           Get-ChildItem -R -Force -Path $installerFolder 
         displayName: 'Install Py39-rc2'

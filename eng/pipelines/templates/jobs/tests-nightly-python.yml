@@ -44,9 +44,9 @@ jobs:
         continueOnError: true
 
       - task: UsePythonVersion@0
-        displayName: 'Use Python 3.7 For Build Tools'
+        displayName: 'Use Python 3.9 For Build Tools'
         inputs:
-          versionSpec: '3.7'
+          versionSpec: '3.9'
 
       - pwsh: |
           $installerFolder = "$(Build.SourcesDirectory)/../py39installer"

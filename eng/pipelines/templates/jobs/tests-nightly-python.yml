@@ -18,6 +18,23 @@ jobs:
         inputs:
           versionSpec: '3.7'
 
+      - pwsh: |
+          $installerFolder = $(Build.SourcesDirectory)/../py39installer
+          Write-Host "Starting Install to $installerFolder"
+
+          mkdir $installerFolder
+          Invoke-WebRequest -Method GET `
+            -Uri https://github.com/actions/python-versions/releases/download/3.9.0-rc.2-82072/python-3.9.0-rc.2-linux-18.04-x64.tar.gz `
+            -OutFile $installerFolder/local.tar.gz
+
+          cd $installerFolder
+
+          tar -xdf local.tar.gz
+
+          Get-ChildItem -R -Force -Path $installerFolder 
+        displayName: 'Install Py39-rc2'
+        continueOnError: true
+
       - script: |
           sudo apt-get update
           sudo apt-get install build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev liblzma-dev libreadline-dev libncursesw5-dev libffi-dev uuid-dev

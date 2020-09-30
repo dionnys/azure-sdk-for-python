@@ -36,7 +36,7 @@ jobs:
         continueOnError: true
 
       - script: |
-          sudo ./setup.sh
+          sh ./setup.sh
 
           echo $PATH
         displayName: 'Install Py39 from script to avoid error?'

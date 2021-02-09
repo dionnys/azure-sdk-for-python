@@ -1,8 +1,5 @@
 # Release History
 
-## 12.2.4 (Unreleased)
-
-
 ## 12.2.3 (2021-02-08)
 **Fixes**
 - Fixed paging issue (#16531)

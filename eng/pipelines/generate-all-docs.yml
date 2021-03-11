@@ -31,7 +31,7 @@ jobs:
           arguments: >-
             "$(BuildTargetingString)"
             --toxenv=sphinx
-
+ 
       - task: PublishPipelineArtifact@0
         inputs:
           artifactName: 'documentation' 

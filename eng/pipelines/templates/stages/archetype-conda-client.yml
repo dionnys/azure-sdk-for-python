@@ -1,46 +1,13 @@
 parameters:
-- name: ServiceDirectory
-  type: string
-  default: not-specified
-- name: Artifacts
-  type: object
-  default: []
 - name: CondaArtifacts
   type: object
   default: []
-- name: TestPipeline
-  type: boolean
-  default: false
-- name: BeforePublishSteps
-  type: object
-  default: []
-- name: TestMarkArgument
-  type: string
-  default: ''
-- name: BuildTargetingString
-  type: string
-  default: azure-*
 - name: TestTimeoutInMinutes
   type: number
   default: 0
-- name: ToxEnvParallel
-  type: string
-  default: --tenvparallel
-- name: InjectedPackages
-  type: string
-  default: ''
-- name: BuildDocs
-  type: boolean
-  default: true
 - name: DevFeedName
   type: string
   default: public/azure-sdk-for-python
-- name: TargetDocRepoOwner
-  type: string
-  default: MicrosoftDocs
-- name: TargetDocRepoName
-  type: string
-  default: azure-docs-sdk-python
 - name: MatrixConfigs
   type: object
   default:
@@ -57,9 +24,6 @@ parameters:
 - name: MatrixReplace
   type: object
   default: []
-- name: VerifyAutorest
-  type: boolean
-  default: false
 
 stages:
   - stage: Build
@@ -67,21 +31,13 @@ stages:
       - name: BuildTargetingStringValue
         value: $[ coalesce(variables['BuildTargetingString'], '${{ parameters.BuildTargetingString }}') ]
     jobs:
-    - template: /eng/pipelines/templates/jobs/ci.yml
+    - template: /eng/pipelines/templates/jobs/ci.conda.yml
       parameters:
-        ServiceDirectory: ${{ parameters.ServiceDirectory }}
-        Artifacts: ${{ parameters.Artifacts }}
         CondaArtifacts: ${{ parameters.CondaArtifacts }}
         ${{ if eq(parameters.ServiceDirectory, 'template') }}:
           TestPipeline: true
-        BeforePublishSteps: ${{ parameters.BeforePublishSteps }}
         TestMarkArgument: ${{ parameters.TestMarkArgument }}
-        BuildTargetingString: $(BuildTargetingStringValue)
         TestTimeoutInMinutes: ${{ parameters.TestTimeoutInMinutes }}
-        ToxEnvParallel: ${{ parameters.ToxEnvParallel }}
-        InjectedPackages: ${{ parameters.InjectedPackages }}
-        BuildDocs: ${{ parameters.BuildDocs }}
-        DevFeedName: ${{ parameters.DevFeedName }}
         MatrixConfigs:
           - ${{ each config in parameters.MatrixConfigs }}:
             -  ${{ config }}
@@ -89,4 +45,15 @@ stages:
             -  ${{ config }}
         MatrixFilters: ${{ parameters.MatrixFilters }}
         MatrixReplace: ${{ parameters.MatrixReplace }}
-        VerifyAutorest: ${{ parameters.VerifyAutorest }}
+
+  # The Prerelease and Release stages are conditioned on whether we are building a pull request and the branch.
+  - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
+    - template: archetype-conda-release.yml
+      parameters:
+        DependsOn: Build
+        ServiceDirectory: ${{ parameters.ServiceDirectory }}
+        CondaArtifacts: ${{ parameters.CondaArtifacts }}
+        ArtifactName: conda
+        ${{ if eq(parameters.ServiceDirectory, 'template') }}:
+          TestPipeline: true
+

@@ -33,3 +33,11 @@ extends:
     Artifacts:
     - name: azure-ai-formrecognizer
       safeName: azureaiformrecognizer
+    CondaArtifacts:
+    - name: azure-ai-formrecognizer
+      meta_source: conda-recipe/meta.yaml
+      common_root: azure
+      checkout:
+        - package: azure-ai-formrecognizer
+          checkout_path: sdk/formrecognizer
+          version: 3.0.0

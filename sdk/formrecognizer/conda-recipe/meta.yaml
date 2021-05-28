@@ -1,0 +1,54 @@
+{% set name = "azure-ai-formrecognizer" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: {{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+
+source:
+  url: {{ environ.get('FORMRECOGNIZER_SOURCE_DISTRIBUTION', '') }}
+
+build:
+  script_env:
+    - FORMRECOGNIZER_SOURCE_DISTRIBUTION
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - azure-core >=2021.06.01
+    - azure-identity >=2021.06.01
+    - msrest >=2021.06.01
+    - pip
+    - python
+    - six
+    - requests-oauthlib >=0.5.0
+    - aiohttp
+  run:
+    - azure-core >=2021.06.01
+    - azure-identity >=2021.06.01
+    - msrest >=2021.06.01
+    - python
+    - six
+    - requests-oauthlib >=0.5.0
+    - aiohttp
+
+test:
+  imports:
+    - azure.ai.formrecognizer
+    - azure.ai.formrecognizer.aio
+
+about:
+  home: "https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer"
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: "Microsoft Azure Form Recognizer Client Library for Python{{ environ.get('FORMRECOGNIZER_SUMMARY', '') }}"
+  description: |
+    Azure Cognitive Services Form Recognizer is a cloud service that uses machine learning to recognize text and table data from form documents.
+  doc_url:
+  dev_url:
+
+extra:
+  recipe-maintainers:
+    - lmazuel,xiangyan99,scbedd

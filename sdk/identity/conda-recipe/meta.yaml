@@ -1,0 +1,51 @@
+{% set name = "azure-identity" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: {{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+
+source:
+  url: {{ environ.get('IDENTITY_SOURCE_DISTRIBUTION', '') }}
+
+build:
+  script_env:
+    - IDENTITY_SOURCE_DISTRIBUTION
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - azure-core >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - cryptography
+    - msal >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - msal-extensions >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - pip
+    - python
+    - six
+  run:
+    - azure-core >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - cryptography
+    - msal >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - msal-extensions >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - python
+    - six
+
+test:
+  imports:
+    - azure.identity
+
+about:
+  home: "https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/identity/azure-identity"
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: "Microsoft Azure Identity Library for Python{{ environ.get('IDENTITY_SUMMARY', '') }}"
+  description: |
+    The Azure Identity library provides a set of credential classes for use with Azure SDK clients which support Azure Active Directory (AAD) token authentication. This library does not support Azure Active Directory B2C.
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - xiangyan99

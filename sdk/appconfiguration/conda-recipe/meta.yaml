@@ -1,0 +1,52 @@
+{% set name = "azure-appconfiguration" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: {{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+
+source:
+  url: {{ environ.get('APPCONFIGURATION_SOURCE_DISTRIBUTION', '') }}
+
+build:
+  script_env:
+    - APPCONFIGURATION_SOURCE_DISTRIBUTION
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - azure-core >={{ environ.get('APPCONFIGURATION_SOURCE_DISTRIBUTION', '') }}
+    - azure-identity >={{ environ.get('APPCONFIGURATION_SOURCE_DISTRIBUTION', '') }}
+    - msrest >={{ environ.get('APPCONFIGURATION_SOURCE_DISTRIBUTION', '') }}
+    - pip
+    - python
+    - requests-oauthlib >=0.5.0
+    - aiohttp
+  run:
+    - azure-core >={{ environ.get('APPCONFIGURATION_SOURCE_DISTRIBUTION', '') }}
+    - azure-identity >={{ environ.get('APPCONFIGURATION_SOURCE_DISTRIBUTION', '') }}
+    - msrest >={{ environ.get('APPCONFIGURATION_SOURCE_DISTRIBUTION', '') }}
+    - python
+    - requests-oauthlib >=0.5.0
+    - aiohttp
+
+test:
+  imports:
+    - azure.appconfiguration
+    - azure.appconfiguration.aio
+
+about:
+  home: "https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/appconfiguration/azure-appconfiguration"
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: "Microsoft App Configuration Data Library for Python{{ environ.get('IDENTITY_SUMMARY', '') }}"
+  description: |
+    Azure App Configuration is a managed service that helps developers centralize their application configurations simply and securely.
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - xiangyan99

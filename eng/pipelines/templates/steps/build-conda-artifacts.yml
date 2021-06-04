@@ -61,9 +61,9 @@ steps:
       displayName: 'Prepare Conda Environment for building ${{ artifact.name }}'
 
     - bash: |
-        source activate ${{ artifact.name }}
+        conda activate ${{ artifact.name }}
         conda-build . --output-folder "$(Agent.BuildDirectory)/conda/output/${{ artifact.name }}" -c $(AzureSDKCondaChannel)
-        source deactivate ${{ artifact.name }}
+        conda deactivate ${{ artifact.name }}
       displayName: 'Activate Conda Environment and Build ${{ artifact.name }}'
       workingDirectory: $(Build.SourcesDirectory)/sdk/conda/${{ artifact.name }}
   

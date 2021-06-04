@@ -66,6 +66,12 @@ steps:
         conda deactivate
       displayName: 'Activate Conda Environment and Build ${{ artifact.name }}'
       workingDirectory: $(Build.SourcesDirectory)/sdk/conda/${{ artifact.name }}
+
+    # this is necessary because conda-deactivate doesn't restore our original python version
+    - task: UsePythonVersion@0
+      displayName: 'Restore Use of Python $(PythonVersion)'
+      inputs:
+        versionSpec: $(PythonVersion)
   
   - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
     parameters:

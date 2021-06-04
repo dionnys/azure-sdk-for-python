@@ -27,16 +27,11 @@ parameters:
 
 stages:
   - stage: Build
-    variables:
-      - name: BuildTargetingStringValue
-        value: $[ coalesce(variables['BuildTargetingString'], '${{ parameters.BuildTargetingString }}') ]
     jobs:
     - template: /eng/pipelines/templates/jobs/ci.conda.yml
       parameters:
         CondaArtifacts: ${{ parameters.CondaArtifacts }}
-        ${{ if eq(parameters.ServiceDirectory, 'template') }}:
-          TestPipeline: true
-        TestMarkArgument: ${{ parameters.TestMarkArgument }}
+        TestMarkArgument: not cosmosEmulator
         TestTimeoutInMinutes: ${{ parameters.TestTimeoutInMinutes }}
         MatrixConfigs:
           - ${{ each config in parameters.MatrixConfigs }}:

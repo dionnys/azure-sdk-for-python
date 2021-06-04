@@ -5,9 +5,6 @@ parameters:
   - name: TestPipeline
     type: boolean
     default: false
-  - name: TestMarkArgument
-    type: string
-    default: ''
   - name: TestTimeoutInMinutes
     type: number
     default: 0
@@ -53,6 +50,5 @@ jobs:
         Cloud: Public
       AdditionalParameters:
         TestPipeline: ${{ parameters.TestPipeline }}
-        TestMarkArgument: ${{ parameters.TestMarkArgument }}
         TestTimeoutInMinutes: ${{ parameters.TestTimeoutInMinutes }}
         CondaArtifacts: ${{ parameters.CondaArtifacts}}

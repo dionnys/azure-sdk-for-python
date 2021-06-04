@@ -1,7 +1,4 @@
 parameters:
-  - name: TestPipeline
-    type: boolean
-    default: false
   - name: CondaArtifacts
     type: object
     default: []
@@ -61,12 +58,6 @@ jobs:
       inputs:
         artifactName: 'conda'
         targetPath: $(Build.ArtifactStagingDirectory)
-
-    - template: /eng/common/pipelines/templates/steps/set-test-pipeline-version.yml
-      parameters:
-        PackageName: "azure-template"
-        ServiceDirectory: "template"
-        TestPipeline: ${{ parameters.TestPipeline }}
 
     - task: UsePythonVersion@0
       displayName: 'Use Python $(PythonVersion)'

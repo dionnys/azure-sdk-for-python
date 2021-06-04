@@ -10,6 +10,7 @@ source:
 build:
   script_env:
     - SEARCH_SOURCE_DISTRIBUTION
+    - SEARCH_SUMMARY
   noarch: python
   number: 0
   script: "{{ PYTHON }} -m pip install . -vv"

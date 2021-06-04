@@ -10,6 +10,7 @@ source:
 build:
   script_env:
     - IDENTITY_SOURCE_DISTRIBUTION
+    - IDENTITY_SUMMARY
   noarch: python
   number: 0
   script: "{{ PYTHON }} -m pip install . -vv"

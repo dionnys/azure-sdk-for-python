@@ -1,0 +1,373 @@
+trigger:
+  branches:
+    include:
+    - master
+    - main
+    - hotfix/*
+    - release/*
+    - restapi*
+  paths:
+    include:
+    - sdk/conda/
+
+pr:
+  branches:
+    include:
+    - master
+    - main
+    - feature/*
+    - hotfix/*
+    - release/*
+    - restapi*
+  paths:
+    include:
+    - sdk/conda/
+
+extends:
+  template: ../../eng/pipelines/templates/stages/archetype-conda-client.yml
+  parameters:
+    CondaArtifacts:
+    - name: azure-core
+      common_root: azure
+      service: core
+      checkout:
+        - package: azure-core
+          checkout_path: sdk/core
+          version: 1.14.0
+    - name: azure-identity
+      common_root: azure
+      service: identity
+      checkout:
+        - package: azure-identity
+          checkout_path: sdk/identity
+          version: 1.6.0
+    - name: azure-storage
+      common_root: azure/storage
+      service: storage
+      checkout:
+        - package: azure-storage-blob
+          checkout_path: sdk/storage
+          version: 12.8.1
+        - package: azure-storage-queue
+          checkout_path: sdk/storage
+          version: 12.1.6
+        - package: azure-storage-file-share
+          checkout_path: sdk/storage
+          version: 12.4.2
+        - package: azure-storage-file-datalake
+          checkout_path: sdk/storage
+          version: 12.3.1
+    - name: azure-ai-textanalytics
+      common_root: azure
+      service: textanalytics
+      checkout:
+        - package: azure-ai-textanalytics
+          checkout_path: sdk/textanalytics
+          version: 5.0.0
+    - name: azure-appconfiguration
+      common_root: azure
+      service: appconfiguration
+      checkout:
+        - package: azure-appconfiguration
+          checkout_path: sdk/appconfiguration
+          version: 1.1.1
+    - name: azure-communication
+      common_root: azure/communication
+      service: communication
+      checkout:
+        - package: azure-communication-chat
+          checkout_path: sdk/communication
+          version: 1.0.0
+        - package: azure-communication-identity
+          checkout_path: sdk/communication
+          version: 1.0.0
+        - package: azure-communication-phonenumbers
+          checkout_path: sdk/communication
+          version: 1.0.0
+        - package: azure-communication-sms
+          checkout_path: sdk/communication
+          version: 1.0.0
+    - name: azure-search-documents
+      common_root: azure
+      service: search
+      checkout:
+        - package: azure-search-documents
+          checkout_path: sdk/search
+          version: 11.1.1
+    - name: azure-servicebus
+      common_root: azure
+      service: servicebus
+      checkout:
+        - package: azure-servicebus
+          checkout_path: sdk/servicebus
+          version: 7.2.0
+    - name: azure-mgmt
+      common_root: azure
+      service: mgmt
+      checkout:
+        - package: azure-mgmt-advisor
+          checkout_path: sdk/advisor
+          version: 9.0.0
+        - package: azure-mgmt-alertsmanagement
+          checkout_path: sdk/alertsmanagement
+          version: 1.0.0
+        - package: azure-mgmt-apimanagement
+          checkout_path: sdk/apimanagement
+          version: 2.0.0
+        - package: azure-mgmt-appconfiguration
+          checkout_path: sdk/appconfiguration
+          version: 1.0.1
+        - package: azure-mgmt-applicationinsights
+          checkout_path: sdk/applicationinsights
+          version: 1.0.0
+        - package: azure-mgmt-appplatform
+          checkout_path: sdk/appplatform
+          version: 6.0.0
+        - package: azure-mgmt-attestation
+          checkout_path: sdk/attestation
+          version: 1.0.0
+        - package: azure-mgmt-authorization
+          checkout_path: sdk/authorization
+          version: 1.0.0
+        - package: azure-mgmt-automation
+          checkout_path: sdk/automation
+          version: 1.0.0
+        - package: azure-mgmt-azurestack
+          checkout_path: sdk/azurestack
+          version: 1.0.0
+        - package: azure-mgmt-azurestackhci
+          checkout_path: sdk/azurestackhci
+          version: 6.0.0
+        - package: azure-mgmt-billing
+          checkout_path: sdk/billing
+          version: 6.0.0
+        - package: azure-mgmt-cdn
+          checkout_path: sdk/cdn
+          version: 11.0.0
+        - package: azure-mgmt-cognitiveservices
+          checkout_path: sdk/cognitiveservices
+          version: 11.0.0
+        - package: azure-mgmt-commerce
+          checkout_path: sdk/commerce
+          version: 6.0.0
+        - package: azure-mgmt-communication
+          checkout_path: sdk/communication
+          version: 1.0.0
+        - package: azure-mgmt-compute
+          checkout_path: sdk/compute
+          version: 20.0.0
+        - package: azure-mgmt-confluent
+          checkout_path: sdk/confluent
+          version: 1.0.0
+        - package: azure-mgmt-containerinstance
+          checkout_path: sdk/containerinstance
+          version: 7.0.0
+        - package: azure-mgmt-containerservice
+          checkout_path: sdk/containerservice
+          version: 15.1.0
+        - package: azure-mgmt-core
+          checkout_path: sdk/core
+          version: 1.2.2
+        - package: azure-mgmt-cosmosdb
+          checkout_path: sdk/cosmosdb
+          version: 6.3.0
+        - package: azure-mgmt-costmanagement
+          checkout_path: sdk/costmanagement
+          version: 1.0.0
+        - package: azure-mgmt-databox
+          checkout_path: sdk/databox
+          version: 1.0.0
+        - package: azure-mgmt-databoxedge
+          checkout_path: sdk/databoxedge
+          version: 1.0.0
+        - package: azure-mgmt-databricks
+          checkout_path: sdk/databricks
+          version: 1.0.0
+        - package: azure-mgmt-datafactory
+          checkout_path: sdk/datafactory
+          version: 1.1.0
+        - package: azure-mgmt-datamigration
+          checkout_path: sdk/datamigration
+          version: 9.0.0
+        - package: azure-mgmt-datashare
+          checkout_path: sdk/datashare
+          version: 1.0.0
+        - package: azure-mgmt-devtestlabs
+          checkout_path: sdk/devtestlabs
+          version: 9.0.0
+        - package: azure-mgmt-eventhub
+          checkout_path: sdk/eventhub
+          version: 8.0.0
+        - package: azure-mgmt-hanaonazure
+          checkout_path: sdk/hanaonazure
+          version: 1.0.0
+        - package: azure-mgmt-hdinsight
+          checkout_path: sdk/hdinsight
+          version: 7.0.0
+        - package: azure-mgmt-healthcareapis
+          checkout_path: sdk/healthcareapis
+          version: 1.0.0
+        - package: azure-mgmt-hybridcompute
+          checkout_path: sdk/hybridcompute
+          version: 7.0.0
+        - package: azure-mgmt-hybridkubernetes
+          checkout_path: sdk/hybridkubernetes
+          version: 1.0.0
+        - package: azure-mgmt-iothub
+          checkout_path: sdk/iothub
+          version: 2.0.0
+        - package: azure-mgmt-keyvault
+          checkout_path: sdk/keyvault
+          version: 9.0.0
+        - package: azure-mgmt-kusto
+          checkout_path: sdk/kusto
+          version: 2.0.0
+        - package: azure-mgmt-labservices
+          checkout_path: sdk/labservices
+          version: 1.0.0
+        - package: azure-mgmt-loganalytics
+          checkout_path: sdk/loganalytics
+          version: 10.0.0
+        - package: azure-mgmt-logic
+          checkout_path: sdk/logic
+          version: 9.0.0
+        - package: azure-mgmt-machinelearningservices
+          checkout_path: sdk/machinelearningservices
+          version: 1.0.0
+        - package: azure-mgmt-maintenance
+          checkout_path: sdk/maintenance
+          version: 2.0.0
+        - package: azure-mgmt-managedservices
+          checkout_path: sdk/managedservices
+          version: 6.0.0
+        - package: azure-mgmt-maps
+          checkout_path: sdk/maps
+          version: 2.0.0
+        - package: azure-mgmt-marketplaceordering
+          checkout_path: sdk/marketplaceordering
+          version: 1.1.0
+        - package: azure-mgmt-mixedreality
+          checkout_path: sdk/mixedreality
+          version: 1.0.0
+        - package: azure-mgmt-monitor
+          checkout_path: sdk/monitor
+          version: 2.0.0
+        - package: azure-mgmt-netapp
+          checkout_path: sdk/netapp
+          version: 2.0.0
+        - package: azure-mgmt-network
+          checkout_path: sdk/network
+          version: 19.0.0
+        - package: azure-mgmt-notificationhubs
+          checkout_path: sdk/notificationhubs
+          version: 7.0.0
+        - package: azure-mgmt-operationsmanagement
+          checkout_path: sdk/operationsmanagement
+          version: 1.0.0
+        - package: azure-mgmt-peering
+          checkout_path: sdk/peering
+          version: 1.0.0
+        - package: azure-mgmt-policyinsights
+          checkout_path: sdk/policyinsights
+          version: 1.0.0
+        - package: azure-mgmt-powerbidedicated
+          checkout_path: sdk/powerbidedicated
+          version: 1.0.0
+        - package: azure-mgmt-rdbms
+          checkout_path: sdk/rdbms
+          version: 8.0.0
+        - package: azure-mgmt-recoveryservices
+          checkout_path: sdk/recoveryservices
+          version: 1.0.0
+        - package: azure-mgmt-redis
+          checkout_path: sdk/redis
+          version: 12.0.0
+        - package: azure-mgmt-relay
+          checkout_path: sdk/relay
+          version: 1.0.0
+        - package: azure-mgmt-resource
+          checkout_path: sdk/resource
+          version: 18.0.0
+        - package: azure-mgmt-resourcemover
+          checkout_path: sdk/resourcemover
+          version: 1.0.0
+        - package: azure-mgmt-search
+          checkout_path: sdk/search
+          version: 8.0.0
+        - package: azure-mgmt-security
+          checkout_path: sdk/security
+          version: 1.0.0
+        - package: azure-mgmt-servicebus
+          checkout_path: sdk/servicebus
+          version: 6.0.0
+        - package: azure-mgmt-sql
+          checkout_path: sdk/sql
+          version: 2.0.0
+        - package: azure-mgmt-storage
+          checkout_path: sdk/storage
+          version: 18.0.0
+        - package: azure-mgmt-storagesync
+          checkout_path: sdk/storagesync
+          version: 1.0.0
+        - package: azure-mgmt-subscription
+          checkout_path: sdk/subscription
+          version: 1.0.0
+        - package: azure-mgmt-support
+          checkout_path: sdk/support
+          version: 6.0.0
+        - package: azure-mgmt-synapse
+          checkout_path: sdk/synapse
+          version: 2.0.0
+        - package: azure-mgmt-timeseriesinsights
+          checkout_path: sdk/timeseriesinsights
+          version: 1.0.0
+        - package: azure-mgmt-web
+          checkout_path: sdk/web
+          version: 2.0.0
+    - name: azure-keyvault
+      common_root: azure/keyvault
+      service: keyvault
+      checkout:
+        - package: azure-keyvault-certificates
+          checkout_path: sdk/keyvault
+          version: 4.2.1
+        - package: azure-keyvault-keys
+          checkout_path: sdk/keyvault
+          version: 4.3.1
+        - package: azure-keyvault-secrets
+          checkout_path: sdk/keyvault
+          version: 4.2.0
+    - name: azure-eventhub
+      common_root: azure/eventhub
+      service: eventhub
+      checkout:
+        - package: azure-eventhub
+          checkout_path: sdk/eventhub
+          version: 5.5.0
+        - package: azure-eventhub-checkpointstoreblob
+          checkout_path: sdk/eventhub
+          version: 1.1.4
+        - package: azure-eventhub-checkpointstoreblob-aio
+          checkout_path: sdk/eventhub
+          version: 1.1.4
+    - name: azure-eventgrid
+      common_root: azure
+      service: eventgrid
+      checkout:
+        - package: azure-eventgrid
+          checkout_path: sdk/eventgrid
+          version: 4.2.0
+    - name: azure-digitaltwins-core
+      common_root: azure
+      service: digitaltwins
+      checkout:
+        - package: azure-digitaltwins-core
+          checkout_path: sdk/digitaltwins
+          version: 4.2.0
+    - name: azure-cosmos
+      common_root: azure
+      service: cosmos
+      checkout:
+        - package: azure-cosmos
+          checkout_path: sdk/cosmos
+          version: 4.2.0

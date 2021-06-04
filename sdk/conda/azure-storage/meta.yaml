@@ -10,6 +10,7 @@ source:
 build:
   script_env:
     - STORAGE_SOURCE_DISTRIBUTION
+    - STORAGE_SUMMARY
   noarch: python
   number: 0
   script: "{{ PYTHON }} -m pip install . -vv"
@@ -48,4 +49,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - lmazuel,xiangyan99,scbedd
+    - xiangyan99

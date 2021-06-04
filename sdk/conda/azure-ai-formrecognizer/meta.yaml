@@ -10,24 +10,25 @@ source:
 build:
   script_env:
     - FORMRECOGNIZER_SOURCE_DISTRIBUTION
+    - FORMRECOGNIZER_SUMMARY
   noarch: python
   number: 0
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
-    - azure-core >=2021.06.01
-    - azure-identity >=2021.06.01
-    - msrest >=2021.06.01
+    - azure-core >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - azure-identity >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - msrest >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
     - pip
     - python
     - six
     - requests-oauthlib >=0.5.0
     - aiohttp
   run:
-    - azure-core >=2021.06.01
-    - azure-identity >=2021.06.01
-    - msrest >=2021.06.01
+    - azure-core >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - azure-identity >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - msrest >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
     - python
     - six
     - requests-oauthlib >=0.5.0

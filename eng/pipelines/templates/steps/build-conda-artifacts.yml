@@ -53,7 +53,7 @@ steps:
         arguments: >-
           -d "$(conda.output)"
           -b "$(conda.build)"
-          -m "$(Build.SourcesDirectory)/sdk/${{ artifact.service }}/${{ artifact.meta_source }}"
+          -m "$(Build.SourcesDirectory)/sdk/${{ artifact.service }}/${{ artifact.name }}/meta.yml"
           -r "${{ artifact.common_root }}"
           -n "${{ artifact.name }}"
           -s "${{ artifact.service }}"

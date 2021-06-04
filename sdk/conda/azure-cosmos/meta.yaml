@@ -1,0 +1,46 @@
+{% set name = "azure-cosmos" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: {{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+
+source:
+  url: {{ environ.get('COSMOS_SOURCE_DISTRIBUTION', '') }}
+
+build:
+  script_env:
+    - COSMOS_SOURCE_DISTRIBUTION
+    - COSMOS_SUMMARY
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - azure-core >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - pip
+    - python
+    - six
+  run:
+    - azure-core >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - python
+    - six
+
+test:
+  imports:
+    - azure.cosmos
+
+about:
+  home: "https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/cosmos/azure-cosmos"
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: "Microsoft Azure Cosmos Client Library for Python{{ environ.get('COSMOS_SUMMARY', '') }}"
+  description: |
+    Azure Cosmos DB is a globally distributed, multi-model database service that supports document, key-value, wide-column, and graph databases.
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - xiangyan99

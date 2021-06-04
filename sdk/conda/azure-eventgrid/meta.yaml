@@ -1,0 +1,51 @@
+{% set name = "azure-eventgrid" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: {{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+
+source:
+  url: {{ environ.get('EVENTGRID_SOURCE_DISTRIBUTION', '') }}
+
+build:
+  script_env:
+    - EVENTGRID_SOURCE_DISTRIBUTION
+    - EVENTGRID_SUMMARY
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - azure-core >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - msrest >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - pip
+    - python
+    - requests-oauthlib >=0.5.0
+    - aiohttp
+  run:
+    - azure-core >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - msrest >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
+    - python
+    - requests-oauthlib >=0.5.0
+    - aiohttp
+
+test:
+  imports:
+    - azure.eventgrid
+    - azure.eventgrid.aio
+
+about:
+  home: "https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/eventgrid/azure-eventgrid"
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: "Microsoft Azure Event Grid Client Library for Python{{ environ.get('EVENTGRID_SUMMARY', '') }}"
+  description: |
+    Azure Event Grid is a fully-managed intelligent event routing service that allows for uniform event consumption using a publish-subscribe model.
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - xiangyan99

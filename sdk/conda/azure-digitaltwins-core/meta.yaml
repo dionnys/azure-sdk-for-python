@@ -1,15 +1,16 @@
-{% set name = "azure-communication" %}
+{% set name = "azure-digitaltwins-core" %}
 
 package:
   name: "{{ name|lower }}"
   version: {{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
 
 source:
-  url: {{ environ.get('COMMUNICATION_SOURCE_DISTRIBUTION', '') }}
-
+  url: {{ environ.get('DIGITALTWINS_SOURCE_DISTRIBUTION', '') }}
+  
 build:
   script_env:
-    - COMMUNICATION_SOURCE_DISTRIBUTION
+    - DIGITALTWINS_SOURCE_DISTRIBUTION
+    - DIGITALTWINS_SUMMARY
   noarch: python
   number: 0
   script: "{{ PYTHON }} -m pip install . -vv"
@@ -21,35 +22,29 @@ requirements:
     - msrest >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
     - pip
     - python
-    - six
+    - requests-oauthlib >=0.5.0
     - aiohttp
   run:
     - azure-core >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
     - azure-identity >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
     - msrest >={{ environ.get('AZURESDK_CONDA_VERSION', '0.0.0') }}
     - python
-    - six
+    - requests-oauthlib >=0.5.0
     - aiohttp
 
 test:
   imports:
-    - azure.communication.chat
-    - azure.communication.chat.aio
-    - azure.communication.identity
-    - azure.communication.identity.aio
-    - azure.communication.phonenumbers
-    - azure.communication.phonenumbers.aio
-    - azure.communication.sms
-    - azure.communication.sms.aio
+    - azure.digitaltwins.core
+    - azure.digitaltwins.core.aio
 
 about:
-  home: "https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/communication"
+  home: "https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/digitaltwins/azure-digitaltwins-core"
   license: MIT
   license_family: MIT
   license_file: 
-  summary: "Azure Communication Package client library for Python{{ environ.get('COMMUNICATION_SUMMARY', '') }}"
+  summary: "Microsoft Azure Azure DigitalTwins Core Client Library for Python{{ environ.get('DIGITALTWINS_SUMMARY', '') }}"
   description: |
-    This is the Microsoft Azure Communication libraries bundle.
+    This package contains an SDK for Azure Digital Twins API to provide access to the Azure Digital Twins service for managing twins, models, relationships, etc.
   doc_url: 
   dev_url: 
 

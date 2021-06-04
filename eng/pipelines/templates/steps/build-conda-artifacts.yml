@@ -49,7 +49,7 @@ steps:
           -n "${{ artifact.name }}"
           -s "${{ artifact.service }}"
           -e "$(Build.SourcesDirectory)/eng/conda_env.yml"
-          -c "$(Build.SourcesDirectory)/sdk/${{ artifact.service }}/ci.yml"
+          -c "$(Build.SourcesDirectory)/sdk/conda/conda.ci.yml"
 
     - bash: |
         echo "##vso[task.prependpath]$CONDA/bin"

@@ -2,9 +2,9 @@ parameters:
   - name: CondaArtifacts
     type: object
     default: []
-  - name: TestPipeline
-    type: boolean
-    default: false
+  - name: TestMarkArgument
+    type: string
+    default: ''
   - name: TestTimeoutInMinutes
     type: number
     default: 0
@@ -30,7 +30,6 @@ jobs:
     steps:
     - template: ../steps/build-conda-artifacts.yml
       parameters:
-        TestPipeline: ${{ parameters.TestPipeline }}
         CondaArtifacts: ${{ parameters.CondaArtifacts }}
 
   - template: /eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml
@@ -49,6 +48,6 @@ jobs:
       CloudConfig:
         Cloud: Public
       AdditionalParameters:
-        TestPipeline: ${{ parameters.TestPipeline }}
+        TestMarkArgument: ${{ parameters.TestMarkArgument }}
         TestTimeoutInMinutes: ${{ parameters.TestTimeoutInMinutes }}
         CondaArtifacts: ${{ parameters.CondaArtifacts}}

@@ -26,8 +26,10 @@ steps:
     # there may be multiple CondaArtifacts. Be certain $(conda.build) is clean just in case!
     - pwsh:
         Write-Host "Clean up Conda Build Directory $(conda.build)"
-        Remove-Item -Path "$(conda.build)/*" -Recurse -Force
-        Get-ChildItem -Path $(conda.build) -Recurse
+
+        Remove-Item -Recurse -Force "$(conda.build)/*"
+        
+        Get-ChildItem -Recurse "$(conda.build)"
       displayName: 'Clean Up Before Building ${{ artifact.name }}'
 
     - ${{ each checkout in artifact.checkout }}:

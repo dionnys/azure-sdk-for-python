@@ -93,7 +93,7 @@ extends:
       checkout:
         - package: azure-search-documents
           checkout_path: sdk/search
-          version: 11.1.1
+          version: 11.1.0
     - name: azure-servicebus
       common_root: azure
       service: servicebus
@@ -101,7 +101,54 @@ extends:
         - package: azure-servicebus
           checkout_path: sdk/servicebus
           version: 7.2.0
-    - name: azure-mgmt
+    - name: azure-keyvault
+      common_root: azure/keyvault
+      service: keyvault
+      checkout:
+        - package: azure-keyvault-certificates
+          checkout_path: sdk/keyvault
+          version: 4.2.1
+        - package: azure-keyvault-keys
+          checkout_path: sdk/keyvault
+          version: 4.3.1
+        - package: azure-keyvault-secrets
+          checkout_path: sdk/keyvault
+          version: 4.2.0
+    - name: azure-eventhub
+      common_root: azure/eventhub
+      service: eventhub
+      checkout:
+        - package: azure-eventhub
+          checkout_path: sdk/eventhub
+          version: 5.5.0
+        - package: azure-eventhub-checkpointstoreblob
+          checkout_path: sdk/eventhub
+          version: 1.1.4
+        - package: azure-eventhub-checkpointstoreblob-aio
+          checkout_path: sdk/eventhub
+          version: 1.1.4
+    - name: azure-eventgrid
+      common_root: azure
+      service: eventgrid
+      checkout:
+        - package: azure-eventgrid
+          checkout_path: sdk/eventgrid
+          version: 4.2.0
+    - name: azure-digitaltwins-core
+      common_root: azure
+      service: digitaltwins
+      checkout:
+        - package: azure-digitaltwins-core
+          checkout_path: sdk/digitaltwins
+          version: 4.2.0
+    - name: azure-cosmos
+      common_root: azure
+      service: cosmos
+      checkout:
+        - package: azure-cosmos
+          checkout_path: sdk/cosmos
+          version: 4.2.0
+- name: azure-mgmt
       common_root: azure
       service: mgmt
       checkout:
@@ -324,50 +371,4 @@ extends:
         - package: azure-mgmt-web
           checkout_path: sdk/web
           version: 2.0.0
-    - name: azure-keyvault
-      common_root: azure/keyvault
-      service: keyvault
-      checkout:
-        - package: azure-keyvault-certificates
-          checkout_path: sdk/keyvault
-          version: 4.2.1
-        - package: azure-keyvault-keys
-          checkout_path: sdk/keyvault
-          version: 4.3.1
-        - package: azure-keyvault-secrets
-          checkout_path: sdk/keyvault
-          version: 4.2.0
-    - name: azure-eventhub
-      common_root: azure/eventhub
-      service: eventhub
-      checkout:
-        - package: azure-eventhub
-          checkout_path: sdk/eventhub
-          version: 5.5.0
-        - package: azure-eventhub-checkpointstoreblob
-          checkout_path: sdk/eventhub
-          version: 1.1.4
-        - package: azure-eventhub-checkpointstoreblob-aio
-          checkout_path: sdk/eventhub
-          version: 1.1.4
-    - name: azure-eventgrid
-      common_root: azure
-      service: eventgrid
-      checkout:
-        - package: azure-eventgrid
-          checkout_path: sdk/eventgrid
-          version: 4.2.0
-    - name: azure-digitaltwins-core
-      common_root: azure
-      service: digitaltwins
-      checkout:
-        - package: azure-digitaltwins-core
-          checkout_path: sdk/digitaltwins
-          version: 4.2.0
-    - name: azure-cosmos
-      common_root: azure
-      service: cosmos
-      checkout:
-        - package: azure-cosmos
-          checkout_path: sdk/cosmos
-          version: 4.2.0
+    

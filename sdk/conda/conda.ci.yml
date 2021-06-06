@@ -27,93 +27,93 @@ extends:
   template: ../../eng/pipelines/templates/stages/archetype-conda-client.yml
   parameters:
     CondaArtifacts:
-    - name: azure-core
-      common_root: azure
-      service: core
-      checkout:
-        - package: azure-core
-          checkout_path: sdk/core
-          version: 1.14.0
-    - name: azure-identity
-      common_root: azure
-      service: identity
-      checkout:
-        - package: azure-identity
-          checkout_path: sdk/identity
-          version: 1.6.0
-    - name: azure-storage
-      common_root: azure/storage
-      service: storage
-      checkout:
-        - package: azure-storage-blob
-          checkout_path: sdk/storage
-          version: 12.8.1
-        - package: azure-storage-queue
-          checkout_path: sdk/storage
-          version: 12.1.6
-        - package: azure-storage-file-share
-          checkout_path: sdk/storage
-          version: 12.4.2
-        - package: azure-storage-file-datalake
-          checkout_path: sdk/storage
-          version: 12.3.1
-    - name: azure-ai-textanalytics
-      common_root: azure
-      service: textanalytics
-      checkout:
-        - package: azure-ai-textanalytics
-          checkout_path: sdk/textanalytics
-          version: 5.0.0
-    - name: azure-appconfiguration
-      common_root: azure
-      service: appconfiguration
-      checkout:
-        - package: azure-appconfiguration
-          checkout_path: sdk/appconfiguration
-          version: 1.1.1
-    - name: azure-communication
-      common_root: azure/communication
-      service: communication
-      checkout:
-        - package: azure-communication-chat
-          checkout_path: sdk/communication
-          version: 1.0.0
-        - package: azure-communication-identity
-          checkout_path: sdk/communication
-          version: 1.0.0
-        - package: azure-communication-phonenumbers
-          checkout_path: sdk/communication
-          version: 1.0.0
-        - package: azure-communication-sms
-          checkout_path: sdk/communication
-          version: 1.0.0
-    - name: azure-search-documents
-      common_root: azure
-      service: search
-      checkout:
-        - package: azure-search-documents
-          checkout_path: sdk/search
-          version: 11.1.0
-    - name: azure-servicebus
-      common_root: azure
-      service: servicebus
-      checkout:
-        - package: azure-servicebus
-          checkout_path: sdk/servicebus
-          version: 7.2.0
-    - name: azure-keyvault
-      common_root: azure/keyvault
-      service: keyvault
-      checkout:
-        - package: azure-keyvault-certificates
-          checkout_path: sdk/keyvault
-          version: 4.2.1
-        - package: azure-keyvault-keys
-          checkout_path: sdk/keyvault
-          version: 4.3.1
-        - package: azure-keyvault-secrets
-          checkout_path: sdk/keyvault
-          version: 4.2.0
+    # - name: azure-core
+    #   common_root: azure
+    #   service: core
+    #   checkout:
+    #     - package: azure-core
+    #       checkout_path: sdk/core
+    #       version: 1.14.0
+    # - name: azure-identity
+    #   common_root: azure
+    #   service: identity
+    #   checkout:
+    #     - package: azure-identity
+    #       checkout_path: sdk/identity
+    #       version: 1.6.0
+    # - name: azure-storage
+    #   common_root: azure/storage
+    #   service: storage
+    #   checkout:
+    #     - package: azure-storage-blob
+    #       checkout_path: sdk/storage
+    #       version: 12.8.1
+    #     - package: azure-storage-queue
+    #       checkout_path: sdk/storage
+    #       version: 12.1.6
+    #     - package: azure-storage-file-share
+    #       checkout_path: sdk/storage
+    #       version: 12.4.2
+    #     - package: azure-storage-file-datalake
+    #       checkout_path: sdk/storage
+    #       version: 12.3.1
+    # - name: azure-ai-textanalytics
+    #   common_root: azure
+    #   service: textanalytics
+    #   checkout:
+    #     - package: azure-ai-textanalytics
+    #       checkout_path: sdk/textanalytics
+    #       version: 5.0.0
+    # - name: azure-appconfiguration
+    #   common_root: azure
+    #   service: appconfiguration
+    #   checkout:
+    #     - package: azure-appconfiguration
+    #       checkout_path: sdk/appconfiguration
+    #       version: 1.1.1
+    # - name: azure-communication
+    #   common_root: azure/communication
+    #   service: communication
+    #   checkout:
+    #     - package: azure-communication-chat
+    #       checkout_path: sdk/communication
+    #       version: 1.0.0
+    #     - package: azure-communication-identity
+    #       checkout_path: sdk/communication
+    #       version: 1.0.0
+    #     - package: azure-communication-phonenumbers
+    #       checkout_path: sdk/communication
+    #       version: 1.0.0
+    #     - package: azure-communication-sms
+    #       checkout_path: sdk/communication
+    #       version: 1.0.0
+    # - name: azure-search-documents
+    #   common_root: azure
+    #   service: search
+    #   checkout:
+    #     - package: azure-search-documents
+    #       checkout_path: sdk/search
+    #       version: 11.1.0
+    # - name: azure-servicebus
+    #   common_root: azure
+    #   service: servicebus
+    #   checkout:
+    #     - package: azure-servicebus
+    #       checkout_path: sdk/servicebus
+    #       version: 7.2.0
+    # - name: azure-keyvault
+    #   common_root: azure/keyvault
+    #   service: keyvault
+    #   checkout:
+    #     - package: azure-keyvault-certificates
+    #       checkout_path: sdk/keyvault
+    #       version: 4.2.1
+    #     - package: azure-keyvault-keys
+    #       checkout_path: sdk/keyvault
+    #       version: 4.3.1
+    #     - package: azure-keyvault-secrets
+    #       checkout_path: sdk/keyvault
+    #       version: 4.2.0
     - name: azure-eventhub
       common_root: azure/eventhub
       service: eventhub

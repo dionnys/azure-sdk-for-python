@@ -395,7 +395,7 @@ class KeyVaultCertificate(object):
 class KeyVaultCertificateIdentifier(object):
     """Information about a KeyVaultCertificate parsed from a certificate ID.
 
-    :param str id: the full original identifier of a certificate
+    :param str source_id: the full original identifier of a certificate
     :raises ValueError: if the certificate ID is improperly formatted
     Example:
         .. literalinclude:: ../tests/test_parse_id.py
@@ -406,9 +406,9 @@ class KeyVaultCertificateIdentifier(object):
             :dedent: 8
     """
 
-    def __init__(self, id):  # pylint: disable=W0622
+    def __init__(self, source_id):
         # type: (str) -> None
-        self._resource_id = parse_key_vault_id(id)
+        self._resource_id = parse_key_vault_id(source_id)
 
     @property
     def source_id(self):
@@ -643,7 +643,8 @@ class CertificatePolicy(object):
     :paramtype enhanced_key_usage: list[str]
     :keyword key_usage: List of key usages.
     :paramtype key_usage: list[str or ~azure.keyvault.certificates.KeyUsageType]
-    :keyword content_type: The media type (MIME type) of the secret backing the certificate.
+    :keyword content_type: The media type (MIME type) of the secret backing the certificate.  If not specified,
+        :attr:`CertificateContentType.pkcs12` is assumed.
     :paramtype content_type: str or ~azure.keyvault.certificates.CertificateContentType
     :keyword int validity_in_months: The duration that the certificate is valid in months.
     :keyword lifetime_actions: Actions that will be performed by Key Vault over the lifetime

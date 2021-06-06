@@ -29,7 +29,6 @@ import yaml
 
 from common_tasks import process_glob_string, run_check_call, str_to_bool, parse_setup
 from subprocess import check_call
-from distutils.dir_util import copy_tree
 
 VERSION_REGEX = re.compile(r"\s*AZURESDK_CONDA_VERSION\s*:\s*[\'](.*)[\']\s*")
 
@@ -78,6 +77,17 @@ setup(
 )
 """
 
+## we need a version of shutuil.copytree that will overwrite without complaining
+def copy_tree(src, dest):
+    if os.path.isdir(src):
+        if not os.path.isdir(dest):
+            os.makedirs(dest)
+        files = os.listdir(src)
+        for f in files:
+            copy_tree(os.path.join(src, f), 
+                                os.path.join(dest, f))
+    else:
+        shutil.copyfile(src, dest)
 
 def create_package(pkg_directory, output_directory):
     check_call(
@@ -143,7 +153,7 @@ def create_sdist_skeleton(build_directory, artifact_name, common_root):
             for directory in directories_for_copy:
                 src = os.path.join(pkg_till_common_root, directory)
                 dest = os.path.join(ns_dir, directory)
-                shutil.copytree(src, dest)
+                copy_tree(src, dest)
 
 
 def get_version_from_config(environment_config):

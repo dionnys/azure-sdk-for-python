@@ -40,7 +40,7 @@ steps:
           CheckoutPath: ${{checkout.checkout_path}}
           Version: ${{checkout.version}}
 
-    - task: pwsh:
+    - pwsh:
         Get-ChildItem -Recurse "$(conda.build)"
       displayName: Output visible directories
 

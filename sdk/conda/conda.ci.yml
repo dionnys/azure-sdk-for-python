@@ -26,7 +26,7 @@ pr:
 extends:
   template: ../../eng/pipelines/templates/stages/archetype-conda-client.yml
   parameters:
-    CondaArtifacts:
+
     # - name: azure-core
     #   common_root: azure
     #   service: core
@@ -114,6 +114,7 @@ extends:
     #     - package: azure-keyvault-secrets
     #       checkout_path: sdk/keyvault
     #       version: 4.2.0
+    CondaArtifacts:
     - name: azure-eventhub
       common_root: azure/eventhub
       service: eventhub

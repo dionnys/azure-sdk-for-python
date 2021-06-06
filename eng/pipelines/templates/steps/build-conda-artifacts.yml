@@ -40,6 +40,10 @@ steps:
           CheckoutPath: ${{checkout.checkout_path}}
           Version: ${{checkout.version}}
 
+    - task: pwsh:
+        Get-ChildItem -Recurse "$(conda.build)"
+      displayName: Output visible directories
+
     - task: PythonScript@0
       displayName: 'Build Source Distribution for ${{ artifact.name }}'
       inputs:

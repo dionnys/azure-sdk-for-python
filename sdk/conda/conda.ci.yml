@@ -148,7 +148,7 @@ extends:
         - package: azure-cosmos
           checkout_path: sdk/cosmos
           version: 4.2.0
-- name: azure-mgmt
+    - name: azure-mgmt
       common_root: azure
       service: mgmt
       checkout:

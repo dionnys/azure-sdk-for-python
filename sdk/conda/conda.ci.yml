@@ -279,7 +279,7 @@ extends:
           checkout_path: sdk/logic
           version: 9.0.0
         - package: azure-mgmt-machinelearningservices
-          checkout_path: sdk/machinelearningservices
+          checkout_path: sdk/machinelearning
           version: 1.0.0
         - package: azure-mgmt-maintenance
           checkout_path: sdk/maintenance
@@ -314,7 +314,7 @@ extends:
         - package: azure-mgmt-peering
           checkout_path: sdk/peering
           version: 1.0.0
-        - package: azure-mgmt-policyinsights
+        - package: azure-mgmt-powerbidedicated
           checkout_path: sdk/policyinsights
           version: 1.0.0
         - package: azure-mgmt-powerbidedicated
@@ -333,7 +333,7 @@ extends:
           checkout_path: sdk/relay
           version: 1.0.0
         - package: azure-mgmt-resource
-          checkout_path: sdk/resource
+          checkout_path: sdk/resources
           version: 18.0.0
         - package: azure-mgmt-resourcemover
           checkout_path: sdk/resourcemover
@@ -369,6 +369,6 @@ extends:
           checkout_path: sdk/timeseriesinsights
           version: 1.0.0
         - package: azure-mgmt-web
-          checkout_path: sdk/web
+          checkout_path: sdk/appservice
           version: 2.0.0
     

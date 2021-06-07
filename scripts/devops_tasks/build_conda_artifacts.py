@@ -117,7 +117,7 @@ def get_pkgs_from_build_directory(build_directory):
     ]
 
 
-def create_sdist_skeleton(build_directory, artifact_name, common_root):
+def create_sdist_skeleton(build_directory, common_root):
     sdist_directory = os.path.join(build_directory, TEMP_ARTIFACT_NAME)
 
     if os.path.exists(sdist_directory):
@@ -181,7 +181,7 @@ def get_manifest_includes(common_root):
 def create_setup_files(
     build_directory, common_root, artifact_name, service, meta_yaml, environment_config
 ):
-    sdist_directory = os.path.join(build_directory, artifact_name)
+    sdist_directory = os.path.join(build_directory, TEMP_ARTIFACT_NAME)
     setup_location = os.path.join(sdist_directory, "setup.py")
     manifest_location = os.path.join(sdist_directory, "MANIFEST.in")
     cfg_location = os.path.join(sdist_directory, "setup.cfg")
@@ -223,7 +223,7 @@ def create_combined_sdist(
     )
 
     if not singular_dependency:
-        create_sdist_skeleton(build_directory, artifact_name, common_root)
+        create_sdist_skeleton(build_directory, common_root)
         create_setup_files(
             build_directory,
             common_root,
@@ -233,7 +233,7 @@ def create_combined_sdist(
             environment_config,
         )
 
-    sdist_location = os.path.join(build_directory, artifact_name)
+    sdist_location = os.path.join(build_directory, TEMP_ARTIFACT_NAME)
 
     output_sdist_location = os.path.join(output_directory, "sdist", artifact_name)
 

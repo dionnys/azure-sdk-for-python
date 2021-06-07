@@ -354,7 +354,7 @@ extends:
           checkout_path: sdk/storage
           version: 18.0.0
         - package: azure-mgmt-storagesync
-          checkout_path: sdk/storagesync
+          checkout_path: sdk/storage
           version: 1.0.0
         - package: azure-mgmt-subscription
           checkout_path: sdk/subscription

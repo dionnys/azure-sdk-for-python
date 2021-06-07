@@ -181,3 +181,4 @@ jobs:
             $(activate.method) ${{ artifact.name }}
             python -m pytest $(conda.build)/${{ checkout.checkout_path }}/${{ checkout.package }}
           displayName: 'Run Tests for ${{ checkout.package }}'
+          continueOnError: true

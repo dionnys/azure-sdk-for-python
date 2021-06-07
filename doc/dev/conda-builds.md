@@ -100,6 +100,8 @@ Given the `storage` example. This is what your `build` folder should look like p
     azure-storage-queue/
 ```
 
+The `output` folder is merely the directory which will contain generated source distribution.
+
 ### Create the Combined SDist
 
 Once you have a directory assembled, invoke the script to build. The below command is formatted for visibility, recombine the lines however necessary for your chosen shell environment.
@@ -109,12 +111,12 @@ Once you have a directory assembled, invoke the script to build. The below comma
 python `build_conda_artifacts.py`
     -d "<output folder>"
     -b "<build folder>"
-    -m "<resolvable path to sdk/storage/meta.yml>"
+    -m "<resolvable path to sdk/conda/azure-storage/meta.yml>"
     -r "azure/storage"
     -n "azure-storage"
     -s "storage"
     -e "<resolvable path to repo root>/eng/conda_env.yml"
-    -c "<resolvable path to sdk/storage/ci.yml>"
+    -c "<resolvable path to sdk/conda/conda.ci.yml>"
 ```
 
 There will be two variables printed to your console. These are used to set the environment variables in CI, and you should do the same.

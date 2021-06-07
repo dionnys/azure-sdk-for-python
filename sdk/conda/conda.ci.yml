@@ -216,7 +216,7 @@ extends:
           checkout_path: sdk/core
           version: 1.2.2
         - package: azure-mgmt-cosmosdb
-          checkout_path: sdk/cosmosdb
+          checkout_path: sdk/cosmos
           version: 6.3.0
         - package: azure-mgmt-costmanagement
           checkout_path: sdk/costmanagement

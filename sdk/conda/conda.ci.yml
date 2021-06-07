@@ -134,20 +134,20 @@ extends:
     #     - package: azure-eventgrid
     #       checkout_path: sdk/eventgrid
     #       version: 4.2.0
-    - name: azure-digitaltwins-core
-      common_root: azure
-      service: digitaltwins
-      checkout:
-        - package: azure-digitaltwins-core
-          checkout_path: sdk/digitaltwins
-          version: 1.1.0
-    - name: azure-cosmos
-      common_root: azure
-      service: cosmos
-      checkout:
-        - package: azure-cosmos
-          checkout_path: sdk/cosmos
-          version: 4.2.0
+    # - name: azure-digitaltwins-core
+    #   common_root: azure
+    #   service: digitaltwins
+    #   checkout:
+    #     - package: azure-digitaltwins-core
+    #       checkout_path: sdk/digitaltwins
+    #       version: 1.1.0
+    # - name: azure-cosmos
+    #   common_root: azure
+    #   service: cosmos
+    #   checkout:
+    #     - package: azure-cosmos
+    #       checkout_path: sdk/cosmos
+    #       version: 4.2.0
     - name: azure-mgmt
       common_root: azure
       service: mgmt

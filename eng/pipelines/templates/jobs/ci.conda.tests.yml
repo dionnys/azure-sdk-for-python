@@ -131,7 +131,8 @@ jobs:
         displayName: 'Activate Conda Environment and Install General Dependencies ${{ artifact.name }}'
 
       - pwsh: |
-          mkdir $(Agent.BuildDirectory)/conda/
+          mkdir -p $(Agent.BuildDirectory)/conda/
+          Remove-Item -Recurse -Force "$(Agent.BuildDirectory)/conda/*"
           Write-Host "##vso[task.setvariable variable=conda.build]$(Agent.BuildDirectory)/conda_checkout"
         displayName: 'Create Conda Working Directory for Testing'
 
@@ -160,7 +161,7 @@ jobs:
       - ${{ each checkout in artifact.checkout }}:
         - pwsh:
             Write-Host "Clean up Conda Build Directory $(conda.build)"
-            Remove-Item $(conda.build)/* -Recurse -Force
+            Remove-Item -Recurse -Force "$(conda.build)/*"
           displayName: 'Clean Up Before Testing ${{ artifact.name }}'
 
         - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml

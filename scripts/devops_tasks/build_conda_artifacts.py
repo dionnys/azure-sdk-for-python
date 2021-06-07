@@ -232,8 +232,9 @@ def create_combined_sdist(
             meta_yaml,
             environment_config,
         )
-
-    sdist_location = os.path.join(build_directory, TEMP_ARTIFACT_NAME)
+        sdist_location = os.path.join(build_directory, TEMP_ARTIFACT_NAME)
+    else:
+        sdist_location = os.path.join(build_directory, artifact_name)
 
     output_sdist_location = os.path.join(output_directory, "sdist", artifact_name)
 

@@ -31,7 +31,7 @@ from common_tasks import process_glob_string, run_check_call, str_to_bool, parse
 from subprocess import check_call
 
 VERSION_REGEX = re.compile(r"\s*AZURESDK_CONDA_VERSION\s*:\s*[\'](.*)[\']\s*")
-
+TEMP_ARTIFACT_NAME = "created_sdist"
 SUMMARY_TEMPLATE = " - Generated from {}."
 
 NAMESPACE_EXTENSION_TEMPLATE = """__path__ = __import__('pkgutil').extend_path(__path__, __name__)  # type: str
@@ -109,16 +109,16 @@ def create_namespace_extension(target_directory):
         f.write(NAMESPACE_EXTENSION_TEMPLATE)
 
 
-def get_pkgs_from_build_directory(build_directory, artifact_name):
+def get_pkgs_from_build_directory(build_directory):
     return [
         os.path.join(build_directory, p)
         for p in os.listdir(build_directory)
-        if p != artifact_name
+        if p != TEMP_ARTIFACT_NAME
     ]
 
 
 def create_sdist_skeleton(build_directory, artifact_name, common_root):
-    sdist_directory = os.path.join(build_directory, artifact_name)
+    sdist_directory = os.path.join(build_directory, TEMP_ARTIFACT_NAME)
 
     if os.path.exists(sdist_directory):
         shutil.rmtree(sdist_directory)
@@ -135,7 +135,7 @@ def create_sdist_skeleton(build_directory, artifact_name, common_root):
         create_namespace_extension(ns_dir)
 
     # get all the directories in the build folder, we will pull in all of them
-    pkgs_for_consumption = get_pkgs_from_build_directory(build_directory, artifact_name)
+    pkgs_for_consumption = get_pkgs_from_build_directory(build_directory)
 
     print("I see the following packages in the build directory")
     print(pkgs_for_consumption)
@@ -219,7 +219,7 @@ def create_combined_sdist(
     environment_config,
 ):
     singular_dependency = (
-        len(get_pkgs_from_build_directory(build_directory, artifact_name)) == 0
+        len(get_pkgs_from_build_directory(build_directory)) == 1
     )
 
     if not singular_dependency:

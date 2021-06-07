@@ -314,7 +314,7 @@ extends:
         - package: azure-mgmt-peering
           checkout_path: sdk/peering
           version: 1.0.0
-        - package: azure-mgmt-powerbidedicated
+        - package: azure-mgmt-policyinsights
           checkout_path: sdk/policyinsights
           version: 1.0.0
         - package: azure-mgmt-powerbidedicated

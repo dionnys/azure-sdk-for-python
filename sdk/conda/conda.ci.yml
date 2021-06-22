@@ -33,7 +33,7 @@ extends:
       checkout:
         - package: azure-core
           checkout_path: sdk/core
-          version: 1.14.0
+          version: 1.15.0
     - name: azure-identity
       common_root: azure
       service: identity
@@ -53,10 +53,10 @@ extends:
           version: 12.1.6
         - package: azure-storage-file-share
           checkout_path: sdk/storage
-          version: 12.4.2
+          version: 12.5.0
         - package: azure-storage-file-datalake
           checkout_path: sdk/storage
-          version: 12.3.1
+          version: 12.4.0
     - name: azure-ai-textanalytics
       common_root: azure
       service: textanalytics
@@ -93,7 +93,7 @@ extends:
       checkout:
         - package: azure-search-documents
           checkout_path: sdk/search
-          version: 11.1.0
+          version: 11.2.0
     - name: azure-servicebus
       common_root: azure
       service: servicebus

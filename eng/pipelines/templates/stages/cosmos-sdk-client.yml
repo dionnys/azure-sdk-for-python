@@ -14,6 +14,10 @@ parameters:
 - name: EmulatorStartParameters
   type: string
   default: ''
+- name: TestProxy
+  type: boolean
+  default: false
+  
 
 stages:
   - template: /eng/pipelines/templates/stages/archetype-sdk-client.yml

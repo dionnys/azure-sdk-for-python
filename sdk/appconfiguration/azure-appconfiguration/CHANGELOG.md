@@ -1,14 +1,16 @@
 # Release History
 
-## 1.2.1 (Unreleased)
-
-### Features Added
-
-### Breaking Changes
+## 1.3.0 (2021-11-09)
 
 ### Bugs Fixed
+- Fix the issue that data was persisted according to an incorrect schema/in an incorrect format ([#20518](https://github.com/Azure/azure-sdk-for-python/issues/20518))
 
-### Other Changes
+  `SecretReferenceConfigurationSetting` in 1.2.0 used "secret_uri" rather than "uri" as the schema keywords which 
+  broken inter-operation of `SecretReferenceConfigurationSetting` between SDK and the portal. 
+  
+  Please:
+  - Use 1.3.0+ for any `SecretReferenceConfigurationSetting` uses.
+  - Call a get method for existing `SecretReferenceConfigurationSetting`s and set them back to correct the format.
 
 ## 1.2.0 (2021-07-06)
 ### Features Added

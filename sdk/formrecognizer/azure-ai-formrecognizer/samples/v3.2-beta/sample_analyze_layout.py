@@ -43,7 +43,7 @@ def analyze_layout():
             "./sample_forms/forms/form_selection_mark.png",
         )
     )
-    # [START analyze_layout]
+
     from azure.core.credentials import AzureKeyCredential
     from azure.ai.formrecognizer import DocumentAnalysisClient
 
@@ -75,20 +75,22 @@ def analyze_layout():
         )
 
         for line_idx, line in enumerate(page.lines):
+            words = line.get_words()
             print(
-                "...Line # {} has text content '{}' within bounding box '{}'".format(
+                "...Line # {} has word count {} and text '{}' within bounding box '{}'".format(
                     line_idx,
+                    len(words),
                     line.content,
                     format_bounding_box(line.bounding_box),
                 )
             )
 
-        for word in page.words:
-            print(
-                "...Word '{}' has a confidence of {}".format(
-                    word.content, word.confidence
+            for word in words:
+                print(
+                    "......Word '{}' has a confidence of {}".format(
+                        word.content, word.confidence
+                    )
                 )
-            )
 
         for selection_mark in page.selection_marks:
             print(
@@ -130,8 +132,6 @@ def analyze_layout():
                 )
 
     print("----------------------------------------")
-
-    # [END analyze_layout]
 
 
 if __name__ == "__main__":

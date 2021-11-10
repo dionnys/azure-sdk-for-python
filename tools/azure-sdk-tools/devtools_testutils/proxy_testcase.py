@@ -8,6 +8,7 @@ import logging
 import requests
 import six
 from typing import TYPE_CHECKING
+import pdb
 
 try:
     # py3
@@ -28,7 +29,6 @@ from .config import PROXY_URL
 
 if TYPE_CHECKING:
     from typing import Tuple
-
 
 # To learn about how to migrate SDK tests to the test proxy, please refer to the migration guide at
 # https://github.com/Azure/azure-sdk-for-python/blob/main/doc/dev/test_proxy_migration_guide.md
@@ -85,7 +85,10 @@ def start_record_or_playback(test_id):
         )
         recording_id = result.headers["x-recording-id"]
         try:
-            variables = result.json()
+            if result.content:
+                variables = result.json()
+            else:
+                variables = {}
         except ValueError as ex:  # would be a JSONDecodeError on Python 3, which subclasses ValueError
             six.raise_from(
                 ValueError("The response body returned from starting playback did not contain valid JSON"), ex

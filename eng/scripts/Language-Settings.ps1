@@ -503,3 +503,9 @@ function Get-python-DocsMsMetadataForPackage($PackageInfo) {
     Suffix = ''
   }
 }
+
+function Import-Dev-Cert-python
+{
+  Write-Host "Python Trust Methodology"
+}
+

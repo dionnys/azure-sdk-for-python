@@ -39,7 +39,7 @@ steps:
     displayName: 'Prep Environment'
 
   - ${{if eq(parameters.TestProxy, true) }}:
-    - template: /eng/common/testproxy/start-proxy-tool.yml
+    - template: /eng/common/testproxy/test-proxy-tool.yml
 
   - ${{if eq(variables['System.TeamProject'], 'internal') }}:
     - template: ../steps/auth-dev-feed.yml

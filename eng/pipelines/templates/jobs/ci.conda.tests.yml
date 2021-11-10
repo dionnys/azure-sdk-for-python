@@ -75,7 +75,7 @@ jobs:
         TestPipeline: ${{ parameters.TestPipeline }}
 
     - ${{if eq(parameters.TestProxy, true) }}:
-      - template: /eng/common/testproxy/start-proxy-tool.yml
+      - template: /eng/common/testproxy/test-proxy-tool.yml
 
     - task: UsePythonVersion@0
       displayName: 'Use Python $(PythonVersion)'

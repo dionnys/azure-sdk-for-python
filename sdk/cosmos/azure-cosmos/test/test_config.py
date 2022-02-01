@@ -84,12 +84,12 @@ class _test_config(object):
         return cls.TEST_DATABASE
 
     @classmethod
-    def create_database_if_not_exist_with_throughput(cls, client, throughput):
+    def create_database_if_not_exist_with_throughput(cls, client):
         # type: (CosmosClient) -> Database
         if cls.TEST_DATABASE is not None:
             return cls.TEST_DATABASE
         cls.try_delete_database(client)
-        cls.TEST_DATABASE = client.create_database(id=cls.TEST_THROUGHPUT_DATABASE_ID, offer_throughput=throughput)
+        cls.TEST_DATABASE = client.create_database(id=cls.TEST_THROUGHPUT_DATABASE_ID, offer_throughput=400)
         cls.IS_MULTIMASTER_ENABLED = client.get_database_account()._EnableMultipleWritableLocations
         return cls.TEST_DATABASE
 

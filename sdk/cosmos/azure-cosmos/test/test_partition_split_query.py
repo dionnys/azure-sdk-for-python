@@ -43,7 +43,7 @@ class TestPartitionSplitQuery(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.client = cosmos_client.CosmosClient(cls.host, cls.masterKey)
-        cls.database = test_config._test_config.create_database_if_not_exist_with_throughput(cls.client, cls.throughput)
+        cls.database = test_config._test_config.create_database_if_not_exist_with_throughput(cls.client)
         cls.container = test_config._test_config.create_collection_if_not_exist_no_custom_throughput(cls.client)
 
     def test_partition_split_query(self):

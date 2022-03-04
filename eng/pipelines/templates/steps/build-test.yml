@@ -32,7 +32,7 @@ steps:
       versionSpec: '${{ parameters.PythonVersion }}'
 
   - script: |
-      python -m pip install pip==20.1
+      python -m pip install pip==20.3.3
       pip install -r eng/ci_tools.txt
       pip --version
       pip freeze

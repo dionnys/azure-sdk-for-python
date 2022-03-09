@@ -3,3 +3,5 @@ variables:
   skipComponentGovernanceDetection: true
   AzureSDKCondaChannel: https://azuresdkconda.blob.core.windows.net/channel1/
   Package.EnableSBOMSigning: true
+  Skip.Analyze: true
+  BuildTargetingString: 'azure-core'

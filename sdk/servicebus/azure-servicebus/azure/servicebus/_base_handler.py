@@ -15,9 +15,11 @@ except ImportError:
     from urllib import quote_plus  # type: ignore
     from urlparse import urlparse  # type: ignore
 
-import uamqp
-from uamqp import utils, compat
-from uamqp.message import MessageProperties
+# import uamqp
+# from uamqp import utils, compat
+# from uamqp.message import MessageProperties
+from ._pyamqp.utils import generate_sas_token
+from ._pyamqp.message import Message, Properties
 
 from azure.core.credentials import AccessToken, AzureSasCredential, AzureNamedKeyCredential
 from azure.core.pipeline.policies import RetryMode
@@ -150,7 +152,7 @@ def _generate_sas_token(uri, policy, key, expiry=None):
     encoded_policy = quote_plus(policy).encode("utf-8")  # pylint: disable=no-member
     encoded_key = key.encode("utf-8")
 
-    token = utils.create_sas_token(encoded_policy, encoded_key, encoded_uri, expiry)
+    token = generate_sas_token(encoded_policy, encoded_key, encoded_uri, expiry)
     return AccessToken(token=token, expires_on=abs_expiry)
 
 def _get_backoff_time(retry_mode, backoff_factor, backoff_max, retried_times):
@@ -459,7 +461,7 @@ class BaseHandler:  # pylint:disable=too-many-instance-attributes
     ):
         # type: (bytes, Any, Callable, bool, Optional[float], Any) -> uamqp.Message
         """
-        Execute an amqp management operation.
+        Execute an pyamqp management operation.
 
         :param bytes mgmt_operation: The type of operation to be performed. This value will
          be service-specific, but common values include READ, CREATE and UPDATE.
@@ -485,9 +487,9 @@ class BaseHandler:  # pylint:disable=too-many-instance-attributes
             except AttributeError:
                 pass
 
-        mgmt_msg = uamqp.Message(
+        mgmt_msg = Message(
             body=message,
-            properties=MessageProperties(
+            properties=Properties(
                 reply_to=self._mgmt_target, encoding=self._config.encoding, **kwargs
             ),
             application_properties=application_properties,

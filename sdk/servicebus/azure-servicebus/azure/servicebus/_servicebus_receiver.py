@@ -14,9 +14,15 @@ from typing import Any, List, Optional, Dict, Iterator, Union, TYPE_CHECKING, ca
 
 import six
 
-from uamqp import ReceiveClient, types, Message
-from uamqp.constants import SenderSettleMode
-from uamqp.authentication.common import AMQPAuth
+# from uamqp import ReceiveClient, types, Message
+# from uamqp.constants import SenderSettleMode
+# from uamqp.authentication.common import AMQPAuth
+from ._pyamqp import (
+    ReceiveClient,
+    types,
+)
+from ._pyamqp.constants import SenderSettleMode
+from ._pyamqp.message import Message
 
 from .exceptions import ServiceBusError
 from ._base_handler import BaseHandler
@@ -63,6 +69,7 @@ if TYPE_CHECKING:
         AzureSasCredential,
         AzureNamedKeyCredential,
     )
+    from ._pyamqp.authentication import JWTTokenAuth
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -332,7 +339,7 @@ class ServiceBusReceiver(
         return cls(**constructor_args)
 
     def _create_handler(self, auth):
-        # type: (AMQPAuth) -> None
+        # type: (JWTTokenAuth) -> None
         self._handler = ReceiveClient(
             self._get_source(),
             auth=auth,

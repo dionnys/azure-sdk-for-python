@@ -9,9 +9,13 @@ import datetime
 import warnings
 from typing import Any, TYPE_CHECKING, Union, List, Optional, Mapping, cast
 
-import uamqp
-from uamqp import SendClient, types
-from uamqp.authentication.common import AMQPAuth
+# import uamqp
+# from uamqp import SendClient, types
+# from uamqp.authentication.common import AMQPAuth
+from ._pyamqp import (
+    SendClient,
+    types,
+)
 
 from ._base_handler import BaseHandler
 from ._common import mgmt_handlers
@@ -60,6 +64,7 @@ if TYPE_CHECKING:
         ServiceBusMessageBatch,
         List[Union[ServiceBusMessage, AmqpAnnotatedMessage]],
     ]
+    from ._pyamqp.authentication import JWTTokenAuth
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -230,7 +235,7 @@ class ServiceBusSender(BaseHandler, SenderMixin):
         return cls(**constructor_args)
 
     def _create_handler(self, auth):
-        # type: (AMQPAuth) -> None
+        # type: (JWTTokenAuth) -> None
         self._handler = SendClient(
             self._entity_uri,
             auth=auth,

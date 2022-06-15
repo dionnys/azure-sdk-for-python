@@ -18,4 +18,5 @@ security-scopes: {{ security_scope }}
 security: AzureKey
 security-header-name: {{ security_header_name }}
 {%- endif %}
+package-mode: dataplane
 ```

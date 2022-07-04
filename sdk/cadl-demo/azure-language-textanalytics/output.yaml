@@ -1,0 +1,303 @@
+client:
+  name: MicrosoftCognitiveLanguageTextAnalytics
+  description: Service client
+  moduleName: microsoft_cognitive_language_text_analytics
+  parameters:
+    - optional: false
+      description: Service host
+      clientName: endpoint
+      clientDefaultValue: http://localhost:3000
+      restApiName: $host
+      location: path
+      type: &ref_0
+        type: string
+      implementation: Client
+      inOverload: false
+  security: {}
+  namespace: Azure.Language.TextAnalytics
+  url: ''
+  apiVersions: []
+operationGroups:
+  - propertyName: analyze
+    className: Analyze
+    operations:
+      - name: analyzeText
+        description: >-
+          Submit a collection of text documents for analysis.  Specify a single
+          unique task to be executed immediately.
+        url: /:analyze-text
+        method: post
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: true
+            description: >-
+              If set to true, response will contain request and document level
+              statistics.
+            clientName: show_stats
+            inOverload: false
+            restApiName: showStats
+            location: query
+            type: &ref_3
+              type: boolean
+            implementation: Method
+        requestBody:
+          optional: false
+          clientName: body
+          inOverload: false
+          contentTypeToType:
+            application/json: &ref_1
+              type: model
+              name: AnalyzeTextTask
+              baseModels:
+                - null
+              discriminatedSubtypes: {}
+              properties: []
+              snakeCaseName: AnalyzeTextTask
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: analyze
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: submitJob
+        description: >-
+          Submit a collection of text documents for analysis. Specify one or
+          more unique tasks to be executed as a long-running operation.
+        url: /analyze-text/jobs
+        method: post
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+        requestBody:
+          optional: false
+          clientName: body
+          inOverload: false
+          contentTypeToType:
+            application/json: &ref_8
+              type: model
+              name: AnalyzeTextJobsInput
+              baseModels:
+                - null
+              discriminatedSubtypes: {}
+              properties:
+                - clientName: display_name
+                  restApiName: displayName
+                  type: *ref_0
+                  optional: true
+                  description: Optional display name for the analysis job.
+                - clientName: analysis_input
+                  restApiName: analysisInput
+                  type: &ref_6
+                    type: model
+                    name: MultiLanguageAnalysisInput
+                    baseModels:
+                      - null
+                    discriminatedSubtypes: {}
+                    properties:
+                      - clientName: documents
+                        restApiName: documents
+                        type: &ref_5
+                          type: list
+                          elementType: &ref_4
+                            type: model
+                            name: MultiLanguageInput
+                            baseModels:
+                              - null
+                            discriminatedSubtypes: {}
+                            properties:
+                              - clientName: id
+                                restApiName: id
+                                type: *ref_0
+                                optional: false
+                                description: A unique, non-empty document identifier.
+                              - clientName: text
+                                restApiName: text
+                                type: *ref_0
+                                optional: false
+                                description: The input text to process.
+                              - clientName: language
+                                restApiName: language
+                                type: *ref_0
+                                optional: true
+                                description: >-
+                                  This is the 2 letter ISO 639-1 representation
+                                  of a language. 
+
+
+                                  For example, use "en" for English; "es" for
+                                  Spanish etc. z,an
+
+                                  If not set, use "en" for English as default."
+                            snakeCaseName: MultiLanguageInput
+                        optional: false
+                        description: Collection of documents to analyze.
+                    snakeCaseName: MultiLanguageAnalysisInput
+                  optional: false
+                - clientName: tasks
+                  restApiName: tasks
+                  type: &ref_7
+                    type: list
+                    elementType: *ref_1
+                  optional: false
+                  description: The set of tasks to execute on the input documents.
+              snakeCaseName: AnalyzeTextJobsInput
+        responses:
+          - headers:
+              - type: *ref_0
+                restApiName: Operation-Location
+            statusCodes:
+              - 202
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: analyze
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: getJobStatus
+        description: >-
+          Get the status of an analysis job.  A job may consist of one or more
+          tasks.  Once all tasks are succeeded, the job will transition to the
+          succeeded state and results will be available for each task.
+        url: /analyze-text/jobs/{jobId}
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: false
+            description: Job ID.
+            clientName: job_id
+            inOverload: false
+            restApiName: jobId
+            location: path
+            type: *ref_0
+            implementation: Method
+          - optional: true
+            description: The maximum number of resources to return from the collection.
+            clientName: top
+            inOverload: false
+            restApiName: top
+            location: query
+            type: &ref_2
+              type: integer
+            implementation: Method
+          - optional: true
+            description: >-
+              An offset into the collection of the first resource to be
+              returned.
+            clientName: skip
+            inOverload: false
+            restApiName: skip
+            location: query
+            type: *ref_2
+            implementation: Method
+          - optional: true
+            description: >-
+              If set to true, response will contain request and document level
+              statistics.
+            clientName: show_stats
+            inOverload: false
+            restApiName: showStats
+            location: query
+            type: *ref_3
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: analyze
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: cancelJob
+        description: Cancel a long-running Text Analysis job.
+        url: /analyze-text/jobs/{jobId}:cancel
+        method: post
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: false
+            description: Job ID.
+            clientName: job_id
+            inOverload: false
+            restApiName: jobId
+            location: path
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers:
+              - type: *ref_0
+                restApiName: Operation-Location
+            statusCodes:
+              - 202
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: analyze
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+types:
+  - *ref_0
+  - *ref_3
+  - *ref_1
+  - *ref_4
+  - *ref_5
+  - *ref_6
+  - *ref_7
+  - *ref_8
+  - *ref_2
+  - *ref_0

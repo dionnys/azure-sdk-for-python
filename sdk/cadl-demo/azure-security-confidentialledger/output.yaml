@@ -1,0 +1,574 @@
+client:
+  name: ConfidentialLedgerService
+  description: Service client
+  moduleName: confidential_ledger_service
+  parameters:
+    - optional: false
+      description: Service host
+      clientName: endpoint
+      clientDefaultValue: http://localhost:3000
+      restApiName: $host
+      location: path
+      type: &ref_0
+        type: string
+      implementation: Client
+      inOverload: false
+  security: {}
+  namespace: Azure.Security.ConfidentialLedger
+  url: ''
+  apiVersions: []
+operationGroups:
+  - propertyName: confidential_ledger
+    className: ConfidentialLedger
+    operations:
+      - name: listCollections
+        description: Collection ids are user-created collections of ledger entries
+        url: /app/collections
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: getEnclaveQuotes
+        description: >-
+          A quote is an SGX enclave measurement that can be used to verify the
+          validity of a node and its enclave.
+        url: /app/enclaveQuotes
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: getConstitution
+        description: >-
+          The constitution is a script that assesses and applies proposals from
+          consortium members.
+        url: /app/governance/constitution
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: getConsortiumMembers
+        description: Consortium members can manage the Confidential Ledger.
+        url: /app/governance/members
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: postLedgerEntry
+        description: A collection id may optionally be specified.
+        url: /app/transactions
+        method: post
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: true
+            description: The collection id.
+            clientName: collection_id
+            inOverload: false
+            restApiName: collectionId
+            location: query
+            type: *ref_0
+            implementation: Method
+        requestBody:
+          optional: false
+          description: ''
+          clientName: entry
+          inOverload: false
+          contentTypeToType:
+            application/json: &ref_1
+              type: model
+              name: LedgerEntry
+              description: ''
+              baseModels:
+                - null
+              discriminatedSubtypes: {}
+              properties:
+                - clientName: contents
+                  restApiName: contents
+                  type: *ref_0
+                  optional: false
+                  description: ''
+                - clientName: collection_id
+                  restApiName: collectionId
+                  type: *ref_0
+                  optional: false
+                  description: ''
+                - clientName: transaction_id
+                  restApiName: transactionId
+                  type: *ref_0
+                  optional: false
+                  description: ''
+              snakeCaseName: LedgerEntry
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: getLedgerEntry
+        description: ''
+        url: /app/transactions/{transactionId}
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: true
+            description: The collection id.
+            clientName: collection_id
+            inOverload: false
+            restApiName: collectionId
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: false
+            description: Identifies a write transaction.
+            clientName: transaction_id
+            inOverload: false
+            restApiName: transactionId
+            location: path
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: getReceipt
+        description: ''
+        url: /app/transactions/{transactionId}/receipt
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: false
+            description: Identifies a write transaction.
+            clientName: transaction_id
+            inOverload: false
+            restApiName: transactionId
+            location: path
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: getTransactionStatus
+        description: ''
+        url: /app/transactions/{transactionId}/status
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: false
+            description: Identifies a write transaction.
+            clientName: transaction_id
+            inOverload: false
+            restApiName: transactionId
+            location: path
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: getCurrentLedgerEntry
+        description: ''
+        url: /app/transactions/current
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: true
+            description: The collection id.
+            clientName: collection_id
+            inOverload: false
+            restApiName: collectionId
+            location: query
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: deleteUser
+        description: ''
+        url: /app/users/{userId}
+        method: delete
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: false
+            description: The user id, either an AAD object ID or certificate fingerprint.
+            clientName: user_id
+            inOverload: false
+            restApiName: userId
+            location: path
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 204
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: getUser
+        description: ''
+        url: /app/users/{userId}
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: false
+            description: The user id, either an AAD object ID or certificate fingerprint.
+            clientName: user_id
+            inOverload: false
+            restApiName: userId
+            location: path
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: createOrUpdateUser
+        description: ''
+        url: /app/users/{userId}
+        method: patch
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: false
+            description: The user id, either an AAD object ID or certificate fingerprint.
+            clientName: user_id
+            inOverload: false
+            restApiName: userId
+            location: path
+            type: *ref_0
+            implementation: Method
+          - optional: false
+            description: ''
+            clientName: content_type
+            inOverload: false
+            restApiName: content-type
+            location: header
+            type: &ref_2
+              type: string
+              constantValue: application/merge-patch+json
+            implementation: Method
+        requestBody:
+          optional: false
+          description: Details about a Confidential Ledger user.
+          clientName: user_details
+          inOverload: false
+          contentTypeToType:
+            application/merge-patch+json: &ref_4
+              type: model
+              name: LedgerUser
+              description: ''
+              baseModels:
+                - null
+              discriminatedSubtypes: {}
+              properties:
+                - clientName: assigned_role
+                  restApiName: assignedRole
+                  type: &ref_3
+                    type: enum
+                    name: ConfidentialLedgerUserRoleName
+                    description: Represents an assignable role
+                    valueType:
+                      type: string
+                    values:
+                      - name: Administrator
+                        value: Administrator
+                        description: ''
+                      - name: Contributor
+                        value: Contributor
+                        description: ''
+                      - name: Reader
+                        value: Reader
+                        description: ''
+                  optional: false
+                  description: ''
+                - clientName: user_id
+                  restApiName: userId
+                  type: *ref_0
+                  optional: false
+                  description: ''
+              snakeCaseName: LedgerUser
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+  - propertyName: confidential_ledger_identity_service
+    className: ConfidentialLedgerIdentityService
+    operations:
+      - name: GetLedgerIdentity
+        description: ''
+        url: /ledgerIdentity/{ledgerId}
+        method: get
+        parameters:
+          - optional: false
+            description: The API version to use for this operation.
+            clientName: api_version
+            inOverload: false
+            restApiName: api-version
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: false
+            description: Id of the Confidential Ledger instance to get information for
+            clientName: ledger_id
+            inOverload: false
+            restApiName: ledgerId
+            location: path
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions:
+          - headers: []
+            statusCodes:
+              - .nan
+            discriminator: basic
+        groupName: confidential_ledger_identity_service
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+types:
+  - *ref_0
+  - *ref_1
+  - *ref_2
+  - *ref_3
+  - *ref_4
+  - *ref_0

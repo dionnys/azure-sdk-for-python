@@ -21,7 +21,7 @@ operationGroups:
   - propertyName: confidential_ledger
     className: ConfidentialLedger
     operations:
-      - name: listCollections
+      - name: list_collections
         description: Collection ids are user-created collections of ledger entries
         url: /app/collections
         method: get
@@ -50,7 +50,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: getEnclaveQuotes
+      - name: get_enclave_quotes
         description: >-
           A quote is an SGX enclave measurement that can be used to verify the
           validity of a node and its enclave.
@@ -81,7 +81,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: getConstitution
+      - name: get_constitution
         description: >-
           The constitution is a script that assesses and applies proposals from
           consortium members.
@@ -112,7 +112,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: getConsortiumMembers
+      - name: get_consortium_members
         description: Consortium members can manage the Confidential Ledger.
         url: /app/governance/members
         method: get
@@ -141,7 +141,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: postLedgerEntry
+      - name: post_ledger_entry
         description: A collection id may optionally be specified.
         url: /app/transactions
         method: post
@@ -208,7 +208,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: getLedgerEntry
+      - name: get_ledger_entry
         description: ''
         url: /app/transactions/{transactionId}
         method: get
@@ -253,7 +253,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: getReceipt
+      - name: get_receipt
         description: ''
         url: /app/transactions/{transactionId}/receipt
         method: get
@@ -290,7 +290,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: getTransactionStatus
+      - name: get_transaction_status
         description: ''
         url: /app/transactions/{transactionId}/status
         method: get
@@ -327,7 +327,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: getCurrentLedgerEntry
+      - name: get_current_ledger_entry
         description: ''
         url: /app/transactions/current
         method: get
@@ -364,7 +364,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: deleteUser
+      - name: delete_user
         description: ''
         url: /app/users/{userId}
         method: delete
@@ -401,7 +401,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: getUser
+      - name: get_user
         description: ''
         url: /app/users/{userId}
         method: get
@@ -438,7 +438,7 @@ operationGroups:
         overloads: []
         apiVersions:
           - null
-      - name: createOrUpdateUser
+      - name: create_or_update_user
         description: ''
         url: /app/users/{userId}
         method: patch
@@ -492,13 +492,13 @@ operationGroups:
                     valueType:
                       type: string
                     values:
-                      - name: Administrator
+                      - name: ADMINISTRATOR
                         value: Administrator
                         description: ''
-                      - name: Contributor
+                      - name: CONTRIBUTOR
                         value: Contributor
                         description: ''
-                      - name: Reader
+                      - name: READER
                         value: Reader
                         description: ''
                   optional: false
@@ -528,7 +528,7 @@ operationGroups:
   - propertyName: confidential_ledger_identity_service
     className: ConfidentialLedgerIdentityService
     operations:
-      - name: GetLedgerIdentity
+      - name: get_ledger_identity
         description: ''
         url: /ledgerIdentity/{ledgerId}
         method: get

@@ -21,10 +21,10 @@ from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
 
 from ...operations._operations import (
-    build_analyze_analyzeText_request,
-    build_analyze_cancelJob_request,
-    build_analyze_getJobStatus_request,
-    build_analyze_submitJob_request,
+    build_analyze_analyze_text_request,
+    build_analyze_cancel_job_request,
+    build_analyze_get_job_status_request,
+    build_analyze_submit_job_request,
 )
 
 T = TypeVar("T")
@@ -49,7 +49,7 @@ class Analyze:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace_async
-    async def analyzeText(  # pylint: disable=inconsistent-return-statements
+    async def analyze_text(  # pylint: disable=inconsistent-return-statements
         self, *, api_version: str, show_stats: Optional[bool] = None, **kwargs: Any
     ) -> None:
         """Submit a collection of text documents for analysis.  Specify a single unique task to be
@@ -77,7 +77,7 @@ class Analyze:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_analyze_analyzeText_request(
+        request = build_analyze_analyze_text_request(
             api_version=api_version,
             show_stats=show_stats,
             headers=_headers,
@@ -99,7 +99,7 @@ class Analyze:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def submitJob(  # pylint: disable=inconsistent-return-statements
+    async def submit_job(  # pylint: disable=inconsistent-return-statements
         self, *, api_version: str, **kwargs: Any
     ) -> None:
         """Submit a collection of text documents for analysis. Specify one or more unique tasks to be
@@ -124,7 +124,7 @@ class Analyze:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_analyze_submitJob_request(
+        request = build_analyze_submit_job_request(
             api_version=api_version,
             headers=_headers,
             params=_params,
@@ -148,7 +148,7 @@ class Analyze:
             return cls(pipeline_response, None, response_headers)
 
     @distributed_trace_async
-    async def getJobStatus(  # pylint: disable=inconsistent-return-statements
+    async def get_job_status(  # pylint: disable=inconsistent-return-statements
         self,
         job_id: str,
         *,
@@ -192,7 +192,7 @@ class Analyze:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_analyze_getJobStatus_request(
+        request = build_analyze_get_job_status_request(
             job_id=job_id,
             api_version=api_version,
             top=top,
@@ -217,7 +217,7 @@ class Analyze:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def cancelJob(  # pylint: disable=inconsistent-return-statements
+    async def cancel_job(  # pylint: disable=inconsistent-return-statements
         self, job_id: str, *, api_version: str, **kwargs: Any
     ) -> None:
         """Cancel a long-running Text Analysis job.
@@ -243,7 +243,7 @@ class Analyze:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_analyze_cancelJob_request(
+        request = build_analyze_cancel_job_request(
             job_id=job_id,
             api_version=api_version,
             headers=_headers,

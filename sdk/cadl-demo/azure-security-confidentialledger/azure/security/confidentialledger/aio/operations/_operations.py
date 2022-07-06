@@ -21,19 +21,19 @@ from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
 
 from ...operations._operations import (
-    build_confidential_ledger_createOrUpdateUser_request,
-    build_confidential_ledger_deleteUser_request,
-    build_confidential_ledger_getConsortiumMembers_request,
-    build_confidential_ledger_getConstitution_request,
-    build_confidential_ledger_getCurrentLedgerEntry_request,
-    build_confidential_ledger_getEnclaveQuotes_request,
-    build_confidential_ledger_getLedgerEntry_request,
-    build_confidential_ledger_getReceipt_request,
-    build_confidential_ledger_getTransactionStatus_request,
-    build_confidential_ledger_getUser_request,
-    build_confidential_ledger_identity_service_GetLedgerIdentity_request,
-    build_confidential_ledger_listCollections_request,
-    build_confidential_ledger_postLedgerEntry_request,
+    build_confidential_ledger_create_or_update_user_request,
+    build_confidential_ledger_delete_user_request,
+    build_confidential_ledger_get_consortium_members_request,
+    build_confidential_ledger_get_constitution_request,
+    build_confidential_ledger_get_current_ledger_entry_request,
+    build_confidential_ledger_get_enclave_quotes_request,
+    build_confidential_ledger_get_ledger_entry_request,
+    build_confidential_ledger_get_receipt_request,
+    build_confidential_ledger_get_transaction_status_request,
+    build_confidential_ledger_get_user_request,
+    build_confidential_ledger_identity_service_get_ledger_identity_request,
+    build_confidential_ledger_list_collections_request,
+    build_confidential_ledger_post_ledger_entry_request,
 )
 
 T = TypeVar("T")
@@ -58,7 +58,7 @@ class ConfidentialLedger:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace_async
-    async def listCollections(  # pylint: disable=inconsistent-return-statements
+    async def list_collections(  # pylint: disable=inconsistent-return-statements
         self, *, api_version: str, **kwargs: Any
     ) -> None:
         """Collection ids are user-created collections of ledger entries
@@ -73,7 +73,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -82,7 +81,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_listCollections_request(
+        request = build_confidential_ledger_list_collections_request(
             api_version=api_version,
             headers=_headers,
             params=_params,
@@ -103,7 +102,7 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def getEnclaveQuotes(  # pylint: disable=inconsistent-return-statements
+    async def get_enclave_quotes(  # pylint: disable=inconsistent-return-statements
         self, *, api_version: str, **kwargs: Any
     ) -> None:
         """A quote is an SGX enclave measurement that can be used to verify the validity of a node and its
@@ -119,7 +118,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -128,7 +126,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_getEnclaveQuotes_request(
+        request = build_confidential_ledger_get_enclave_quotes_request(
             api_version=api_version,
             headers=_headers,
             params=_params,
@@ -149,7 +147,7 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def getConstitution(  # pylint: disable=inconsistent-return-statements
+    async def get_constitution(  # pylint: disable=inconsistent-return-statements
         self, *, api_version: str, **kwargs: Any
     ) -> None:
         """The constitution is a script that assesses and applies proposals from consortium members.
@@ -164,7 +162,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -173,7 +170,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_getConstitution_request(
+        request = build_confidential_ledger_get_constitution_request(
             api_version=api_version,
             headers=_headers,
             params=_params,
@@ -194,7 +191,7 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def getConsortiumMembers(  # pylint: disable=inconsistent-return-statements
+    async def get_consortium_members(  # pylint: disable=inconsistent-return-statements
         self, *, api_version: str, **kwargs: Any
     ) -> None:
         """Consortium members can manage the Confidential Ledger.
@@ -209,7 +206,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -218,7 +214,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_getConsortiumMembers_request(
+        request = build_confidential_ledger_get_consortium_members_request(
             api_version=api_version,
             headers=_headers,
             params=_params,
@@ -239,7 +235,7 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def postLedgerEntry(  # pylint: disable=inconsistent-return-statements
+    async def post_ledger_entry(  # pylint: disable=inconsistent-return-statements
         self, *, api_version: str, collection_id: Optional[str] = None, **kwargs: Any
     ) -> None:
         """A collection id may optionally be specified.
@@ -256,7 +252,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -265,7 +260,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_postLedgerEntry_request(
+        request = build_confidential_ledger_post_ledger_entry_request(
             api_version=api_version,
             collection_id=collection_id,
             headers=_headers,
@@ -287,10 +282,10 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def getLedgerEntry(  # pylint: disable=inconsistent-return-statements
+    async def get_ledger_entry(  # pylint: disable=inconsistent-return-statements
         self, transaction_id: str, *, api_version: str, collection_id: Optional[str] = None, **kwargs: Any
     ) -> None:
-        """getLedgerEntry
+        """get_ledger_entry
 
         :param transaction_id: Identifies a write transaction. Required.
         :type transaction_id: str
@@ -306,7 +301,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -315,7 +309,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_getLedgerEntry_request(
+        request = build_confidential_ledger_get_ledger_entry_request(
             transaction_id=transaction_id,
             api_version=api_version,
             collection_id=collection_id,
@@ -338,10 +332,10 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def getReceipt(  # pylint: disable=inconsistent-return-statements
+    async def get_receipt(  # pylint: disable=inconsistent-return-statements
         self, transaction_id: str, *, api_version: str, **kwargs: Any
     ) -> None:
-        """getReceipt
+        """get_receipt
 
         :param transaction_id: Identifies a write transaction. Required.
         :type transaction_id: str
@@ -355,7 +349,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -364,7 +357,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_getReceipt_request(
+        request = build_confidential_ledger_get_receipt_request(
             transaction_id=transaction_id,
             api_version=api_version,
             headers=_headers,
@@ -386,10 +379,10 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def getTransactionStatus(  # pylint: disable=inconsistent-return-statements
+    async def get_transaction_status(  # pylint: disable=inconsistent-return-statements
         self, transaction_id: str, *, api_version: str, **kwargs: Any
     ) -> None:
-        """getTransactionStatus
+        """get_transaction_status
 
         :param transaction_id: Identifies a write transaction. Required.
         :type transaction_id: str
@@ -403,7 +396,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -412,7 +404,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_getTransactionStatus_request(
+        request = build_confidential_ledger_get_transaction_status_request(
             transaction_id=transaction_id,
             api_version=api_version,
             headers=_headers,
@@ -434,10 +426,10 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def getCurrentLedgerEntry(  # pylint: disable=inconsistent-return-statements
+    async def get_current_ledger_entry(  # pylint: disable=inconsistent-return-statements
         self, *, api_version: str, collection_id: Optional[str] = None, **kwargs: Any
     ) -> None:
-        """getCurrentLedgerEntry
+        """get_current_ledger_entry
 
         :keyword api_version: The API version to use for this operation. Required.
         :paramtype api_version: str
@@ -451,7 +443,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -460,7 +451,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_getCurrentLedgerEntry_request(
+        request = build_confidential_ledger_get_current_ledger_entry_request(
             api_version=api_version,
             collection_id=collection_id,
             headers=_headers,
@@ -482,10 +473,10 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def deleteUser(  # pylint: disable=inconsistent-return-statements
+    async def delete_user(  # pylint: disable=inconsistent-return-statements
         self, user_id: str, *, api_version: str, **kwargs: Any
     ) -> None:
-        """deleteUser
+        """delete_user
 
         :param user_id: The user id, either an AAD object ID or certificate fingerprint. Required.
         :type user_id: str
@@ -499,7 +490,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -508,7 +498,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_deleteUser_request(
+        request = build_confidential_ledger_delete_user_request(
             user_id=user_id,
             api_version=api_version,
             headers=_headers,
@@ -530,10 +520,10 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def getUser(  # pylint: disable=inconsistent-return-statements
+    async def get_user(  # pylint: disable=inconsistent-return-statements
         self, user_id: str, *, api_version: str, **kwargs: Any
     ) -> None:
-        """getUser
+        """get_user
 
         :param user_id: The user id, either an AAD object ID or certificate fingerprint. Required.
         :type user_id: str
@@ -547,7 +537,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -556,7 +545,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_getUser_request(
+        request = build_confidential_ledger_get_user_request(
             user_id=user_id,
             api_version=api_version,
             headers=_headers,
@@ -578,10 +567,10 @@ class ConfidentialLedger:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def createOrUpdateUser(  # pylint: disable=inconsistent-return-statements
+    async def create_or_update_user(  # pylint: disable=inconsistent-return-statements
         self, user_id: str, *, api_version: str, content_type: str, **kwargs: Any
     ) -> None:
-        """createOrUpdateUser
+        """create_or_update_user
 
         :param user_id: The user id, either an AAD object ID or certificate fingerprint. Required.
         :type user_id: str
@@ -597,7 +586,6 @@ class ConfidentialLedger:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -606,7 +594,7 @@ class ConfidentialLedger:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_createOrUpdateUser_request(
+        request = build_confidential_ledger_create_or_update_user_request(
             user_id=user_id,
             api_version=api_version,
             content_type=content_type,
@@ -647,10 +635,10 @@ class ConfidentialLedgerIdentityService:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace_async
-    async def GetLedgerIdentity(  # pylint: disable=inconsistent-return-statements
+    async def get_ledger_identity(  # pylint: disable=inconsistent-return-statements
         self, ledger_id: str, *, api_version: str, **kwargs: Any
     ) -> None:
-        """GetLedgerIdentity
+        """get_ledger_identity
 
         :param ledger_id: Id of the Confidential Ledger instance to get information for Required.
         :type ledger_id: str
@@ -664,7 +652,6 @@ class ConfidentialLedgerIdentityService:
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
             409: ResourceExistsError,
-            nan: HttpResponseError,
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -673,7 +660,7 @@ class ConfidentialLedgerIdentityService:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_confidential_ledger_identity_service_GetLedgerIdentity_request(
+        request = build_confidential_ledger_identity_service_get_ledger_identity_request(
             ledger_id=ledger_id,
             api_version=api_version,
             headers=_headers,

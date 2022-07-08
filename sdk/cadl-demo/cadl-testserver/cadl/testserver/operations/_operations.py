@@ -123,6 +123,8 @@ class params:
         :attr:`params` attribute.
     """
 
+    models = _models
+
     def __init__(self, *args, **kwargs):
         input_args = list(args)
         self._client = input_args.pop(0) if input_args else kwargs.pop("client")
@@ -303,6 +305,7 @@ class params:
         if cls:
             return cls(pipeline_response, None, {})
 
+    @added("1.1.0")
     @distributed_trace
     def delete_parameters(self, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
         """Delete something.
@@ -385,6 +388,7 @@ class params:
         if cls:
             return cls(pipeline_response, None, {})
 
+    @added("1.1.0")
     @distributed_trace
     def get_new_operation(self, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
         """I'm a new operation.

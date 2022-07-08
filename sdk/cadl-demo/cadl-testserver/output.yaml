@@ -150,6 +150,7 @@ operationGroups:
               discriminatedSubtypes: {}
               properties:
                 - clientName: url
+                  description: post input
                   restApiName: url
                   type: *ref_0
                   optional: false

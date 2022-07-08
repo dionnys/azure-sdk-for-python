@@ -5,18 +5,15 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, TYPE_CHECKING
+from typing import Any
 
 from azure.core import PipelineClient
 from azure.core.rest import HttpRequest, HttpResponse
 
+from . import models
 from ._configuration import DPGClientConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import params
-
-if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
-    from typing import Dict
 
 
 class DPGClient:  # pylint: disable=client-accepts-api-version-keyword
@@ -34,8 +31,9 @@ class DPGClient:  # pylint: disable=client-accepts-api-version-keyword
         self._config = DPGClientConfiguration(**kwargs)
         self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
 
-        self._serialize = Serializer()
-        self._deserialize = Deserializer()
+        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        self._serialize = Serializer(client_models)
+        self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
         self.params = params(self._client, self._config, self._serialize, self._deserialize)
 

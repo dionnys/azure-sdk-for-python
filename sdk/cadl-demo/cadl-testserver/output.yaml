@@ -1,0 +1,248 @@
+client:
+  name: DPGClient
+  description: Service client
+  moduleName: d_p_g_client
+  parameters:
+    - optional: false
+      description: Service host
+      clientName: endpoint
+      clientDefaultValue: http://localhost:3000
+      restApiName: $host
+      location: path
+      type: &ref_0
+        type: string
+      implementation: Client
+      inOverload: false
+  security: {}
+  namespace: Cadl.Testserver
+  url: ''
+  apiVersions: []
+operationGroups:
+  - propertyName: params
+    className: params
+    operations:
+      - name: head_no_params
+        description: |-
+          Head request, no params.
+           Initially has no query parameters. After evolution, a new optional query parameter is added
+        url: /serviceDriven/parameters
+        method: head
+        parameters:
+          - optional: true
+            description: I'm a new input optional parameter
+            addedApiVersion: 1.1.0
+            clientName: new_parameter
+            inOverload: false
+            restApiName: new_parameter
+            location: query
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions: []
+        groupName: params
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: get_required
+        description: |-
+          Get true Boolean value on path.
+           Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
+        url: /serviceDriven/parameters
+        method: get
+        parameters:
+          - optional: false
+            description: I am a required parameter
+            clientName: parameter
+            inOverload: false
+            restApiName: parameter
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: true
+            description: I'm a new input optional parameter
+            addedApiVersion: 1.1.0
+            clientName: new_parameter
+            inOverload: false
+            restApiName: new_parameter
+            location: query
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions: []
+        groupName: params
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: put_required_optional
+        description: >-
+          Initially has one required query parameter and one optional query
+          parameter.  After evolution, a new optional query parameter is added
+        url: /serviceDriven/parameters
+        method: put
+        parameters:
+          - optional: false
+            description: I am a required parameter
+            clientName: required_param
+            inOverload: false
+            restApiName: requiredParam
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: true
+            description: I am an optional parameter
+            clientName: optional_param
+            inOverload: false
+            restApiName: optionalParam
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: true
+            description: I'm a new input optional parameter
+            addedApiVersion: 1.1.0
+            clientName: new_parameter
+            inOverload: false
+            restApiName: new_parameter
+            location: query
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions: []
+        groupName: params
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: post_parameters
+        description: POST a JSON or a JPEG
+        url: /serviceDriven/parameters
+        method: post
+        parameters: []
+        requestBody:
+          optional: false
+          description: >-
+            I am a body parameter. My only valid JSON entry is { url:
+            "http://example.org/myimage.jpeg" }
+          clientName: parameter
+          inOverload: false
+          contentTypeToType:
+            application/json: &ref_1
+              type: model
+              name: PostInput
+              baseModels:
+                - null
+              discriminatedSubtypes: {}
+              properties:
+                - clientName: url
+                  restApiName: url
+                  type: *ref_0
+                  optional: false
+              snakeCaseName: PostInput
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions: []
+        groupName: params
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: delete_parameters
+        description: |-
+          Delete something.
+           Initially the path exists but there is no delete method. After evolution this is a new method in a known path
+        url: /serviceDriven/parameters
+        method: delete
+        parameters: []
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions: []
+        groupName: params
+        addedApiVersion: 1.1.0
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - 1.1.0
+      - name: get_optional
+        description: |-
+          Get true Boolean value on path.
+           Initially has one optional query parameter. After evolution, a new optional query parameter is added
+        url: /serviceDriven/moreParameters
+        method: get
+        parameters:
+          - optional: true
+            description: I am an optional parameter
+            clientName: optional_param
+            inOverload: false
+            restApiName: optionalParam
+            location: query
+            type: *ref_0
+            implementation: Method
+          - optional: true
+            description: I'm a new input optional parameter
+            addedApiVersion: 1.1.0
+            clientName: new_parameter
+            inOverload: false
+            restApiName: new_parameter
+            location: query
+            type: *ref_0
+            implementation: Method
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions: []
+        groupName: params
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - null
+      - name: get_new_operation
+        description: |-
+          I'm a new operation.
+           Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
+        url: /serviceDriven/newPath
+        method: get
+        parameters: []
+        responses:
+          - headers: []
+            statusCodes:
+              - 200
+            discriminator: basic
+        exceptions: []
+        groupName: params
+        addedApiVersion: 1.1.0
+        discriminator: basic
+        isOverload: false
+        overloads: []
+        apiVersions:
+          - 1.1.0
+types:
+  - *ref_0
+  - *ref_1
+  - *ref_0

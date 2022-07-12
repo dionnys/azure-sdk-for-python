@@ -375,6 +375,7 @@ class HttpLoggingPolicy(SansIOHTTPPolicy):
         "If-None-Match",
         "If-Unmodified-Since",
         "Last-Modified",
+        "Metadata",
         "Pragma",
         "Request-Id",
         "Retry-After",

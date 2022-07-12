@@ -19,7 +19,7 @@ stages:
         Location: 'canadacentral'
 
           # All 5 service stages run in parallel, and with no parallel limits the tests may get throttled.
-        MaxParallel: 2
+        MaxParallel: 1
         ServiceDirectory: storage
         InjectedPackages: $(InjectedPackages)
         MatrixReplace:

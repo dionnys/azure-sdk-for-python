@@ -562,6 +562,8 @@ class ContentDecodePolicy(SansIOHTTPPolicy):
                 return json.loads(data_as_str)
             except ValueError as err:
                 raise DecodeError(message="JSON is invalid: {}".format(err), response=response, error=err)
+            except Exception as err1:
+                raise DecodeError(message="JSON is invalid: {}".format(err1), response=response, error=err1)
         elif "xml" in (mime_type or []):
             try:
                 try:

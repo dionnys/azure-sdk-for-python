@@ -9,7 +9,7 @@ from azure.core import MatchConditions
 from azure.core.credentials import AzureKeyCredential
 from azure.core.tracing.decorator import distributed_trace
 
-from ._generated import SearchClient as _SearchServiceClient
+from ._generated import SearchServiceClient as _SearchServiceClient
 from .models import SearchIndexerSkillset
 from ._utils import (
     get_access_conditions,

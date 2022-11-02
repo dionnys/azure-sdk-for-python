@@ -13,7 +13,7 @@ from azure.core.exceptions import ServiceResponseTimeoutError
 from ._utils import is_retryable_status_code, get_authentication_policy
 from .indexes import SearchIndexClient as SearchServiceClient
 from ._search_indexing_buffered_sender_base import SearchIndexingBufferedSenderBase
-from ._generated import SearchClient as SearchIndexClient
+from ._generated import SearchIndexClient as SearchIndexClient
 from ._generated.models import IndexingResult
 from ._search_documents_error import RequestEntityTooLargeError
 from ._index_documents_batch import IndexDocumentsBatch

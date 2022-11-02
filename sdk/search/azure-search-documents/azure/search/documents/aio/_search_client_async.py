@@ -10,7 +10,7 @@ from azure.core.credentials import AzureKeyCredential
 from azure.core.tracing.decorator_async import distributed_trace_async
 from ._paging import AsyncSearchItemPaged, AsyncSearchPageIterator
 from .._utils import get_authentication_policy
-from .._generated.aio import SearchClient as SearchIndexClient
+from .._generated.aio import SearchIndexClient as SearchIndexClient
 from .._generated.models import IndexingResult
 from .._search_documents_error import RequestEntityTooLargeError
 from .._index_documents_batch import IndexDocumentsBatch

@@ -11,7 +11,7 @@ from azure.core.tracing.decorator import distributed_trace
 from azure.core.paging import ItemPaged
 
 from .._api_versions import DEFAULT_VERSION
-from ._generated import SearchClient as _SearchServiceClient
+from ._generated import SearchServiceClient as _SearchServiceClient
 from ._utils import (
     get_access_conditions,
     normalize_endpoint,

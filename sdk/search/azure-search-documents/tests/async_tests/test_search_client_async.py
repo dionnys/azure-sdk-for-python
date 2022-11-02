@@ -15,7 +15,7 @@ CREDENTIAL = AzureKeyCredential(key="test_api_key")
 
 class TestSearchClientAsync(object):
     @mock.patch(
-        "azure.search.documents._generated.aio.operations._documents_operations.DocumentsOperations.search_post"
+        "azure.search.documents._generated.aio.operations._operations.DocumentsOperations.search_post"
     )
     async def test_get_count_reset_continuation_token(self, mock_search_post):
         client = SearchClient("endpoint", "index name", CREDENTIAL)

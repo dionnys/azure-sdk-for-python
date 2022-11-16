@@ -26,9 +26,9 @@ steps:
         - "${{ parameters.CheckoutPath }}/${{ parameters.Package }}"
       Repositories:
         - Name: "Azure/azure-sdk-for-python"
-        - ${{ if eq(parameters.Package, 'live') }}:
+        - ${{ if eq(parameters.Version, 'live') }}:
             Commitish: "main"
-        - ${{ if ne(parameters.Package, 'live') }}:
+        - ${{ if ne(parameters.Version, 'live') }}:
             Commitish: "${{ parameters.Package }}_${{ parameters.Version }}"
           WorkingDirectory: "$(Package.Clone)"
       SkipCheckoutNone: true

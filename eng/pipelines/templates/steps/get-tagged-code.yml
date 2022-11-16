@@ -33,16 +33,6 @@ steps:
           WorkingDirectory: "$(Package.Clone)"
       SkipCheckoutNone: true
 
-  - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
-    parameters:
-      Paths:
-        - "${{ parameters.CheckoutPath }}/${{ parameters.Package }}"
-      Repositories:
-        - Name: "Azure/azure-sdk-for-python"
-          Commitish: "${{ parameters.Package }}_${{ parameters.Version }}"
-          WorkingDirectory: "$(Package.Clone)"
-      SkipCheckoutNone: true
-
   - pwsh: |
       $pathForCopy = Join-Path -Path "$(Package.Clone)" -ChildPath "${{ parameters.CheckoutPath }}/${{ parameters.Package }}"
 

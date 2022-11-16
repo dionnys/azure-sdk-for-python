@@ -28,7 +28,7 @@ steps:
         - Name: "Azure/azure-sdk-for-python"
         - ${{ if eq(parameters.Package, 'live') }}:
             Commitish: "main"
-        - ${{ if nee(parameters.Package, 'live') }}:
+        - ${{ if ne(parameters.Package, 'live') }}:
             Commitish: "${{ parameters.Package }}_${{ parameters.Version }}"
           WorkingDirectory: "$(Package.Clone)"
       SkipCheckoutNone: true

@@ -1,0 +1,1762 @@
+info:
+  description: Azure Schema Registry is as a central schema repository, with support for versioning, management, compatibility checking, and RBAC.
+  title: Azure Schema Registry
+schemas:
+  numbers:
+    - &ref_27
+      type: integer
+      apiVersions:
+        - version: 2022-10
+      precision: 32
+      language:
+        default:
+          name: Integer
+          description: ''
+          header: Schema-Version
+      protocol: {}
+    - &ref_6
+      type: integer
+      apiVersions:
+        - version: 2022-10
+      precision: 32
+      language:
+        default:
+          name: SchemaVersion
+          description: Version number of specific schema.
+      protocol: {}
+    - &ref_36
+      type: integer
+      apiVersions:
+        - version: 2022-10
+      precision: 32
+      language:
+        default:
+          name: Integer
+          description: ''
+          header: Schema-Version
+      protocol: {}
+    - &ref_60
+      type: integer
+      apiVersions:
+        - version: 2022-10
+      precision: 32
+      language:
+        default:
+          name: Integer
+          description: ''
+          header: Schema-Version
+      protocol: {}
+    - &ref_73
+      type: integer
+      apiVersions:
+        - version: 2022-10
+      precision: 32
+      language:
+        default:
+          name: Integer
+          description: ''
+          header: Schema-Version
+      protocol: {}
+  strings:
+    - &ref_0
+      type: string
+      language:
+        default:
+          name: String
+          description: simple string
+      protocol: {}
+    - &ref_1
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: SchemaGroup
+          description: Name of individual schema group in list of schema groups.
+      protocol: {}
+    - &ref_2
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: SchemaGroupsNextLink
+          description: URl to next batch of schema groups
+      protocol: {}
+    - &ref_18
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_3
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: ErrorDetailCode
+          description: Server-defined error code.
+      protocol: {}
+    - &ref_4
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: ErrorDetailMessage
+          description: Brief description of error.
+      protocol: {}
+    - &ref_19
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: {}
+    - &ref_22
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Content-Type
+      protocol: {}
+    - &ref_23
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Id
+      protocol: {}
+    - &ref_24
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Id-Location
+      protocol: {}
+    - &ref_25
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Group-Name
+      protocol: {}
+    - &ref_26
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Name
+      protocol: {}
+    - &ref_29
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_30
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_31
+      type: string
+      apiVersions:
+        - version: 2022-10
+      maxLength: 50
+      pattern: ^[A-Za-z0-9][^\\/$:]*$
+      language:
+        default:
+          name: String
+          description: ''
+      protocol: {}
+    - &ref_7
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: SchemaVersionsNextLink
+          description: URl to next batch of schema versions
+      protocol: {}
+    - &ref_35
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: {}
+    - &ref_41
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Content-Type
+      protocol: {}
+    - &ref_42
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Id
+      protocol: {}
+    - &ref_43
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Id-Location
+      protocol: {}
+    - &ref_44
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Group-Name
+      protocol: {}
+    - &ref_45
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Name
+      protocol: {}
+    - &ref_47
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_48
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: {}
+    - &ref_56
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Id
+      protocol: {}
+    - &ref_57
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Id-Location
+      protocol: {}
+    - &ref_58
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Group-Name
+      protocol: {}
+    - &ref_59
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Name
+      protocol: {}
+    - &ref_61
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_62
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: {}
+    - &ref_69
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Id
+      protocol: {}
+    - &ref_70
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Id-Location
+      protocol: {}
+    - &ref_71
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Group-Name
+      protocol: {}
+    - &ref_72
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: Schema-Name
+      protocol: {}
+    - &ref_74
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_8
+      type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: SchemaId
+          description: Schema ID that uniquely identifies a schema in the registry namespace.
+      protocol: {}
+    - type: string
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: String
+          description: ''
+      protocol: {}
+  sealedChoices:
+    - &ref_49
+      choices:
+        - value: application/json; serialization=Avro
+          language:
+            default:
+              name: APPLICATION_JSON_SERIALIZATION_AVRO
+              description: Content Type 'application/json; serialization=Avro'
+        - value: application/json; serialization=json
+          language:
+            default:
+              name: APPLICATION_JSON_SERIALIZATION_JSON
+              description: Content Type 'application/json; serialization=json'
+        - value: text/plain; charset=utf-8
+          language:
+            default:
+              name: TEXT_PLAIN_CHARSET_UTF8
+              description: Content Type 'text/plain; charset=utf-8'
+      type: sealed-choice
+      choiceType: *ref_0
+      language:
+        default:
+          name: ContentType
+          description: Content type for upload
+      protocol: {}
+  constants:
+    - &ref_12
+      type: constant
+      value:
+        value: 2022-10
+      valueType: *ref_0
+      language:
+        default:
+          name: api_version2022_10
+          description: Api Version (2022-10)
+      protocol: {}
+    - &ref_15
+      type: constant
+      value:
+        value: application/json
+      valueType: *ref_0
+      language:
+        default:
+          name: accept
+          description: 'Accept: application/json'
+      protocol: {}
+    - &ref_20
+      type: constant
+      value:
+        value: application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8
+      valueType: *ref_0
+      language:
+        default:
+          name: accept1
+          description: 'Accept: application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8'
+      protocol: {}
+    - &ref_37
+      type: constant
+      value:
+        value: application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8
+      valueType: *ref_0
+      language:
+        default:
+          name: accept2
+          description: 'Accept: application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8'
+      protocol: {}
+  binaries:
+    - &ref_28
+      type: binary
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: binary
+          description: Binary representation of the registered schema.
+      protocol: {}
+    - &ref_46
+      type: binary
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: binary
+          description: Binary representation of the registered schema.
+      protocol: {}
+    - &ref_50
+      type: binary
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: binary
+          description: ''
+      protocol: {}
+    - &ref_63
+      type: binary
+      apiVersions:
+        - version: 2022-10
+      language:
+        default:
+          name: binary
+          description: ''
+      protocol: {}
+  objects:
+    - &ref_16
+      type: object
+      apiVersions:
+        - version: 2022-10
+      properties:
+        - schema: &ref_9
+            type: array
+            apiVersions:
+              - version: 2022-10
+            elementType: *ref_1
+            language:
+              default:
+                name: SchemaGroups
+                description: Array of schema groups.
+            protocol: {}
+          serializedName: schemaGroups
+          language:
+            default:
+              name: groups
+              description: Array of schema groups.
+          protocol: {}
+        - schema: *ref_2
+          serializedName: nextLink
+          language:
+            default:
+              name: next_link
+              description: URl to next batch of schema groups
+          protocol: {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language:
+        default:
+          name: SchemaGroups
+          description: Object received from the registry containing the list of schema groups and link to next batch page.
+          namespace: ''
+      protocol: {}
+    - &ref_17
+      type: object
+      apiVersions:
+        - version: 2022-10
+      properties:
+        - schema: &ref_5
+            type: object
+            apiVersions:
+              - version: 2022-10
+            properties:
+              - schema: *ref_3
+                required: true
+                serializedName: code
+                language:
+                  default:
+                    name: code
+                    description: Server-defined error code.
+                protocol: {}
+              - schema: *ref_4
+                required: true
+                serializedName: message
+                language:
+                  default:
+                    name: message
+                    description: Brief description of error.
+                protocol: {}
+              - schema: &ref_10
+                  type: array
+                  apiVersions:
+                    - version: 2022-10
+                  elementType: *ref_5
+                  language:
+                    default:
+                      name: ErrorDetailDetails
+                      description: Error message details to help user understand/debug failure.
+                  protocol: {}
+                required: false
+                serializedName: details
+                language:
+                  default:
+                    name: details
+                    description: Error message details to help user understand/debug failure.
+                protocol: {}
+            serializationFormats:
+              - json
+            usage:
+              - exception
+            language:
+              default:
+                name: ErrorDetail
+                description: Error response returned from Azure Schema Registry service.
+                namespace: ''
+            protocol: {}
+          required: true
+          serializedName: error
+          language:
+            default:
+              name: error
+              description: Error response returned from Azure Schema Registry service.
+          protocol: {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      language:
+        default:
+          name: Error
+          description: An error response returned from Azure Schema Registry service.
+          namespace: ''
+      protocol: {}
+    - *ref_5
+    - &ref_34
+      type: object
+      apiVersions:
+        - version: 2022-10
+      properties:
+        - schema: &ref_11
+            type: array
+            apiVersions:
+              - version: 2022-10
+            elementType: *ref_6
+            language:
+              default:
+                name: SchemaVersions
+                description: Array of schema version integers.
+            protocol: {}
+          serializedName: schemaVersions
+          language:
+            default:
+              name: versions
+              description: Array of schema version integers.
+          protocol: {}
+        - schema: *ref_7
+          serializedName: nextLink
+          language:
+            default:
+              name: next_link
+              description: URl to next batch of schema versions
+          protocol: {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language:
+        default:
+          name: SchemaVersions
+          description: Object received from the registry containing the list of schema versions and link to next batch page.
+          namespace: ''
+      protocol: {}
+    - type: object
+      apiVersions:
+        - version: 2022-10
+      properties:
+        - schema: *ref_8
+          serializedName: id
+          language:
+            default:
+              name: id
+              description: Schema ID that uniquely identifies a schema in the registry namespace.
+          protocol: {}
+      language:
+        default:
+          name: SchemaId
+          description: Object received from the registry containing schema identifiers.
+          namespace: ''
+      protocol: {}
+  arrays:
+    - *ref_9
+    - *ref_10
+    - *ref_11
+globalParameters:
+  - &ref_13
+    schema: *ref_0
+    implementation: Client
+    required: true
+    extensions:
+      x-in: path
+      x-ms-priority: 1
+      x-ms-skip-url-encoding: true
+      x-name: endpoint
+      x-required: true
+      x-type: string
+    language:
+      default:
+        name: endpoint
+        description: The Schema Registry service endpoint, for example my-namespace.servicebus.windows.net.
+        serializedName: endpoint
+    protocol:
+      http:
+        in: uri
+  - &ref_14
+    schema: *ref_12
+    implementation: Client
+    origin: modelerfour:synthesized/api-version
+    required: true
+    language:
+      default:
+        name: api_version
+        description: Api Version
+        serializedName: api-version
+    protocol:
+      http:
+        in: query
+operationGroups:
+  - $key: SchemaGroups
+    operations:
+      - operationId: SchemaGroups_List
+        apiVersions:
+          - version: 2022-10
+        parameters:
+          - *ref_13
+          - *ref_14
+        requests:
+          - parameters:
+              - schema: *ref_15
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /$schemaGroups
+                method: get
+                uri: https://{endpoint}
+        signatureParameters: []
+        responses:
+          - schema: *ref_16
+            language:
+              default:
+                name: ''
+                description: OK
+            protocol:
+              http:
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - schema: *ref_17
+            language:
+              default:
+                name: ''
+                description: An error response received from the Azure Schema Registry service.
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_18
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: XMsErrorCode
+                        description: Error code for specific error that occurred.
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-examples:
+            Get schema by ID:
+              parameters:
+                api-version: 2022-10
+                endpoint: mynamespace.servicebus.windows.net
+              responses:
+                '200':
+                  body:
+                    nextLink: https://mynamespace.servicebus.windows.net/$schemagroups/?api-version=2022-10&skip=3
+                    schemaGroups:
+                      - group1
+                      - group2
+                      - group3
+          x-ms-pageable:
+            itemName: schemaGroups
+            nextLinkName: nextLink
+        language:
+          default:
+            name: list
+            description: Gets the list of schema groups user is authorized to access.
+            paging:
+              itemName: schemaGroups
+              nextLinkName: nextLink
+            summary: Get list of schema groups.
+        protocol: {}
+    language:
+      default:
+        name: SchemaGroups
+        description: ''
+    protocol: {}
+  - $key: Schema
+    operations:
+      - operationId: Schema_GetById
+        apiVersions:
+          - version: 2022-10
+        parameters:
+          - *ref_13
+          - &ref_21
+            schema: *ref_19
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: id
+                description: References specific schema in registry namespace.
+                serializedName: id
+            protocol:
+              http:
+                in: path
+          - *ref_14
+        requests:
+          - parameters:
+              - schema: *ref_20
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /$schemaGroups/$schemas/{id}
+                method: get
+                uri: https://{endpoint}
+        signatureParameters:
+          - *ref_21
+        responses:
+          - binary: true
+            language:
+              default:
+                name: ''
+                description: OK
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_19
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL location of schema, identified by schema group, schema name, and version.
+                  - schema: *ref_22
+                    header: Content-Type
+                    language:
+                      default:
+                        name: ContentType
+                        description: The content type for given schema. Each schema type has an associated content-type.
+                  - schema: *ref_23
+                    header: Schema-Id
+                    language:
+                      default:
+                        name: SchemaId
+                        description: References specific schema in registry namespace.
+                  - schema: *ref_24
+                    header: Schema-Id-Location
+                    language:
+                      default:
+                        name: SchemaIdLocation
+                        description: URL location of schema, identified by schema ID.
+                  - schema: *ref_25
+                    header: Schema-Group-Name
+                    language:
+                      default:
+                        name: SchemaGroupName
+                        description: References schema group.
+                  - schema: *ref_26
+                    header: Schema-Name
+                    language:
+                      default:
+                        name: SchemaName
+                        description: References schema name.
+                  - schema: *ref_27
+                    header: Schema-Version
+                    language:
+                      default:
+                        name: SchemaVersion
+                        description: Version of the returned schema.
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json; serialization=Avro
+                  - application/json; serialization=json
+                statusCodes:
+                  - '200'
+          - schema: *ref_28
+            language:
+              default:
+                name: ''
+                description: OK
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_19
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL location of schema, identified by schema group, schema name, and version.
+                  - schema: *ref_22
+                    header: Content-Type
+                    language:
+                      default:
+                        name: ContentType
+                        description: The content type for given schema. Each schema type has an associated content-type.
+                  - schema: *ref_23
+                    header: Schema-Id
+                    language:
+                      default:
+                        name: SchemaId
+                        description: References specific schema in registry namespace.
+                  - schema: *ref_24
+                    header: Schema-Id-Location
+                    language:
+                      default:
+                        name: SchemaIdLocation
+                        description: URL location of schema, identified by schema ID.
+                  - schema: *ref_25
+                    header: Schema-Group-Name
+                    language:
+                      default:
+                        name: SchemaGroupName
+                        description: References schema group.
+                  - schema: *ref_26
+                    header: Schema-Name
+                    language:
+                      default:
+                        name: SchemaName
+                        description: References schema name.
+                  - schema: *ref_27
+                    header: Schema-Version
+                    language:
+                      default:
+                        name: SchemaVersion
+                        description: Version of the returned schema.
+                knownMediaType: text
+                mediaTypes:
+                  - text/plain; charset=utf-8
+                statusCodes:
+                  - '200'
+        exceptions:
+          - schema: *ref_17
+            language:
+              default:
+                name: ''
+                description: An error response received from the Azure Schema Registry service.
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_29
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: XMsErrorCode
+                        description: Error code for specific error that occurred.
+                knownMediaType: json
+                mediaTypes:
+                  - application/json; serialization=Avro
+                  - application/json; serialization=json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-examples:
+            Get schema by ID:
+              parameters:
+                api-version: 2022-10
+                endpoint: mynamespace.servicebus.windows.net
+                id: b489dc4916744e3db72dda8f9693f342
+              responses:
+                '200':
+                  body: '{"title":"Person","type":"object","properties":{"firstName":{"type":"string",},"lastName":{"type":"string",},"age":{"type":"integer","minimum":0}}}'
+                  headers:
+                    Content-Type: application/json; serialization=json
+                    Location: https://sample-namespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-schema-name/versions/3?api-version=2022-10
+                    Schema-Group-Name: sample-sr-group
+                    Schema-Id: b489dc4916744e3db72dda8f9693f342
+                    Schema-Id-Location: https://sample-namespace.servicebus.windows.net/$schemagroups?api-version=2021-10&schema-id=b489dc4916744e3db72dda8f9693f342
+                    Schema-Name: sample-json-schema
+                    Schema-Version: 4
+        language:
+          default:
+            name: get_by_id
+            description: Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.
+            summary: Get a registered schema by its unique ID reference.
+        protocol: {}
+      - operationId: Schema_GetVersions
+        apiVersions:
+          - version: 2022-10
+        parameters:
+          - *ref_13
+          - &ref_32
+            schema: *ref_30
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group_name
+                description: Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
+                serializedName: groupName
+            protocol:
+              http:
+                in: path
+          - &ref_33
+            schema: *ref_31
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: schema_name
+                description: Name of schema.
+                serializedName: schemaName
+            protocol:
+              http:
+                in: path
+          - *ref_14
+        requests:
+          - parameters:
+              - schema: *ref_15
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /$schemaGroups/{groupName}/schemas/{schemaName}/versions
+                method: get
+                uri: https://{endpoint}
+        signatureParameters:
+          - *ref_32
+          - *ref_33
+        responses:
+          - schema: *ref_34
+            language:
+              default:
+                name: ''
+                description: OK
+            protocol:
+              http:
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - schema: *ref_17
+            language:
+              default:
+                name: ''
+                description: An error response received from the Azure Schema Registry service.
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_30
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: XMsErrorCode
+                        description: Error code for specific error that occurred.
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-examples:
+            Get schema by ID:
+              parameters:
+                api-version: 2022-10
+                endpoint: mynamespace.servicebus.windows.net
+                groupName: sample-sr-group
+                schemaName: sample-schema-name
+              responses:
+                '200':
+                  body:
+                    nextLink: https://mynamespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-schema-name/versions?api-version=2022-10&skip=3
+                    schemaVersions:
+                      - 0
+                      - 1
+                      - 2
+          x-ms-pageable:
+            itemName: schemaVersions
+            nextLinkName: nextLink
+        language:
+          default:
+            name: get_versions
+            description: Gets the list of all versions of one schema.
+            paging:
+              itemName: schemaVersions
+              nextLinkName: nextLink
+            summary: Get list schema versions.
+        protocol: {}
+      - operationId: Schema_GetSchemaVersion
+        apiVersions:
+          - version: 2022-10
+        parameters:
+          - *ref_13
+          - &ref_38
+            schema: *ref_35
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group_name
+                description: Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
+                serializedName: groupName
+            protocol:
+              http:
+                in: path
+          - &ref_39
+            schema: *ref_31
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: schema_name
+                description: Name of schema.
+                serializedName: schemaName
+            protocol:
+              http:
+                in: path
+          - &ref_40
+            schema: *ref_36
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: schema_version
+                description: Version number of specific schema.
+                serializedName: schemaVersion
+            protocol:
+              http:
+                in: path
+          - *ref_14
+        requests:
+          - parameters:
+              - schema: *ref_37
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}
+                method: get
+                uri: https://{endpoint}
+        signatureParameters:
+          - *ref_38
+          - *ref_39
+          - *ref_40
+        responses:
+          - binary: true
+            language:
+              default:
+                name: ''
+                description: OK
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_35
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL location of schema, identified by schema group, schema name, and version.
+                  - schema: *ref_41
+                    header: Content-Type
+                    language:
+                      default:
+                        name: ContentType
+                        description: The content type for given schema. Each schema type has an associated content-type.
+                  - schema: *ref_42
+                    header: Schema-Id
+                    language:
+                      default:
+                        name: SchemaId
+                        description: References specific schema in registry namespace.
+                  - schema: *ref_43
+                    header: Schema-Id-Location
+                    language:
+                      default:
+                        name: SchemaIdLocation
+                        description: URL location of schema, identified by schema ID.
+                  - schema: *ref_44
+                    header: Schema-Group-Name
+                    language:
+                      default:
+                        name: SchemaGroupName
+                        description: References schema group.
+                  - schema: *ref_45
+                    header: Schema-Name
+                    language:
+                      default:
+                        name: SchemaName
+                        description: References schema name.
+                  - schema: *ref_36
+                    header: Schema-Version
+                    language:
+                      default:
+                        name: SchemaVersion
+                        description: Version of the returned schema.
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json; serialization=Avro
+                  - application/json; serialization=json
+                statusCodes:
+                  - '200'
+          - schema: *ref_46
+            language:
+              default:
+                name: ''
+                description: OK
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_35
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL location of schema, identified by schema group, schema name, and version.
+                  - schema: *ref_41
+                    header: Content-Type
+                    language:
+                      default:
+                        name: ContentType
+                        description: The content type for given schema. Each schema type has an associated content-type.
+                  - schema: *ref_42
+                    header: Schema-Id
+                    language:
+                      default:
+                        name: SchemaId
+                        description: References specific schema in registry namespace.
+                  - schema: *ref_43
+                    header: Schema-Id-Location
+                    language:
+                      default:
+                        name: SchemaIdLocation
+                        description: URL location of schema, identified by schema ID.
+                  - schema: *ref_44
+                    header: Schema-Group-Name
+                    language:
+                      default:
+                        name: SchemaGroupName
+                        description: References schema group.
+                  - schema: *ref_45
+                    header: Schema-Name
+                    language:
+                      default:
+                        name: SchemaName
+                        description: References schema name.
+                  - schema: *ref_36
+                    header: Schema-Version
+                    language:
+                      default:
+                        name: SchemaVersion
+                        description: Version of the returned schema.
+                knownMediaType: text
+                mediaTypes:
+                  - text/plain; charset=utf-8
+                statusCodes:
+                  - '200'
+        exceptions:
+          - schema: *ref_17
+            language:
+              default:
+                name: ''
+                description: An error response received from the Azure Schema Registry service.
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_47
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: XMsErrorCode
+                        description: Error code for specific error that occurred.
+                knownMediaType: json
+                mediaTypes:
+                  - application/json; serialization=Avro
+                  - application/json; serialization=json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-examples:
+            Get schema by ID:
+              parameters:
+                api-version: 2022-10
+                endpoint: mynamespace.servicebus.windows.net
+                groupName: sample-sr-group
+                schemaName: sample-json-schema
+                schemaVersion: 25
+              responses:
+                '200':
+                  body: '{"title":"Person","type":"object","properties":{"firstName":{"type":"string",},"lastName":{"type":"string",},"age":{"type":"integer","minimum":0}}}'
+                  headers:
+                    Content-Type: application/json; serialization=json
+                    Location: https://sample-namespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-json-schema/versions/25?api-version=2022-10
+                    Schema-Group-Name: sample-sr-group
+                    Schema-Id: b489dc4916744e3db72dda8f9693f392
+                    Schema-Id-Location: https://sample-namespace.servicebus.windows.net/$schemagroups?api-version=2022-10&schema-id=b489dc4916744e3db72dda8f9693f342
+                    Schema-Name: sample-json-schema
+                    Schema-Version: 25
+                    Schema-Version-Location: https://sample-namespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-json-schema/versions/?api-version=2022-10
+        language:
+          default:
+            name: get_schema_version
+            description: Gets one specific version of one schema.
+            summary: Get specific schema versions.
+        protocol: {}
+      - operationId: Schema_QueryIdByContent
+        apiVersions:
+          - version: 2022-10
+        parameters:
+          - *ref_13
+          - &ref_54
+            schema: *ref_48
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group_name
+                description: Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
+                serializedName: groupName
+            protocol:
+              http:
+                in: path
+          - &ref_55
+            schema: *ref_31
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: schema_name
+                description: Name of schema.
+                serializedName: schemaName
+            protocol:
+              http:
+                in: path
+          - *ref_14
+        requestMediaTypes:
+          application/json; serialization=Avro: &ref_53
+            parameters:
+              - &ref_51
+                schema: *ref_49
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language:
+                  default:
+                    name: content_type
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol:
+                  http:
+                    in: header
+              - &ref_52
+                schema: *ref_50
+                implementation: Method
+                required: true
+                language:
+                  default:
+                    name: schema_content
+                    description: String representation (UTF-8) of the registered schema.
+                protocol:
+                  http:
+                    in: body
+                    style: binary
+              - schema: *ref_15
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters:
+              - *ref_51
+              - *ref_52
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /$schemaGroups/{groupName}/schemas/{schemaName}:get-id
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json; serialization=Avro
+                  - application/json; serialization=json
+                  - text/plain; charset=utf-8
+                uri: https://{endpoint}
+          application/json; serialization=json: *ref_53
+          text/plain; charset=utf-8: *ref_53
+        requests:
+          - *ref_53
+        signatureParameters:
+          - *ref_54
+          - *ref_55
+        responses:
+          - language:
+              default:
+                name: ''
+                description: No Content
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_48
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL location of schema, identified by schema group, schema name, and version.
+                  - schema: *ref_56
+                    header: Schema-Id
+                    language:
+                      default:
+                        name: SchemaId
+                        description: References specific schema in registry namespace.
+                  - schema: *ref_57
+                    header: Schema-Id-Location
+                    language:
+                      default:
+                        name: SchemaIdLocation
+                        description: URL location of schema, identified by schema ID.
+                  - schema: *ref_58
+                    header: Schema-Group-Name
+                    language:
+                      default:
+                        name: SchemaGroupName
+                        description: References schema group.
+                  - schema: *ref_59
+                    header: Schema-Name
+                    language:
+                      default:
+                        name: SchemaName
+                        description: References schema name.
+                  - schema: *ref_60
+                    header: Schema-Version
+                    language:
+                      default:
+                        name: SchemaVersion
+                        description: Version of the returned schema.
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_17
+            language:
+              default:
+                name: ''
+                description: An error response received from the Azure Schema Registry service.
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_61
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: XMsErrorCode
+                        description: Error code for specific error that occurred.
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-examples:
+            Get schema ID:
+              parameters:
+                api-version: 2022-10
+                endpoint: mynamespace.servicebus.windows.net
+                groupName: sample-sr-group
+                schemaContent: '{"title":"Person","type":"object","properties":{"firstName":{"type":"string",},"lastName":{"type":"string",},"age":{"type":"integer","minimum":0}}}'
+                schemaName: sample-json-schema
+              responses:
+                '204':
+                  headers:
+                    Location: https://sample-namespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-json-schema/versions/3?api-version=2022-10
+                    Schema-Group-Name: sample-sr-group
+                    Schema-Id: b489dc4916744e3db72dda8f9693f342
+                    Schema-Id-Location: https://sample-namespace.servicebus.windows.net/$schemagroups?api-version=2022-10&schema-id=b489dc4916744e3db72dda8f9693f342
+                    Schema-Name: sample-json-schema
+                    Schema-Version: 4
+        language:
+          default:
+            name: query_id_by_content
+            description: Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
+            summary: Get ID for existing schema.
+        protocol: {}
+      - operationId: Schema_Register
+        apiVersions:
+          - version: 2022-10
+        parameters:
+          - *ref_13
+          - &ref_67
+            schema: *ref_62
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group_name
+                description: Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
+                serializedName: groupName
+            protocol:
+              http:
+                in: path
+          - &ref_68
+            schema: *ref_31
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: schema_name
+                description: Name of schema.
+                serializedName: schemaName
+            protocol:
+              http:
+                in: path
+          - *ref_14
+        requestMediaTypes:
+          application/json; serialization=Avro: &ref_66
+            parameters:
+              - &ref_64
+                schema: *ref_49
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language:
+                  default:
+                    name: content_type
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol:
+                  http:
+                    in: header
+              - &ref_65
+                schema: *ref_63
+                implementation: Method
+                required: true
+                language:
+                  default:
+                    name: schema_content
+                    description: String representation (UTF-8) of the schema being registered.
+                protocol:
+                  http:
+                    in: body
+                    style: binary
+              - schema: *ref_15
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters:
+              - *ref_64
+              - *ref_65
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /$schemaGroups/{groupName}/schemas/{schemaName}
+                method: put
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json; serialization=Avro
+                  - application/json; serialization=json
+                  - text/plain; charset=utf-8
+                uri: https://{endpoint}
+          application/json; serialization=json: *ref_66
+          text/plain; charset=utf-8: *ref_66
+        requests:
+          - *ref_66
+        signatureParameters:
+          - *ref_67
+          - *ref_68
+        responses:
+          - language:
+              default:
+                name: ''
+                description: No Content
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_62
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL location of schema, identified by schema group, schema name, and version.
+                  - schema: *ref_69
+                    header: Schema-Id
+                    language:
+                      default:
+                        name: SchemaId
+                        description: References specific schema in registry namespace.
+                  - schema: *ref_70
+                    header: Schema-Id-Location
+                    language:
+                      default:
+                        name: SchemaIdLocation
+                        description: URL location of schema, identified by schema ID.
+                  - schema: *ref_71
+                    header: Schema-Group-Name
+                    language:
+                      default:
+                        name: SchemaGroupName
+                        description: References schema group.
+                  - schema: *ref_72
+                    header: Schema-Name
+                    language:
+                      default:
+                        name: SchemaName
+                        description: References schema name.
+                  - schema: *ref_73
+                    header: Schema-Version
+                    language:
+                      default:
+                        name: SchemaVersion
+                        description: Version of the returned schema.
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_17
+            language:
+              default:
+                name: ''
+                description: An error response received from the Azure Schema Registry service.
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_74
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: XMsErrorCode
+                        description: Error code for specific error that occurred.
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-examples:
+            Register schema:
+              parameters:
+                api-version: 2022-10
+                endpoint: mynamespace.servicebus.windows.net
+                groupName: sample-sr-group
+                schemaContent: '{"title":"Person","type":"object","properties":{"firstName":{"type":"string",},"lastName":{"type":"string",},"age":{"type":"integer","minimum":0}}}'
+                schemaName: sample-json-schema
+              responses:
+                '204':
+                  headers:
+                    Location: https://sample-namespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-json-schema/versions/4?api-version=2022-10
+                    Schema-Group-Name: sample-sr-group
+                    Schema-Id: b489dc4916744e3db72dda8f9693f342
+                    Schema-Id-Location: https://sample-namespace.servicebus.windows.net/$schemagroups?api-version=2022-10&schema-id=b489dc4916744e3db72dda8f9693f342
+                    Schema-Name: sample-json-schema
+                    Schema-Version: 4
+        language:
+          default:
+            name: register
+            description: |
+              Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+            summary: Register new schema
+        protocol: {}
+    language:
+      default:
+        name: Schema
+        description: ''
+    protocol: {}
+security:
+  authenticationRequired: true
+  schemes:
+    - type: OAuth2
+      scopes:
+        - user_impersonation
+language:
+  default:
+    name: AzureSchemaRegistry
+    description: ''
+protocol:
+  http: {}

@@ -1,0 +1,2759 @@
+info:
+  title: WebPubSubServiceClient
+schemas:
+  numbers:
+    - &ref_21
+      type: integer
+      apiVersions:
+        - version: '2021-10-01'
+      defaultValue: 60
+      precision: 32
+      language:
+        default:
+          name: Integer
+          description: ''
+      protocol: {}
+  strings:
+    - &ref_0
+      type: string
+      language:
+        default:
+          name: String
+          description: simple string
+      protocol: {}
+    - &ref_15
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      pattern: ^[A-Za-z][A-Za-z0-9_`,.[\]]{0,127}$
+      language:
+        default:
+          name: String
+          description: ''
+      protocol: {}
+    - &ref_19
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_8
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: Post2ItemsItem
+          description: ''
+      protocol: {}
+    - &ref_1
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: ClientTokenResponseToken
+          description: The token value for the WebSocket client to connect to the service
+      protocol: {}
+    - &ref_2
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: ErrorDetailCode
+          description: One of a server-defined set of error codes.
+      protocol: {}
+    - &ref_3
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: ErrorDetailMessage
+          description: A human-readable representation of the error.
+      protocol: {}
+    - &ref_4
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: ErrorDetailTarget
+          description: The target of the error.
+      protocol: {}
+    - &ref_6
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: InnerErrorCode
+          description: A more specific error code than was provided by the containing error.
+      protocol: {}
+    - &ref_10
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: Post1ItemsItem
+          description: ''
+      protocol: {}
+    - &ref_29
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_11
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_39
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      minLength: 1
+      language:
+        default:
+          name: String
+          description: ''
+      protocol: {}
+    - &ref_41
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_42
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_50
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_51
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      maxLength: 1024
+      minLength: 1
+      language:
+        default:
+          name: String
+          description: ''
+      protocol: {}
+    - &ref_53
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_12
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_13
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_67
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_70
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_72
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_14
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_82
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_85
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_88
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_90
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_92
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_96
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - &ref_100
+      type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: {}
+    - type: string
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: String
+          description: ''
+      protocol: {}
+  choices:
+    - &ref_91
+      choices:
+        - value: sendToGroup
+          language:
+            default:
+              name: SEND_TO_GROUP
+              description: ''
+        - value: joinLeaveGroup
+          language:
+            default:
+              name: JOIN_LEAVE_GROUP
+              description: ''
+      type: choice
+      apiVersions:
+        - version: '2021-10-01'
+      choiceType: *ref_0
+      language:
+        default:
+          name: WebPubSubPermission
+          description: ''
+      protocol: {}
+  sealedChoices:
+    - &ref_33
+      choices:
+        - value: application/json
+          language:
+            default:
+              name: APPLICATION_JSON
+              description: Content Type 'application/json'
+        - value: application/octet-stream
+          language:
+            default:
+              name: APPLICATION_OCTET_STREAM
+              description: Content Type 'application/octet-stream'
+        - value: text/plain
+          language:
+            default:
+              name: TEXT_PLAIN
+              description: Content Type 'text/plain'
+      type: sealed-choice
+      choiceType: *ref_0
+      language:
+        default:
+          name: ContentType
+          description: Content type for upload
+      protocol: {}
+  constants:
+    - &ref_16
+      type: constant
+      value:
+        value: '2021-10-01'
+      valueType: *ref_0
+      language:
+        default:
+          name: api_version2021_10_01
+          description: Api Version (2021-10-01)
+      protocol: {}
+    - &ref_23
+      type: constant
+      value:
+        value: application/json, text/json
+      valueType: *ref_0
+      language:
+        default:
+          name: accept
+          description: 'Accept: application/json, text/json'
+      protocol: {}
+  binaries:
+    - &ref_34
+      type: binary
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: binary
+          description: ''
+      protocol: {}
+    - &ref_45
+      type: binary
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: binary
+          description: ''
+      protocol: {}
+    - &ref_59
+      type: binary
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: binary
+          description: ''
+      protocol: {}
+    - &ref_77
+      type: binary
+      apiVersions:
+        - version: '2021-10-01'
+      language:
+        default:
+          name: binary
+          description: ''
+      protocol: {}
+  objects:
+    - &ref_27
+      type: object
+      apiVersions:
+        - version: '2021-10-01'
+      properties:
+        - schema: *ref_1
+          serializedName: token
+          language:
+            default:
+              name: token
+              description: The token value for the WebSocket client to connect to the service
+          protocol: {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language:
+        default:
+          name: ClientTokenResponse
+          description: The response object containing the token for the client
+          namespace: ''
+      protocol: {}
+    - &ref_5
+      type: object
+      apiVersions:
+        - version: '2021-10-01'
+      properties:
+        - schema: *ref_2
+          serializedName: code
+          language:
+            default:
+              name: code
+              description: One of a server-defined set of error codes.
+          protocol: {}
+        - schema: *ref_3
+          serializedName: message
+          language:
+            default:
+              name: message
+              description: A human-readable representation of the error.
+          protocol: {}
+        - schema: *ref_4
+          serializedName: target
+          language:
+            default:
+              name: target
+              description: The target of the error.
+          protocol: {}
+        - schema: &ref_9
+            type: array
+            apiVersions:
+              - version: '2021-10-01'
+            elementType: *ref_5
+            language:
+              default:
+                name: ErrorDetailDetails
+                description: An array of details about specific errors that led to this reported error.
+            protocol: {}
+          serializedName: details
+          language:
+            default:
+              name: details
+              description: An array of details about specific errors that led to this reported error.
+          protocol: {}
+        - schema: &ref_7
+            type: object
+            apiVersions:
+              - version: '2021-10-01'
+            properties:
+              - schema: *ref_6
+                serializedName: code
+                language:
+                  default:
+                    name: code
+                    description: A more specific error code than was provided by the containing error.
+                protocol: {}
+              - schema: *ref_7
+                serializedName: inner
+                language:
+                  default:
+                    name: inner
+                    description: ''
+                protocol: {}
+            serializationFormats:
+              - json
+            usage:
+              - exception
+            language:
+              default:
+                name: InnerError
+                description: ''
+                namespace: ''
+            protocol: {}
+          serializedName: inner
+          language:
+            default:
+              name: inner
+              description: ''
+          protocol: {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      language:
+        default:
+          name: ErrorDetail
+          description: The error object.
+          namespace: ''
+      protocol: {}
+    - *ref_7
+  arrays:
+    - &ref_20
+      type: array
+      apiVersions:
+        - version: '2021-10-01'
+      elementType: *ref_8
+      language:
+        default:
+          name: ArrayOfPost2ItemsItem
+          description: Array of Post2ItemsItem
+      protocol: {}
+    - *ref_9
+    - &ref_28
+      type: array
+      apiVersions:
+        - version: '2021-10-01'
+      elementType: *ref_10
+      language:
+        default:
+          name: ArrayOfPost1ItemsItem
+          description: Array of Post1ItemsItem
+      protocol: {}
+    - &ref_32
+      type: array
+      apiVersions:
+        - version: '2021-10-01'
+      elementType: *ref_11
+      language:
+        default:
+          name: ArrayOfString
+          description: Array of String
+      protocol: {}
+    - &ref_54
+      type: array
+      apiVersions:
+        - version: '2021-10-01'
+      elementType: *ref_12
+      language:
+        default:
+          name: ArrayOfString
+          description: Array of String
+      protocol: {}
+    - &ref_58
+      type: array
+      apiVersions:
+        - version: '2021-10-01'
+      elementType: *ref_13
+      language:
+        default:
+          name: ArrayOfString
+          description: Array of String
+      protocol: {}
+    - &ref_73
+      type: array
+      apiVersions:
+        - version: '2021-10-01'
+      elementType: *ref_14
+      language:
+        default:
+          name: ArrayOfString
+          description: Array of String
+      protocol: {}
+globalParameters:
+  - &ref_18
+    schema: *ref_15
+    implementation: Client
+    required: true
+    extensions:
+      x-ms-priority: 0
+    language:
+      default:
+        name: hub
+        description: Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.
+        serializedName: hub
+    protocol:
+      http:
+        in: path
+  - &ref_17
+    schema: *ref_0
+    implementation: Client
+    required: true
+    extensions:
+      x-in: path
+      x-ms-skip-url-encoding: true
+      x-name: Endpoint
+      x-required: true
+      x-type: string
+    language:
+      default:
+        name: endpoint
+        description: HTTP or HTTPS endpoint for the Web PubSub service instance.
+        serializedName: Endpoint
+    protocol:
+      http:
+        in: uri
+  - &ref_22
+    schema: *ref_16
+    implementation: Client
+    origin: modelerfour:synthesized/api-version
+    required: true
+    language:
+      default:
+        name: api_version
+        description: Api Version
+        serializedName: api-version
+    protocol:
+      http:
+        in: query
+operationGroups:
+  - $key: ''
+    operations:
+      - operationId: GetClientAccessToken
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_24
+            schema: *ref_19
+            implementation: Method
+            language:
+              default:
+                name: user_id
+                description: User Id.
+                serializedName: userId
+            protocol:
+              http:
+                in: query
+          - &ref_25
+            schema: *ref_20
+            implementation: Method
+            language:
+              default:
+                name: roles
+                description: Roles that the connection with the generated token will have.
+                serializedName: role
+            protocol:
+              http:
+                explode: true
+                in: query
+                style: form
+          - &ref_26
+            schema: *ref_21
+            implementation: Method
+            language:
+              default:
+                name: minutes_to_expire
+                description: The expire time of the generated token.
+                serializedName: minutesToExpire
+            protocol:
+              http:
+                in: query
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/:generateToken
+                method: post
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_24
+          - *ref_25
+          - *ref_26
+        responses:
+          - schema: *ref_27
+            language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_19
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: get_client_access_token
+            description: Generate token for the client to connect Azure Web PubSub service.
+            summary: Generate token for the client to connect Azure Web PubSub service.
+        protocol: {}
+      - operationId: CloseAllConnections
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_30
+            schema: *ref_28
+            implementation: Method
+            language:
+              default:
+                name: excluded
+                description: Exclude these connectionIds when closing the connections in the hub.
+                serializedName: excluded
+            protocol:
+              http:
+                explode: true
+                in: query
+                style: form
+          - &ref_31
+            schema: *ref_29
+            implementation: Method
+            language:
+              default:
+                name: reason
+                description: The reason closing the client connection.
+                serializedName: reason
+            protocol:
+              http:
+                in: query
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/:closeConnections
+                method: post
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_30
+          - *ref_31
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_29
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: close_all_connections
+            description: Close the connections in the hub.
+            summary: Close the connections in the hub.
+        protocol: {}
+      - operationId: SendToAll
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_38
+            schema: *ref_32
+            implementation: Method
+            language:
+              default:
+                name: excluded
+                description: Excluded connection Ids.
+                serializedName: excluded
+            protocol:
+              http:
+                explode: true
+                in: query
+                style: form
+          - *ref_22
+        requestMediaTypes:
+          application/json: &ref_37
+            parameters:
+              - &ref_35
+                schema: *ref_33
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language:
+                  default:
+                    name: content_type
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol:
+                  http:
+                    in: header
+              - &ref_36
+                schema: *ref_34
+                implementation: Method
+                required: true
+                language:
+                  default:
+                    name: message
+                    description: The payload body.
+                protocol:
+                  http:
+                    in: body
+                    style: binary
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters:
+              - *ref_35
+              - *ref_36
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/:send
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                  - application/octet-stream
+                  - text/plain
+                uri: '{Endpoint}'
+          application/octet-stream: *ref_37
+          text/plain: *ref_37
+        requests:
+          - *ref_37
+        signatureParameters:
+          - *ref_38
+        responses:
+          - language:
+              default:
+                name: ''
+                description: The message is accepted. The service follows fire-and-forget pattern when sending messages.
+            protocol:
+              http:
+                statusCodes:
+                  - '202'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_11
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: send_to_all
+            description: Broadcast content inside request body to all the connected client connections.
+            summary: Broadcast content inside request body to all the connected client connections.
+        protocol: {}
+      - operationId: ConnectionExists
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_40
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: connection_id
+                description: The connection Id.
+                serializedName: connectionId
+            protocol:
+              http:
+                in: path
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/connections/{connectionId}
+                method: head
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_40
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+          - language:
+              default:
+                name: ''
+                description: Not Found
+            protocol:
+              http:
+                statusCodes:
+                  - '404'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_41
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: connection_exists
+            description: Check if the connection with the given connectionId exists.
+            summary: Check if the connection with the given connectionId exists.
+        protocol: {}
+      - operationId: CloseConnection
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_43
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: connection_id
+                description: Target connection Id.
+                serializedName: connectionId
+            protocol:
+              http:
+                in: path
+          - &ref_44
+            schema: *ref_42
+            implementation: Method
+            language:
+              default:
+                name: reason
+                description: The reason closing the client connection.
+                serializedName: reason
+            protocol:
+              http:
+                in: query
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/connections/{connectionId}
+                method: delete
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_43
+          - *ref_44
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_42
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: close_connection
+            description: Close the client connection.
+            summary: Close the client connection.
+        protocol: {}
+      - operationId: SendToConnection
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_49
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: connection_id
+                description: The connection Id.
+                serializedName: connectionId
+            protocol:
+              http:
+                in: path
+          - *ref_22
+        requestMediaTypes:
+          application/json: &ref_48
+            parameters:
+              - &ref_46
+                schema: *ref_33
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language:
+                  default:
+                    name: content_type
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol:
+                  http:
+                    in: header
+              - &ref_47
+                schema: *ref_45
+                implementation: Method
+                required: true
+                language:
+                  default:
+                    name: message
+                    description: The payload body.
+                protocol:
+                  http:
+                    in: body
+                    style: binary
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters:
+              - *ref_46
+              - *ref_47
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/connections/{connectionId}/:send
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                  - application/octet-stream
+                  - text/plain
+                uri: '{Endpoint}'
+          application/octet-stream: *ref_48
+          text/plain: *ref_48
+        requests:
+          - *ref_48
+        signatureParameters:
+          - *ref_49
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '202'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_50
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: send_to_connection
+            description: Send content inside request body to the specific connection.
+            summary: Send content inside request body to the specific connection.
+        protocol: {}
+      - operationId: GroupExists
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_52
+            schema: *ref_51
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group
+                description: Target group name, which length should be greater than 0 and less than 1025.
+                serializedName: group
+            protocol:
+              http:
+                in: path
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/groups/{group}
+                method: head
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_52
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+          - language:
+              default:
+                name: ''
+                description: Not Found
+            protocol:
+              http:
+                statusCodes:
+                  - '404'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_53
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: group_exists
+            description: Check if there are any client connections inside the given group
+            summary: Check if there are any client connections inside the given group
+        protocol: {}
+      - operationId: CloseGroupConnections
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_55
+            schema: *ref_51
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group
+                description: Target group name, which length should be greater than 0 and less than 1025.
+                serializedName: group
+            protocol:
+              http:
+                in: path
+          - &ref_56
+            schema: *ref_54
+            implementation: Method
+            language:
+              default:
+                name: excluded
+                description: Exclude these connectionIds when closing the connections in the group.
+                serializedName: excluded
+            protocol:
+              http:
+                explode: true
+                in: query
+                style: form
+          - &ref_57
+            schema: *ref_12
+            implementation: Method
+            language:
+              default:
+                name: reason
+                description: The reason closing the client connection.
+                serializedName: reason
+            protocol:
+              http:
+                in: query
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/groups/{group}/:closeConnections
+                method: post
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_55
+          - *ref_56
+          - *ref_57
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_12
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: close_group_connections
+            description: Close connections in the specific group.
+            summary: Close connections in the specific group.
+        protocol: {}
+      - operationId: SendToGroup
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_63
+            schema: *ref_51
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group
+                description: Target group name, which length should be greater than 0 and less than 1025.
+                serializedName: group
+            protocol:
+              http:
+                in: path
+          - &ref_64
+            schema: *ref_58
+            implementation: Method
+            language:
+              default:
+                name: excluded
+                description: Excluded connection Ids
+                serializedName: excluded
+            protocol:
+              http:
+                explode: true
+                in: query
+                style: form
+          - *ref_22
+        requestMediaTypes:
+          application/json: &ref_62
+            parameters:
+              - &ref_60
+                schema: *ref_33
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language:
+                  default:
+                    name: content_type
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol:
+                  http:
+                    in: header
+              - &ref_61
+                schema: *ref_59
+                implementation: Method
+                required: true
+                language:
+                  default:
+                    name: message
+                    description: The payload body.
+                protocol:
+                  http:
+                    in: body
+                    style: binary
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters:
+              - *ref_60
+              - *ref_61
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/groups/{group}/:send
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                  - application/octet-stream
+                  - text/plain
+                uri: '{Endpoint}'
+          application/octet-stream: *ref_62
+          text/plain: *ref_62
+        requests:
+          - *ref_62
+        signatureParameters:
+          - *ref_63
+          - *ref_64
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '202'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_13
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: send_to_group
+            description: Send content inside request body to a group of connections.
+            summary: Send content inside request body to a group of connections.
+        protocol: {}
+      - operationId: AddConnectionToGroup
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_65
+            schema: *ref_51
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group
+                description: Target group name, which length should be greater than 0 and less than 1025.
+                serializedName: group
+            protocol:
+              http:
+                in: path
+          - &ref_66
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: connection_id
+                description: Target connection Id
+                serializedName: connectionId
+            protocol:
+              http:
+                in: path
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/groups/{group}/connections/{connectionId}
+                method: put
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_65
+          - *ref_66
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_67
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: add_connection_to_group
+            description: Add a connection to the target group.
+            summary: Add a connection to the target group.
+        protocol: {}
+      - operationId: RemoveConnectionFromGroup
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_68
+            schema: *ref_51
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group
+                description: Target group name, which length should be greater than 0 and less than 1025.
+                serializedName: group
+            protocol:
+              http:
+                in: path
+          - &ref_69
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: connection_id
+                description: Target connection Id.
+                serializedName: connectionId
+            protocol:
+              http:
+                in: path
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/groups/{group}/connections/{connectionId}
+                method: delete
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_68
+          - *ref_69
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_70
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: remove_connection_from_group
+            description: Remove a connection from the target group.
+            summary: Remove a connection from the target group.
+        protocol: {}
+      - operationId: UserExists
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_71
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: user_id
+                description: Target user Id.
+                serializedName: userId
+            protocol:
+              http:
+                in: path
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/users/{userId}
+                method: head
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_71
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+          - language:
+              default:
+                name: ''
+                description: Not Found
+            protocol:
+              http:
+                statusCodes:
+                  - '404'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_72
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: user_exists
+            description: Check if there are any client connections connected for the given user.
+            summary: Check if there are any client connections connected for the given user.
+        protocol: {}
+      - operationId: CloseUserConnections
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_74
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: user_id
+                description: The user Id.
+                serializedName: userId
+            protocol:
+              http:
+                in: path
+          - &ref_75
+            schema: *ref_73
+            implementation: Method
+            language:
+              default:
+                name: excluded
+                description: Exclude these connectionIds when closing the connections for the user.
+                serializedName: excluded
+            protocol:
+              http:
+                explode: true
+                in: query
+                style: form
+          - &ref_76
+            schema: *ref_14
+            implementation: Method
+            language:
+              default:
+                name: reason
+                description: The reason closing the client connection.
+                serializedName: reason
+            protocol:
+              http:
+                in: query
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/users/{userId}/:closeConnections
+                method: post
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_74
+          - *ref_75
+          - *ref_76
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_14
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: close_user_connections
+            description: Close connections for the specific user.
+            summary: Close connections for the specific user.
+        protocol: {}
+      - operationId: SendToUser
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_81
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: user_id
+                description: The user Id.
+                serializedName: userId
+            protocol:
+              http:
+                in: path
+          - *ref_22
+        requestMediaTypes:
+          application/json: &ref_80
+            parameters:
+              - &ref_78
+                schema: *ref_33
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language:
+                  default:
+                    name: content_type
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol:
+                  http:
+                    in: header
+              - &ref_79
+                schema: *ref_77
+                implementation: Method
+                required: true
+                language:
+                  default:
+                    name: message
+                    description: The payload body.
+                protocol:
+                  http:
+                    in: body
+                    style: binary
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters:
+              - *ref_78
+              - *ref_79
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/users/{userId}/:send
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                  - application/octet-stream
+                  - text/plain
+                uri: '{Endpoint}'
+          application/octet-stream: *ref_80
+          text/plain: *ref_80
+        requests:
+          - *ref_80
+        signatureParameters:
+          - *ref_81
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '202'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_82
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: send_to_user
+            description: Send content inside request body to the specific user.
+            summary: Send content inside request body to the specific user.
+        protocol: {}
+      - operationId: AddUserToGroup
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_83
+            schema: *ref_51
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group
+                description: Target group name, which length should be greater than 0 and less than 1025.
+                serializedName: group
+            protocol:
+              http:
+                in: path
+          - &ref_84
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: user_id
+                description: Target user Id.
+                serializedName: userId
+            protocol:
+              http:
+                in: path
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/users/{userId}/groups/{group}
+                method: put
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_83
+          - *ref_84
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_85
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: add_user_to_group
+            description: Add a user to the target group.
+            summary: Add a user to the target group.
+        protocol: {}
+      - operationId: RemoveUserFromGroup
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_86
+            schema: *ref_51
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: group
+                description: Target group name, which length should be greater than 0 and less than 1025.
+                serializedName: group
+            protocol:
+              http:
+                in: path
+          - &ref_87
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: user_id
+                description: Target user Id.
+                serializedName: userId
+            protocol:
+              http:
+                in: path
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/users/{userId}/groups/{group}
+                method: delete
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_86
+          - *ref_87
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_88
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: remove_user_from_group
+            description: Remove a user from the target group.
+            summary: Remove a user from the target group.
+        protocol: {}
+      - operationId: RemoveUserFromAllGroups
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_89
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: user_id
+                description: Target user Id.
+                serializedName: userId
+            protocol:
+              http:
+                in: path
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/users/{userId}/groups
+                method: delete
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_89
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_90
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: remove_user_from_all_groups
+            description: Remove a user from all groups.
+            summary: Remove a user from all groups.
+        protocol: {}
+      - operationId: GrantPermission
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_93
+            schema: *ref_91
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: permission
+                description: 'The permission: current supported actions are joinLeaveGroup and sendToGroup.'
+                serializedName: permission
+            protocol:
+              http:
+                in: path
+          - &ref_94
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: connection_id
+                description: Target connection Id.
+                serializedName: connectionId
+            protocol:
+              http:
+                in: path
+          - &ref_95
+            schema: *ref_92
+            implementation: Method
+            language:
+              default:
+                name: target_name
+                description: The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.
+                serializedName: targetName
+            protocol:
+              http:
+                in: query
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/permissions/{permission}/connections/{connectionId}
+                method: put
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_93
+          - *ref_94
+          - *ref_95
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_92
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: grant_permission
+            description: Grant permission to the connection.
+            summary: Grant permission to the connection.
+        protocol: {}
+      - operationId: RevokePermission
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_97
+            schema: *ref_91
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: permission
+                description: 'The permission: current supported actions are joinLeaveGroup and sendToGroup.'
+                serializedName: permission
+            protocol:
+              http:
+                in: path
+          - &ref_98
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: connection_id
+                description: Target connection Id.
+                serializedName: connectionId
+            protocol:
+              http:
+                in: path
+          - &ref_99
+            schema: *ref_96
+            implementation: Method
+            language:
+              default:
+                name: target_name
+                description: The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.
+                serializedName: targetName
+            protocol:
+              http:
+                in: query
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/permissions/{permission}/connections/{connectionId}
+                method: delete
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_97
+          - *ref_98
+          - *ref_99
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_96
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: revoke_permission
+            description: Revoke permission for the connection.
+            summary: Revoke permission for the connection.
+        protocol: {}
+      - operationId: HasPermission
+        apiVersions:
+          - version: '2021-10-01'
+        parameters:
+          - *ref_17
+          - *ref_18
+          - &ref_101
+            schema: *ref_91
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: permission
+                description: 'The permission: current supported actions are joinLeaveGroup and sendToGroup.'
+                serializedName: permission
+            protocol:
+              http:
+                in: path
+          - &ref_102
+            schema: *ref_39
+            implementation: Method
+            required: true
+            language:
+              default:
+                name: connection_id
+                description: Target connection Id.
+                serializedName: connectionId
+            protocol:
+              http:
+                in: path
+          - &ref_103
+            schema: *ref_100
+            implementation: Method
+            language:
+              default:
+                name: target_name
+                description: The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name.
+                serializedName: targetName
+            protocol:
+              http:
+                in: query
+          - *ref_22
+        requests:
+          - parameters:
+              - schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters: []
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /api/hubs/{hub}/permissions/{permission}/connections/{connectionId}
+                method: head
+                uri: '{Endpoint}'
+        signatureParameters:
+          - *ref_101
+          - *ref_102
+          - *ref_103
+        responses:
+          - language:
+              default:
+                name: ''
+                description: Success
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+          - language:
+              default:
+                name: ''
+                description: Not Found
+            protocol:
+              http:
+                statusCodes:
+                  - '404'
+        exceptions:
+          - schema: *ref_5
+            extensions:
+              x-ms-error-response: true
+            language:
+              default:
+                name: ''
+                description: Error response
+            protocol:
+              http:
+                headers:
+                  - schema: *ref_100
+                    header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language:
+          default:
+            name: has_permission
+            description: Check if a connection has permission to the specified action.
+            summary: Check if a connection has permission to the specified action.
+        protocol: {}
+    language:
+      default:
+        name: ''
+        description: ''
+    protocol: {}
+security:
+  authenticationRequired: false
+  schemes: []
+language:
+  default:
+    name: WebPubSubServiceClient
+    description: ''
+protocol:
+  http: {}

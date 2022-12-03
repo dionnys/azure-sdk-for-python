@@ -116,34 +116,6 @@ def check_proxy_availability() -> None:
         now = time.time()
 
 
-def create_container(repo_root: str) -> None:
-    """Creates the test proxy Docker container"""
-    # Most of the time, running this script on a Windows machine will work just fine, as Docker defaults to Linux
-    # containers. However, in CI, Windows images default to _Windows_ containers. We cannot swap them. We can tell
-    # if we're in a CI build by checking for the environment variable TF_BUILD.
-    delete_container()
-
-    if sys.platform.startswith("win") and os.environ.get("TF_BUILD"):
-        image_prefix = WINDOWS_IMAGE_SOURCE_PREFIX
-        path_prefix = "C:"
-        linux_container_args = ""
-    else:
-        image_prefix = LINUX_IMAGE_SOURCE_PREFIX
-        path_prefix = ""
-        linux_container_args = "--add-host=host.docker.internal:host-gateway"
-
-    image_tag = get_image_tag(repo_root)
-    subprocess.Popen(
-        shlex.split(
-            f"docker run --rm --name {CONTAINER_NAME} -v '{repo_root}:{path_prefix}/srv/testproxy' "
-            f"{linux_container_args} -p 5001:5001 -p 5000:5000 {image_prefix}:{image_tag}"
-        ),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        stdin=subprocess.DEVNULL,
-    )
-
-
 def start_test_proxy(request) -> None:
     """Starts the test proxy and returns when the proxy server is ready to receive requests. In regular use
     cases, this will auto-start the test-proxy docker container. In CI, or when environment variable TF_BUILD is set, this
@@ -153,30 +125,25 @@ def start_test_proxy(request) -> None:
     check_system_proxy_availability()
 
     if not PROXY_MANUALLY_STARTED:
-        if os.getenv("TF_BUILD"):
-            _LOGGER.info("Starting the test proxy tool...")
-            if check_availability() == 200:
-                _LOGGER.debug("Tool is responding, exiting...")
-            else:
-                envname = os.getenv("TOX_ENV_NAME", "default")
-                root = os.getenv("BUILD_SOURCESDIRECTORY", repo_root)
-                log = open(os.path.join(root, "_proxy_log_{}.log".format(envname)), "a")
+        _LOGGER.info("Starting the test proxy tool...")
 
-                _LOGGER.info("{} is calculated repo root".format(root))
+        envname = os.getenv("TOX_ENV_NAME", "default")
+        root = os.getenv("BUILD_SOURCESDIRECTORY", repo_root)
+        log = open(os.path.join(root, "_proxy_log_{}.log".format(envname)), "a")
 
-                os.environ["PROXY_ASSETS_FOLDER"] = os.path.join(root, "l", envname)
-                if not os.path.exists(os.environ["PROXY_ASSETS_FOLDER"]):
-                    os.makedirs(os.environ["PROXY_ASSETS_FOLDER"])
+        _LOGGER.info("{} is calculated repo root".format(root))
 
-                proc = subprocess.Popen(
-                    shlex.split('test-proxy start --storage-location="{}" -- --urls "{}"'.format(root, PROXY_URL)),
-                    stdout=log,
-                    stderr=log
-                )
-                os.environ[TOOL_ENV_VAR] = str(proc.pid)
-        else:
-            _LOGGER.info("Starting the test proxy container...")
-            create_container(repo_root)
+        os.environ["PROXY_ASSETS_FOLDER"] = os.path.join(root, "l", envname)
+        if not os.path.exists(os.environ["PROXY_ASSETS_FOLDER"]):
+            os.makedirs(os.environ["PROXY_ASSETS_FOLDER"])
+
+        proc = subprocess.Popen(
+            shlex.split(f'test-proxy start --storage-location="{repo_root}" -- --urls "{PROXY_URL}"'),
+            stdout=log,
+            stderr=log
+        )
+
+        os.environ[TOOL_ENV_VAR] = str(proc.pid)
 
     # Wait for the proxy server to become available
     check_proxy_availability()

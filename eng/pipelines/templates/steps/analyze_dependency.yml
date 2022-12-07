@@ -29,3 +29,8 @@ steps:
     inputs:
      scriptPath: 'scripts/analyze_deps.py'
      arguments: '--verbose --out "$(Build.ArtifactStagingDirectory)/reports/dependencies.html" --dump "$(Build.ArtifactStagingDirectory)/reports"'
+
+  - pwsh: |
+      pip install poetry==1.2.2
+      python scripts/devops_tasks/run_poetry.py
+    displayName: 'Verify Package Dependencies'

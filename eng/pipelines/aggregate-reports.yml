@@ -29,6 +29,7 @@ stages:
           - pwsh: |
               pip install tools/azure-sdk-tools[build]
               pip install poetry==1.2.2
+              python scripts/devops_tasks/run_poetry.py
               poetry update
             displayName: Run Poetry
 

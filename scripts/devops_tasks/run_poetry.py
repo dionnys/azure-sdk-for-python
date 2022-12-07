@@ -42,6 +42,6 @@ def run_poetry(root: str) -> str:
 if __name__ == "__main__":
    repo_root = discover_repo_root()
    generate_pyproject(repo_root)
-   # run_poetry(repo_root)
+   run_poetry(repo_root)
 
    

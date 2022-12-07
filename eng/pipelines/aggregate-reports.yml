@@ -24,6 +24,14 @@ stages:
         timeoutInMinutes: 120
         steps:
 
+
+
+          - pwsh: |
+              pip install tools/azure-sdk-tools[build]
+              pip install poetry==1.2.2
+              poetry update
+            displayName: Run Poetry
+
           - template: /eng/pipelines/templates/steps/analyze_dependency.yml
             parameters:
               ScanPath: $(Build.SourcesDirectory)

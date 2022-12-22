@@ -1,36 +1,77 @@
 # Azure Pipelines Matrix Generator
 
-* [Usage in a pipeline](#usage-in-a-pipeline)
+* [Azure Pipelines Matrix Generator](#azure-pipelines-matrix-generator)
+* [How does the matrix generator work](#how-does-the-matrix-generator-work)
+* [How to use matrix generator from your pipeline](#how-to-use-matrix-generator-from-your-pipeline)
+  * [Matrix generator pipeline usage example](#matrix-generator-pipeline-usage-example)
+  * [Runtime matrix generation customization](#runtime-matrix-generation-customization)
 * [Matrix config file syntax](#matrix-config-file-syntax)
-* [Fields](#fields)
+* [Matrix JSON config fields](#matrix-json-config-fields)
   * [matrix](#matrix)
   * [include](#include)
   * [exclude](#exclude)
   * [displayNames](#displaynames)
   * [$IMPORT](#import)
+* [Example matrix generation](#example-matrix-generation)
 * [Matrix Generation behavior](#matrix-generation-behavior)
   * [all](#all)
   * [sparse](#sparse)
   * [include/exclude](#includeexclude)
-  * [displayNames](#displaynames-1)
+  * [Generated display name](#generated-display-name)
   * [Filters](#filters)
   * [Replace/Modify/Append](#replacemodifyappend-values)
   * [NonSparseParameters](#nonsparseparameters)
   * [Under the hood](#under-the-hood)
 * [Testing](#testing)
 
-This directory contains scripts supporting dynamic, cross-product matrix generation for azure pipeline jobs.
-It aims to replicate the [cross-product matrix functionality in github actions](https://docs.github.com/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-running-with-more-than-one-version-of-nodejs),
-but also adds some additional features like sparse matrix generation, cross-product includes and excludes, and programmable matrix filters.
+This directory contains scripts supporting dynamic, cross-product matrix generation for Azure Pipelines jobs.
 
-This functionality is made possible by the ability for the azure pipelines yaml to take a [dynamic variable as an input
-for a job matrix definition](https://docs.microsoft.com/azure/devops/pipelines/process/phases?view=azure-devops&tabs=yaml#multi-job-configuration) (see the code sample at the bottom of the linked section).
+Azure DevOps supports [multi-job configuration](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/phases?view=azure-devops&tabs=yaml#multi-job-configuration)
+via [`jobs.job.strategy.matrix`](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/jobs-job-strategy?view=azure-pipelines#strategy-matrix-maxparallel)
+definition, but unlike [GitHub's support for job matrixes](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs),
+it doesn't allow full cross-product job executions based on the matrix inputs.
+This implementation aims to address that, by replicating the cross-product matrix functionality in GitHub actions, together with its
+[includes](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategymatrixinclude)
+and [excludes](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategymatrixexclude)
+filters, but also adds some additional features like sparse matrix generation and programmable matrix filters.
 
-## Usage in a pipeline
+## How does the matrix generator work
 
-In order to use these scripts in a pipeline, you must provide a config file and call the matrix creation script within a powershell job.
+This matrix generator implementation works by generating a json value for [`jobs.job.strategy.matrix`](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/jobs-job-strategy?view=azure-pipelines#strategy-matrix-maxparallel) and passing it
+to the definition, which is possible because [matrix can accept a runtime expression containing a stringified json object](https://docs.microsoft.com/azure/devops/pipelines/process/phases?view=azure-devops&tabs=yaml#multi-job-configuration) (see the code sample at the bottom of the linked section).
 
-For a single matrix, you can include the `/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml` template in a pipeline (see /eng/common/scripts/job-matrix/samples/matrix-test.yml for a full working example):
+You can use the matrix generator in two ways: [from the pipeline](#how-to-use-matrix-generator-from-your-pipeline),
+or by calling [`Create-JobMatrix.ps1`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/scripts/job-matrix/Create-JobMatrix.ps1) script directly and then passing the generated matrix json as an argument to `jobs.job.strategy.matrix`.
+
+The pipeline usage is recommended.
+
+If you call the generator from the pipeline, you will rely on the [archetype](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml), which ends up calling `Create-JobMatrix.ps1` behind the scenes.
+
+## How to use matrix generator from your pipeline
+
+Assume you have a job defined in azure pipelines yaml file. You want to run
+it in a matrix, leveraging the matrix generator functionality.
+
+To do this, you will need to create another job that will reference your job
+definition in its `JobTemplatePath` parameter and generate the matrix
+based on one or more matrix json configs referenced in its `MatrixConfigs` parameter.
+That job will use as template the definition
+[`archetype-sdk-tests-generate.yml`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml).
+
+### Matrix generator pipeline usage example
+
+Here is an example. Let's assume your job definition has following path:
+
+* [`eng/common/scripts/job-matrix/samples/matrix-job-sample.yml`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/scripts/job-matrix/samples/matrix-job-sample.yml)
+
+And the path of matrix config you want to use is:
+
+* [`eng/common/scripts/job-matrix/samples/matrix.json`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/scripts/job-matrix/samples/matrix.json)
+
+If now you want to run the job defined in `matrix-job-sample.yml` in a matrix, with all
+the matrix configuration combinations generated with appropriate values by matrix generator
+based on `matrix.json`, you need to introduce a job using the `archetype-sdk-tests-generate.yml` template that
+will set up your job with the matrix config. It can look like this:
 
 ``` yaml
 jobs:
@@ -58,56 +99,87 @@ jobs:
       PreGenerationSteps: []
 ```
 
-### A note regarding PreGenerationSteps
+To see an example of a complete pipeline definition with a job that runs your job using matrix generator, refer to
+[`/eng/common/scripts/job-matrix/samples/matrix-test.yml`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/scripts/job-matrix/samples/matrix-test.yml).
 
-The generation template laid out above runs as its own job. A limitation of this method is that it disallows any runtime matrix customization due to the fact that an individual job clones the targeted build SHA. The stepList `PreGenerationSteps` allows users to update matrix json however they like prior to actually invoking the matrix generation. Injected steps are run after the repository checkout, but before any matrix generation is invoked.
+### Runtime matrix generation customization
+
+The "matrix generator-enabled" job laid out above runs as its own job. A limitation of this approach is that it disallows any runtime matrix customization due to the fact that an individual job clones the targeted build SHA. That is, the matrix to generate would be determined based only on the content of the used matrix json configs.
+
+To address this limitation, we introduce the [stepList](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops#parameter-data-types) `PreGenerationSteps` as well as `MatrixFilters` and `MatrixReplace`.
+
+`PreGenerationSteps` allows users to update matrix config json however they like prior to actually invoking the matrix generation. Injected steps are run after the repository checkout, but before any matrix generation is invoked.
+
+`MatrixFilters` and `MatrixReplace` allow runtime adjustment of the matrix generation process as can be seen in the source of [GenerateMatrix](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/scripts/job-matrix/job-matrix-functions.ps1#L94-L95).  
+See also [Filters](#filters) and [Replace/Modify/Append Values](#replacemodifyappend-values).
 
 ## Matrix config file syntax
 
-Matrix parameters can either be a list of strings, or a set of grouped strings (represented as a hash). The latter parameter
-type is useful for when 2 or more parameters need to be grouped together, but without generating more than one matrix permutation.
+Matrix config file is a [JSON](https://www.json.org/json-en.html) file.
+
+The top-level element in the config is a JSON object having following keys:
+`matrix`, `include`, `exclude` and `displayNames`.
+For explanation of all the top-level keys, see [Matrix JSON config fields](#matrix-json-config-fields) section below.
+Note that `include` and `exclude` have different interpretation than [their
+equivalents in GitHub matrix](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#expanding-or-adding-matrix-configurations).
+
+### Matrix syntax
+
+In `matrix`, each key-value pair denotes a parameter and its values.
+
+Each parameter value is either an array of strings, or an object.
+
+If a parameter value is an object, then we say that parameter represents
+a `parameter set group` and the parameter value is a group of all the valid
+parameter sets.
+
+The `parameter set group` kind of parameter is useful for when 2 or more parameters
+need to be grouped together, but without generating more than one matrix combination.
+In such case we group them into one set of given parameter set group.
+
+Grammar of a config file, as an example:
 
 ``` yaml
 "matrix": {
   "<parameter1 name>": [ <values...> ],
   "<parameter2 name>": [ <values...> ],
-  "<parameter set>": {
-    "<parameter set 1 name>": {
-        "<parameter set 1 value 1": "value",
-        "<parameter set 1 value 2": "<value>",
+  "<parameter set group>": {
+    "<parameter set group set 1 name>": {
+        "<parameter set 1 key 1": "<value>",
+        "<parameter set 1 key 2": "<value>",
     },
-    "<parameter set 2 name>": {
-        "<parameter set 2 value 1": "value",
-        "<parameter set 2 value 2": "<value>",
+    "<parameter set group set 2 name>": {
+        "<parameter set group set 2 key 1": "<value>",
+        "<parameter set group set 2 key 2": "<value>",
     }
   }
 }
 "include": [ <matrix>, <matrix>, ... ],
 "exclude": [ <matrix>, <matrix>, ... ],
-"displayNames": { <parameter value>: <human readable override> }
+"displayNames": { <parameter value>: <human readable override> },
 ```
 
-See `samples/matrix.json` for a full sample.
+See [`samples/matrix.json`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/scripts/job-matrix/samples/matrix.json) for a full sample.
 
-### Fields
+## Matrix JSON config fields
 
-#### matrix
+### matrix
 
 The `matrix` field defines the base cross-product matrix. The generated matrix can be full or sparse.
 
 Example:
 
-``` yaml
+``` json
 "matrix": {
   "operatingSystem": [
     "windows-2022",
-    "ubuntu-18.04",
+    "ubuntu-22.04",
     "macos-11"
   ],
   "framework": [
     "net461",
     "netcoreapp2.1",
-    "net50"
+    "net6.0"
   ],
   "additionalTestArguments": [
     "",
@@ -116,44 +188,30 @@ Example:
 }
 ```
 
-#### include
+### include
 
-The `include` field defines any number of matrices to be appended to the base matrix after processing exclusions.
+The `include` field defines any number of matrix combinations to be appended to the base matrix after processing exclusions.
+
+The value of `include` key is an array of objects, where each object represents one combination to add to all the combinations generated from the matrix.
+
+See [`samples/matrix.json`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/scripts/job-matrix/samples/matrix.json) for an example of `include` definition.
+
+### exclude
+
+The `exclude` field defines any number of matrix combinations to be removed from the base matrix. Exclude parameters can be a partial
+set, meaning as long as all exclude parameters match against a matrix combination (even if the matrix combination has additional parameters),
+then it will be excluded from the matrix. For example, the below combination will match the exclusion and be removed:
 
 ``` yaml
-# matrix entry format:
+# An example matrix combination:
 {
     "a": 1,
     "b": 2,
     "c": 3,
 }
 
-# Include field in a matrix config
-{
-    "include": [
-        {
-            "a": 1,
-            "b": 2
-        }
-    ]
-}
-```
-
-#### exclude
-
-The `exclude` field defines any number of matrices to be removed from the base matrix. Exclude parameters can be a partial
-set, meaning as long as all exclude parameters match against a matrix entry (even if the matrix entry has additional parameters),
-then it will be excluded from the matrix. For example, the below entry will match the exclusion and be removed:
-
-``` yaml
-# matrix entry format:
-{
-    "a": 1,
-    "b": 2,
-    "c": 3,
-}
-
-# Exclude field in a matrix config
+# An example "exclude" with one combination. The combination will match against the combination
+# above and exclude it.
 {
     "exclude": [
         {
@@ -164,13 +222,16 @@ then it will be excluded from the matrix. For example, the below entry will matc
 }
 ```
 
-#### displayNames
+### displayNames
 
-Specify any overrides for the azure pipelines definition and UI that determines the matrix job name. If some parameter
-values are too long or unreadable for this purpose (e.g. a command line argument), then you can replace them with a more
-readable value here. For example:
+Each matrix combination is named and displayed in Azure pipelines UI by
+concatenating values of all the parameters of given combination.
+Sometimes these values are too long to be human readable or easy to use,
+e.g. as a command line argument.
 
-``` yaml
+If this is the case, they can be overridden with `displayNames`. For example:
+
+``` json
 "displayNames": {
   "/p:UseProjectReferenceToAzureClients=true": "UseProjectRef"
 },
@@ -181,13 +242,16 @@ readable value here. For example:
 }
 ```
 
-#### $IMPORT
+### $IMPORT
 
 Matrix configs can also import another matrix config. The effect of this is the imported matrix will be generated,
-and then the importing config will be combined with that matrix (as if each entry of the imported matrix was a parameter).
+and then the importing config will be combined with that matrix as a product.
+Thus, if the imported matrix has `n` combinations and the importing matrix has `m` combinations, resulting
+matrix will have `n * m` combinations.
+
 To import a matrix, add a parameter with the key `$IMPORT`:
 
-``` yaml
+``` json
 "matrix": {
   "$IMPORT": "path/to/matrix.json",
   "JavaVersion": [ "1.8", "1.11" ]
@@ -195,16 +259,23 @@ To import a matrix, add a parameter with the key `$IMPORT`:
 ```
 
 Importing can be useful, for example, in cases where there is a shared base matrix, but there is a need to run it
-once for each instance of a language version. Importing does not support overriding duplicate parameters. To achieve
-this, use the [Replace](#replacemodifyappend-values) argument instead.
+once for each instance of a language version, as seen in the example snippet above.
+Importing does not support overriding duplicate parameters. 
+To achieve this, use the [Replace](#replacemodifyappend-values) argument instead.
 
-The `Selection` and `NonSparseParameters` parameters are respected when generating an imported matrix.
+The `MatrixConfigs` `Selection` and `NonSparseParameters` parameters are respected when generating an imported matrix.
 
-The processing order is as follows:
+For an example of how `$IMPORT` works, [Example matrix generation](#example-matrix-generation).
+
+## Example matrix generation
+
+This section shows example matrix generation using the  `matrix`, `include` `exclude` and `$IMPORT` keys
+in matrix json config.
 
 Given a matrix and import matrix like below:
 
-``` json
+``` yaml
+# top-level matrix
 {
     "matrix": {
         "$IMPORT": "example-matrix.json",
@@ -220,7 +291,7 @@ Given a matrix and import matrix like below:
     ]
 }
 
-### example-matrix.json to import
+# example-matrix.json to import
 {
     "matrix": {
       "operatingSystem": [ "windows", "linux" ],
@@ -235,7 +306,7 @@ Given a matrix and import matrix like below:
 }
 ```
 
-1. The base matrix is generated (sparse in this example):
+1. The base matrix is generated ([sparse](#sparse) in this example):
 
     ``` yaml
     {
@@ -250,7 +321,7 @@ Given a matrix and import matrix like below:
     }
     ```
 
-1. The imported base matrix is generated (sparse in this example):
+1. The imported base matrix is generated ([sparse](#sparse) in this example):
 
     ``` json
     {
@@ -284,8 +355,8 @@ Given a matrix and import matrix like below:
     }
     ```
 
-1. The base matrix is multipled by the imported matrix (in this case, the base matrix has 2 elements, and the imported
-   matrix has 3 elements, so the product is a matrix with 6 elements:
+1. The base matrix is multiplied by the imported matrix. In this case, the base matrix has 2 elements,
+and the imported matrix has 3 elements, so the product is a matrix with 6 elements:
 
     ``` yaml
       "storage_18_windows_netty": {
@@ -342,14 +413,15 @@ Given a matrix and import matrix like below:
 
 ### all
 
-<!-- markdownlint-disable MD037 -->
-`all` will output the full matrix, i.e. every possible permutation of all parameters given (p1.Length * p2.Length * ...).
-<!-- markdownlint-enable MD037 -->
+`MatrixConfigs.Selection.all` will output the full matrix, i.e. every possible combination of all parameters given.  
+The total number of combinations will be: `p1.Length * p2.Length * ... * pn.Length`,  
+where `px.Length` denotes the number of values of `x`-th parameter.
 
 ### sparse
 
-`sparse` outputs the minimum number of parameter combinations while ensuring that all parameter values are present in at least one matrix job.
-Effectively this means the total length of a sparse matrix will be equal to the largest matrix dimension, i.e. `max(p1.Length, p2.Length, ...)`.
+`MatrixConfigs.Selection.sparse` outputs the minimum number of parameter combinations while ensuring that all parameter values are present in at least one matrix job.
+Effectively this means the total number of combinations of a sparse matrix will be equal to the largest matrix
+dimension, i.e. `max(p1.Length, p2.Length, ...)`.
 
 To build a sparse matrix, a full matrix is generated, and then walked diagonally N times where N is the largest matrix dimension.
 This pattern works for any N-dimensional matrix, via an incrementing index (n, n, n, ...), (n+1, n+1, n+1, ...), etc.
@@ -375,19 +447,20 @@ index: 3, 3 (modded to 3, 1):
 
 ### include/exclude
 
-Include and exclude support additions and subtractions off the base matrix. Both include and exclude take an array of matrix values.
-Typically these values will be a single entry, but they also support the cross-product matrix definition syntax of the base matrix.
+Matrix json configuration `include` and `exclude` keys support additions and subtractions of combinations
+off the base matrix.
+Both `include` and `exclude` take an array of matrix values. Typically each value will be a single combination,
+but `include/exclude` keys also support the cross-product matrix definition syntax of the base matrix.
 
-Include and exclude are parsed fully. So if a sparse matrix is called for, a sparse version of the base matrix will be generated, but
-the full matrix of both include and exclude will be processed.
+Include and exclude are parsed fully. So if a sparse matrix is called for, a sparse version of the base matrix
+will be generated, but the full matrix of both include and exclude will be processed.
 
-Excludes are processed first, so includes can be used to add back any specific jobs to the matrix.
+Excludes are processed first, so includes can be used to forcefully add specific combinations to the matrix,
+regardless of exclusions.
 
-<!-- markdownlint-disable MD024 -->
-### displayNames
-<!-- markdownlint-enable MD024 -->
+### Generated display name
 
-In the matrix job output that azure pipelines consumes, the format is a dictionary of dictionaries. For example:
+In the matrix job output that azure pipelines consumes, the format is a map of maps. For example:
 
 ``` yaml
 {
@@ -395,9 +468,9 @@ In the matrix job output that azure pipelines consumes, the format is a dictiona
     "framework": "net461",
     "operatingSystem": "macos-11"
   },
-  "net50_ubuntu1804": {
-    "framework": "net50",
-    "operatingSystem": "ubuntu-18.04"
+  "net60_ubuntu2204": {
+    "framework": "net6.0",
+    "operatingSystem": "ubuntu-22.04"
   },
   "netcoreapp21_windows2022": {
     "framework": "netcoreapp2.1",
@@ -415,41 +488,48 @@ The top level keys are used as job names, meaning they get displayed in the azur
 
 The logic for generating display names works like this:
 
-* Join parameter values by "_"
-    a. If the parameter value exists as a key in `displayNames` in the matrix config, replace it with that value.
-    b. For each name value, strip all non-alphanumeric characters (excluding "_").
+* Join parameter values by `_`  
+    a. If the parameter value exists as a key in [`displayNames`](#displaynames) in the matrix config, replace it with that value.  
+    b. For each name value, strip all non-alphanumeric characters (excluding "_").  
     c. If the name is greater than 100 characters, truncate it.
 
 ### Filters
 
-Filters can be passed to the matrix as an array of strings, each matching the format of `<key>=<regex>`. When a matrix entry
-does not contain the specified key, it will default to a value of empty string for regex parsing. This can be used to specify
-filters for keys that don't exist or keys that optionally exist and match a regex, as seen in the below example.
+Filters can be passed to the matrix as an array of strings, in `MatrixFilters` parameter, each matching the format of `<key>=<regex>`.
+When a matrix combination does not contain the specified key, it will default to a value of empty string for regex parsing.
 
-Display name filters can also be passed as a single regex string that runs against the [generated display name](#displaynames) of the matrix job.
-The intent of display name filters is to be defined primarily as a top level variable at template queue time in the azure pipelines UI.
+Interpreting missing key in given combination as a key with value being empty string enables following scenarios:
 
-For example, the below command will filter for matrix entries with "windows" in the job display name, no matrix variable
-named "ExcludedKey", a framework variable containing either "461" or "5.0", and an optional key "SupportedClouds" that, if exists, must contain "Public":
+* filter for combinations that do _not_ have given parameter;
+* filter for combinations in which when given parameter with given key exists, it needs to have specific value.
 
-``` yaml
+Display name filters can also be passed as a single regex string that runs against the [generated display name](#generated-display-name) of the matrix job.
+The intent of display name filters is to be defined primarily as a top level variable at template queue time in the azure pipelines UI. It cannot be passed as parameter to the matrix generator template archetype, [`archetype-sdk-tests-generate.yml`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml).
+
+For example, the below command will filter for matrix combinations  with `windows` in the job display name, no parameter variable
+named `ExcludedKey`, a `framework` parameter with value either `461` or `6.0`, and an optional parameter `SupportedClouds` that, if exists, must contain `Public`:
+
+``` powershell
 ./Create-JobMatrix.ps1 `
   -ConfigPath samples/matrix.json `
   -Selection all `
   -DisplayNameFilter ".*windows.*" `
-  -Filters @("ExcludedKey=^$", "framework=(461|5\.0)", "SupportedClouds=^$|.*Public.*")
+  -Filters @("ExcludedKey=^$", "framework=(461|6\.0)", "SupportedClouds=^$|.*Public.*")
 ```
 
-#### Replace/Modify/Append Values
+Note that `Create-JobMatrix.ps1` is [called internally by the archetype](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml#L72) and you are never expected to call it directly.
+Instead, use use the generator from the pipelines, as explained in [Matrix generator pipeline usage example](#matrix-generator-pipeline-usage-example).
 
-Replacements for values can be passed to the matrix as an array of strings, each matching the format of `<keyRegex>=<valueRegex>/<replacementValue>`.
-The replace argument will find any permutations where the key fully matches the key regex and the value fully matches the value regex, and replace the value with
-the replacement specified.
+### Replace/Modify/Append Values
+
+Replacements for values can be passed to the matrix as an array of strings, in `MatrixReplace` parameter, each matching the format of `<keyRegex>=<valueRegex>/<replacementValue>`.
+The replace argument will find any combinations where the key fully matches the key regex and the value fully matches
+the value regex, and replace the value with the replacement specified.
 
 NOTE:
 
 * The replacement value supports regex capture groups, enabling substring transformations, e.g. `Foo=(.*)-replaceMe/$1-replaced`. See the below examples for usage.
-* For each key/value, the first replacement provided that matches will be the only one applied.
+* For each key/value pair, the first replacement provided that matches will be the only one applied.
 * If `=` or `/` characters need to be part of the regex or replacement, escape them with `\`.
 
 For example, given a matrix config like below:
@@ -458,7 +538,7 @@ For example, given a matrix config like below:
 {
   "matrix": {
     "Agent": {
-      "ubuntu-1804": { "OSVmImage": "MMSUbuntu18.04", "Pool": "azsdk-pool-mms-ubuntu-1804-general" }
+      "ubuntu-2204": { "OSVmImage": "MMSUbuntu22.04", "Pool": "azsdk-pool-mms-ubuntu-2204-general" }
     },
     "JavaTestVersion": [ "1.8", "1.11" ]
   }
@@ -471,21 +551,21 @@ The normal matrix output (without replacements), looks like:
 ``` powershell
 $ ./Create-JobMatrix.ps1 -ConfigPath <test> -Selection all
 {
-  "ubuntu1804_18": {
-    "OSVmImage": "MMSUbuntu18.04",
-    "Pool": "azsdk-pool-mms-ubuntu-1804-general",
+  "ubuntu2204_18": {
+    "OSVmImage": "MMSUbuntu22.04",
+    "Pool": "azsdk-pool-mms-ubuntu-2204-general",
     "JavaTestVersion": "1.8"
   },
-  "ubuntu1804_111": {
+  "ubuntu2204_111": {
     "OSVmImage": "MMSUbuntu18.04",
-    "Pool": "azsdk-pool-mms-ubuntu-1804-general",
+    "Pool": "azsdk-pool-mms-ubuntu-2204-general",
     "JavaTestVersion": "1.11"
   }
 }
 ```
 
-Passing in multiple replacements, the output will look like below. Note that replacing key/values that appear nested within a grouping
-will not affect that segment of the job name, since the job takes the grouping name (in this case "ubuntu1804").
+Passing in multiple replacements, the output will look like below. Note that replacing key/value pairs that appear
+nested within a grouping will not affect that segment of the job name, since the job takes the grouping name (in this case `ubuntu2204`).
 
 The below example includes samples of regex grouping references, and wildcard key/value regexes:
 
@@ -493,23 +573,24 @@ The below example includes samples of regex grouping references, and wildcard ke
 $ $replacements = @('.*Version=1.11/2.0', 'Pool=(.*ubuntu.*)-general/$1-custom')
 $ ../Create-JobMatrix.ps1 -ConfigPath ./test.Json -Selection all -Replace $replacements
 {
-  "ubuntu1804_18": {
-    "OSVmImage": "MMSUbuntu18.04",
-    "Pool": "azsdk-pool-mms-ubuntu-1804-custom",
+  "ubuntu2204_18": {
+    "OSVmImage": "MMSUbuntu22.04",
+    "Pool": "azsdk-pool-mms-ubuntu-2204-custom",
     "JavaTestVersion": "1.8"
   },
   "ubuntu1804_20": {
-    "OSVmImage": "MMSUbuntu18.04",
-    "Pool": "azsdk-pool-mms-ubuntu-1804-custom",
+    "OSVmImage": "MMSUbuntu22.04",
+    "Pool": "azsdk-pool-mms-ubuntu-2204-custom",
     "JavaTestVersion": "2.0"
   }
 }
 ```
 
-#### NonSparseParameters
+### NonSparseParameters
 
-Sometimes it may be necessary to generate a sparse matrix, but keep the full combination of a few parameters. The
-NonSparseParameters argument allows for more fine-grained control of matrix generation. For example:
+Sometimes it may be necessary to generate a sparse matrix, but keep the full combination of a few parameters.
+The `MatrixConfigs` `NonSparseParameters` parameter allows for more fine-grained control of matrix generation.  
+For example:
 
 ``` powershell
 ./Create-JobMatrix.ps1 `
@@ -525,7 +606,7 @@ Given a matrix like below with `JavaTestVersion` marked as a non-sparse paramete
   "matrix": {
     "Agent": {
       "windows-2022": { "OSVmImage": "MMS2022", "Pool": "azsdk-pool-mms-win-2022-general" },
-      "ubuntu-1804": { "OSVmImage": "MMSUbuntu18.04", "Pool": "azsdk-pool-mms-ubuntu-1804-general" },
+      "ubuntu-2204": { "OSVmImage": "MMSUbuntu22.04", "Pool": "azsdk-pool-mms-ubuntu-2204-general" },
       "macos-11": { "OSVmImage": "macos-11", "Pool": "Azure Pipelines" }
     },
     "JavaTestVersion": [ "1.8", "1.11" ],
@@ -535,27 +616,28 @@ Given a matrix like below with `JavaTestVersion` marked as a non-sparse paramete
 }
 ```
 
-A matrix with 6 entries will be generated: A sparse matrix of Agent, AZURE_TEST_HTTP_CLIENTS and ArmTemplateParameters
-(3 total entries) will be multipled by the two `JavaTestVersion` parameters `1.8` and `1.11`.
+A matrix with 6 combinations will be generated: A sparse matrix of `Agent`, `AZURE_TEST_HTTP_CLIENTS` and `ArmTemplateParameters`
+(3 total combinations) will be multiplied by the two `JavaTestVersion` parameter values of `1.8` and `1.11`.
 
-NOTE: NonSparseParameters are also applied when generating an imported matrix.
+NOTE: `NonSparseParameters` are also applied when generating an imported matrix.
 
-#### Under the hood
+## Under the hood
 
-The script generates an N-dimensional matrix with dimensions equal to the parameter array lengths. For example,
-the below config would generate a 2x2x1x1x1 matrix (five-dimensional):
+The [`Create-JobMatrix.ps1`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/scripts/job-matrix/Create-JobMatrix.ps1) script generates an N-dimensional matrix with dimensions equal to the parameter array lengths.
+For example, the below config would generate a 2x2x1x1x1 matrix (five-dimensional):
 
 ``` json
 "matrix": {
-  "framework": [ "net461", "netcoreapp2.1" ],
+  "framework": [ "net461", "net6.0" ],
   "additionalTestArguments": [ "", "/p:SuperTest=true" ]
-  "pool": [ "ubuntu-18.04" ],
-  "container": [ "ubuntu-18.04" ],
+  "pool": [ "ubuntu-22.04" ],
+  "container": [ "ubuntu-22.04" ],
   "testMode": [ "Record" ]
 }
 ```
 
-The matrix is stored as a one-dimensional array, with a row-major indexing scheme (e.g. `(2, 1, 0, 1, 0)`).
+The matrix is stored as a one-dimensional array, with a [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order)
+indexing scheme (e.g. `(2, 1, 0, 1, 0)`).
 
 ## Testing
 

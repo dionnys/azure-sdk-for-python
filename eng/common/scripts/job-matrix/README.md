@@ -2,23 +2,22 @@
 
 * [Usage in a pipeline](#usage-in-a-pipeline)
 * [Matrix config file syntax](#matrix-config-file-syntax)
- * [Fields](#fields)
-    * [matrix](#matrix)
-    * [include](#include)
-    * [exclude](#exclude)
-    * [displayNames](#displaynames)
-    * [$IMPORT](#import)
+* [Fields](#fields)
+  * [matrix](#matrix)
+  * [include](#include)
+  * [exclude](#exclude)
+  * [displayNames](#displaynames)
+  * [$IMPORT](#import)
 * [Matrix Generation behavior](#matrix-generation-behavior)
-    * [all](#all)
-    * [sparse](#sparse)
-    * [include/exclude](#includeexclude)
-    * [displayNames](#displaynames-1)
-    * [Filters](#filters)
-    * [Replace/Modify/Append](#replacemodifyappend-values)
-    * [NonSparseParameters](#nonsparseparameters)
-    * [Under the hood](#under-the-hood)
+  * [all](#all)
+  * [sparse](#sparse)
+  * [include/exclude](#includeexclude)
+  * [displayNames](#displaynames-1)
+  * [Filters](#filters)
+  * [Replace/Modify/Append](#replacemodifyappend-values)
+  * [NonSparseParameters](#nonsparseparameters)
+  * [Under the hood](#under-the-hood)
 * [Testing](#testing)
-
 
 This directory contains scripts supporting dynamic, cross-product matrix generation for azure pipeline jobs.
 It aims to replicate the [cross-product matrix functionality in github actions](https://docs.github.com/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-running-with-more-than-one-version-of-nodejs),
@@ -33,7 +32,7 @@ In order to use these scripts in a pipeline, you must provide a config file and 
 
 For a single matrix, you can include the `/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml` template in a pipeline (see /eng/common/scripts/job-matrix/samples/matrix-test.yml for a full working example):
 
-```
+``` yaml
 jobs:
   - template: /eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml
     parameters:
@@ -68,7 +67,7 @@ The generation template laid out above runs as its own job. A limitation of this
 Matrix parameters can either be a list of strings, or a set of grouped strings (represented as a hash). The latter parameter
 type is useful for when 2 or more parameters need to be grouped together, but without generating more than one matrix permutation.
 
-```
+``` yaml
 "matrix": {
   "<parameter1 name>": [ <values...> ],
   "<parameter2 name>": [ <values...> ],
@@ -97,7 +96,8 @@ See `samples/matrix.json` for a full sample.
 The `matrix` field defines the base cross-product matrix. The generated matrix can be full or sparse.
 
 Example:
-```
+
+``` yaml
 "matrix": {
   "operatingSystem": [
     "windows-2022",
@@ -120,7 +120,7 @@ Example:
 
 The `include` field defines any number of matrices to be appended to the base matrix after processing exclusions.
 
-```
+``` yaml
 # matrix entry format:
 {
     "a": 1,
@@ -139,14 +139,13 @@ The `include` field defines any number of matrices to be appended to the base ma
 }
 ```
 
-
 #### exclude
 
 The `exclude` field defines any number of matrices to be removed from the base matrix. Exclude parameters can be a partial
 set, meaning as long as all exclude parameters match against a matrix entry (even if the matrix entry has additional parameters),
 then it will be excluded from the matrix. For example, the below entry will match the exclusion and be removed:
 
-```
+``` yaml
 # matrix entry format:
 {
     "a": 1,
@@ -171,7 +170,7 @@ Specify any overrides for the azure pipelines definition and UI that determines 
 values are too long or unreadable for this purpose (e.g. a command line argument), then you can replace them with a more
 readable value here. For example:
 
-```
+``` yaml
 "displayNames": {
   "/p:UseProjectReferenceToAzureClients=true": "UseProjectRef"
 },
@@ -188,7 +187,7 @@ Matrix configs can also import another matrix config. The effect of this is the 
 and then the importing config will be combined with that matrix (as if each entry of the imported matrix was a parameter).
 To import a matrix, add a parameter with the key `$IMPORT`:
 
-```
+``` yaml
 "matrix": {
   "$IMPORT": "path/to/matrix.json",
   "JavaVersion": [ "1.8", "1.11" ]
@@ -204,7 +203,8 @@ The `Selection` and `NonSparseParameters` parameters are respected when generati
 The processing order is as follows:
 
 Given a matrix and import matrix like below:
-```
+
+``` json
 {
     "matrix": {
         "$IMPORT": "example-matrix.json",
@@ -236,7 +236,8 @@ Given a matrix and import matrix like below:
 ```
 
 1. The base matrix is generated (sparse in this example):
-    ```
+
+    ``` yaml
     {
       "storage_18": {
         "endpointType": "storage",
@@ -248,8 +249,10 @@ Given a matrix and import matrix like below:
       }
     }
     ```
+
 1. The imported base matrix is generated (sparse in this example):
-    ```
+
+    ``` json
     {
       "windows_netty": {
         "operatingSystem": "windows",
@@ -261,8 +264,10 @@ Given a matrix and import matrix like below:
       }
     }
     ```
+
 1. Includes/excludes from the imported matrix get applied to the imported matrix
-    ```
+
+    ``` yaml
     {
       "windows_netty": {
         "operatingSystem": "windows",
@@ -278,9 +283,11 @@ Given a matrix and import matrix like below:
       }
     }
     ```
+
 1. The base matrix is multipled by the imported matrix (in this case, the base matrix has 2 elements, and the imported
    matrix has 3 elements, so the product is a matrix with 6 elements:
-    ```
+
+    ``` yaml
       "storage_18_windows_netty": {
         "endpointType": "storage",
         "JavaVersion": "1.8",
@@ -319,9 +326,11 @@ Given a matrix and import matrix like below:
       }
     }
     ```
+
 1. Includes/excludes from the top-level matrix get applied to the multiplied matrix, so the below element will be added
    to the above matrix, for an output matrix with 7 elements:
-    ```
+
+    ``` yaml
     "windows_TestFromSource_18": {
       "operatingSystem": "windows",
       "mode": "TestFromSource",
@@ -331,11 +340,13 @@ Given a matrix and import matrix like below:
 
 ## Matrix Generation behavior
 
-#### all
+### all
 
+<!-- markdownlint-disable MD037 -->
 `all` will output the full matrix, i.e. every possible permutation of all parameters given (p1.Length * p2.Length * ...).
+<!-- markdownlint-enable MD037 -->
 
-#### sparse
+### sparse
 
 `sparse` outputs the minimum number of parameter combinations while ensuring that all parameter values are present in at least one matrix job.
 Effectively this means the total length of a sparse matrix will be equal to the largest matrix dimension, i.e. `max(p1.Length, p2.Length, ...)`.
@@ -344,7 +355,7 @@ To build a sparse matrix, a full matrix is generated, and then walked diagonally
 This pattern works for any N-dimensional matrix, via an incrementing index (n, n, n, ...), (n+1, n+1, n+1, ...), etc.
 Index lookups against matrix dimensions are calculated modulus the dimension size, so a two-dimensional matrix of 4x2 might be walked like this:
 
-```
+``` yaml
 index: 0, 0:
 o . . .
 . . . .
@@ -362,7 +373,7 @@ index: 3, 3 (modded to 3, 1):
 . . . o
 ```
 
-#### include/exclude
+### include/exclude
 
 Include and exclude support additions and subtractions off the base matrix. Both include and exclude take an array of matrix values.
 Typically these values will be a single entry, but they also support the cross-product matrix definition syntax of the base matrix.
@@ -372,11 +383,13 @@ the full matrix of both include and exclude will be processed.
 
 Excludes are processed first, so includes can be used to add back any specific jobs to the matrix.
 
-#### displayNames
+<!-- markdownlint-disable MD024 -->
+### displayNames
+<!-- markdownlint-enable MD024 -->
 
 In the matrix job output that azure pipelines consumes, the format is a dictionary of dictionaries. For example:
 
-```
+``` yaml
 {
   "net461_macOS1015": {
     "framework": "net461",
@@ -402,12 +415,12 @@ The top level keys are used as job names, meaning they get displayed in the azur
 
 The logic for generating display names works like this:
 
-- Join parameter values by "_"
+* Join parameter values by "_"
     a. If the parameter value exists as a key in `displayNames` in the matrix config, replace it with that value.
     b. For each name value, strip all non-alphanumeric characters (excluding "_").
     c. If the name is greater than 100 characters, truncate it.
 
-#### Filters
+### Filters
 
 Filters can be passed to the matrix as an array of strings, each matching the format of `<key>=<regex>`. When a matrix entry
 does not contain the specified key, it will default to a value of empty string for regex parsing. This can be used to specify
@@ -419,7 +432,7 @@ The intent of display name filters is to be defined primarily as a top level var
 For example, the below command will filter for matrix entries with "windows" in the job display name, no matrix variable
 named "ExcludedKey", a framework variable containing either "461" or "5.0", and an optional key "SupportedClouds" that, if exists, must contain "Public":
 
-```
+``` yaml
 ./Create-JobMatrix.ps1 `
   -ConfigPath samples/matrix.json `
   -Selection all `
@@ -434,13 +447,14 @@ The replace argument will find any permutations where the key fully matches the 
 the replacement specified.
 
 NOTE:
-- The replacement value supports regex capture groups, enabling substring transformations, e.g. `Foo=(.*)-replaceMe/$1-replaced`. See the below examples for usage.
-- For each key/value, the first replacement provided that matches will be the only one applied.
-- If `=` or `/` characters need to be part of the regex or replacement, escape them with `\`.
+
+* The replacement value supports regex capture groups, enabling substring transformations, e.g. `Foo=(.*)-replaceMe/$1-replaced`. See the below examples for usage.
+* For each key/value, the first replacement provided that matches will be the only one applied.
+* If `=` or `/` characters need to be part of the regex or replacement, escape them with `\`.
 
 For example, given a matrix config like below:
 
-```
+``` json
 {
   "matrix": {
     "Agent": {
@@ -454,7 +468,7 @@ For example, given a matrix config like below:
 
 The normal matrix output (without replacements), looks like:
 
-```
+``` powershell
 $ ./Create-JobMatrix.ps1 -ConfigPath <test> -Selection all
 {
   "ubuntu1804_18": {
@@ -475,7 +489,7 @@ will not affect that segment of the job name, since the job takes the grouping n
 
 The below example includes samples of regex grouping references, and wildcard key/value regexes:
 
-```
+``` powershell
 $ $replacements = @('.*Version=1.11/2.0', 'Pool=(.*ubuntu.*)-general/$1-custom')
 $ ../Create-JobMatrix.ps1 -ConfigPath ./test.Json -Selection all -Replace $replacements
 {
@@ -497,7 +511,7 @@ $ ../Create-JobMatrix.ps1 -ConfigPath ./test.Json -Selection all -Replace $repla
 Sometimes it may be necessary to generate a sparse matrix, but keep the full combination of a few parameters. The
 NonSparseParameters argument allows for more fine-grained control of matrix generation. For example:
 
-```
+``` powershell
 ./Create-JobMatrix.ps1 `
   -ConfigPath /path/to/matrix.json `
   -Selection sparse `
@@ -506,7 +520,7 @@ NonSparseParameters argument allows for more fine-grained control of matrix gene
 
 Given a matrix like below with `JavaTestVersion` marked as a non-sparse parameter:
 
-```
+``` json
 {
   "matrix": {
     "Agent": {
@@ -531,7 +545,7 @@ NOTE: NonSparseParameters are also applied when generating an imported matrix.
 The script generates an N-dimensional matrix with dimensions equal to the parameter array lengths. For example,
 the below config would generate a 2x2x1x1x1 matrix (five-dimensional):
 
-```
+``` json
 "matrix": {
   "framework": [ "net461", "netcoreapp2.1" ],
   "additionalTestArguments": [ "", "/p:SuperTest=true" ]
@@ -547,7 +561,7 @@ The matrix is stored as a one-dimensional array, with a row-major indexing schem
 
 The matrix functions can be tested using [pester](https://pester.dev/). The test command must be run from within the tests directory.
 
-```
+``` txt
 $ cd tests
 $ Invoke-Pester
 

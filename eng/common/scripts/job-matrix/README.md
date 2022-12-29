@@ -500,7 +500,7 @@ When a matrix combination does not contain the specified key, it will default to
 
 Interpreting missing key in given combination as a key with value being empty string enables following scenarios:
 
-* filter for combinations that do _not_ have given parameter;
+* filter for combinations that do _not_ have a given parameter;
 * filter for combinations in which when given parameter with given key exists, it needs to have specific value.
 
 Display name filters can also be passed as a single regex string that runs against the [generated display name](#generated-display-name) of the matrix job.

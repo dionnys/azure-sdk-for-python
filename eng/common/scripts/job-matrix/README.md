@@ -224,7 +224,7 @@ then it will be excluded from the matrix. For example, the below combination wil
 
 ### displayNames
 
-Each matrix combination is named and displayed in Azure pipelines UI by
+Each matrix combination is named and displayed in the Azure pipelines UI by
 concatenating values of all the parameters of given combination.
 Sometimes these values are too long to be human readable or easy to use,
 e.g. as a command line argument.

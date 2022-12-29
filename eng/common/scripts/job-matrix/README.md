@@ -194,12 +194,65 @@ The `include` field defines any number of matrix combinations to be appended to 
 
 The value of `include` key is an array of objects, where each object represents one combination to add to all the combinations generated from the matrix.
 
-See [`samples/matrix.json`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/scripts/job-matrix/samples/matrix.json) for an example of `include` definition.
+For example:
+
+``` json
+"include": [
+    { "param_foo": "foo1","param_bar": "bar3" },
+    { "param_foo": "fooA","param_bar": "barC" }
+]
+```
+
+will add two combinations to the set of output combinations.
+
+There is an alternative, advanced interpretation of `include`, where each object in the array is not one combination
+to include, but a matrix used to generate a set of combinations. For example, given:
+
+``` json
+"include": [
+    {
+        "param_foo": ["foo1","foo2"],
+        "param_bar": ["bar3","bar4"]
+    },
+    {
+        "param_foo": ["fooA","fooB"],
+        "param_bar": ["barC","barD"]
+    }
+]
+```
+
+you will end up including `(2*2)+(2*2)=8` combinations:
+
+``` json
+[
+  {"param_foo": "foo1", "param_bar": "bar3"},
+  {"param_foo": "foo1", "param_bar": "bar4"},
+  {"param_foo": "foo2", "param_bar": "bar3"},
+  {"param_foo": "foo2", "param_bar": "bar4"},
+  {"param_foo": "fooA", "param_bar": "barC"},
+  {"param_foo": "fooA", "param_bar": "barD"},
+  {"param_foo": "fooB", "param_bar": "barC"},
+  {"param_foo": "fooB", "param_bar": "barD"}
+]
+```
+
+See [`samples/matrix.json`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/scripts/job-matrix/samples/matrix.json)
+for an example of `include` definition.
+Note that in this example, because `include[0].TestTargetFramework` parameter value
+is an array composed of two elements, the `include` will result in two combinations being added,
+differing by the value of `TestTargetFramework`.
+
+Implementation detail: in fact, the simple case of just listing combinations is
+a special case of the advanced matrix-generating case, where each array object
+has no more than one value for each parameter.
 
 ### exclude
 
-The `exclude` field defines any number of matrix combinations to be removed from the base matrix. Exclude parameters can be a partial
-set, meaning as long as all exclude parameters match against a matrix combination (even if the matrix combination has additional parameters),
+The `exclude` field defines any number of matrix combinations to be removed from the base matrix.
+`exclude` also supports defining matrix generating these combinations, same way as explained in the section
+on `include` above.
+Exclude parameters of each generated combination can be a partial set, meaning as long as all exclude parameters
+match against a matrix combination (even if the matrix combination has additional parameters),
 then it will be excluded from the matrix. For example, the below combination will match the exclusion and be removed:
 
 ``` yaml
@@ -260,7 +313,7 @@ To import a matrix, add a parameter with the key `$IMPORT`:
 
 Importing can be useful, for example, in cases where there is a shared base matrix, but there is a need to run it
 once for each instance of a language version, as seen in the example snippet above.
-Importing does not support overriding duplicate parameters. 
+Importing does not support overriding duplicate parameters.
 To achieve this, use the [Replace](#replacemodifyappend-values) argument instead.
 
 The `MatrixConfigs` `Selection` and `NonSparseParameters` parameters are respected when generating an imported matrix.
@@ -451,6 +504,7 @@ Matrix json configuration `include` and `exclude` keys support additions and sub
 off the base matrix.
 Both `include` and `exclude` take an array of matrix values. Typically each value will be a single combination,
 but `include/exclude` keys also support the cross-product matrix definition syntax of the base matrix.
+For details on the matrix generation support, see `Matrix JSON config fields` section for `include`.
 
 Include and exclude are parsed fully. So if a sparse matrix is called for, a sparse version of the base matrix
 will be generated, but the full matrix of both include and exclude will be processed.

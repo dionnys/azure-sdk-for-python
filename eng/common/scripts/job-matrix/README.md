@@ -501,7 +501,7 @@ When a matrix combination does not contain the specified key, it will default to
 Interpreting missing key in given combination as a key with value being empty string enables following scenarios:
 
 * filter for combinations that do _not_ have a given parameter;
-* filter for combinations in which when given parameter with given key exists, it needs to have specific value.
+* filter for combinations in which when a given parameter with a given key exists, it needs to have a specific value.
 
 Display name filters can also be passed as a single regex string that runs against the [generated display name](#generated-display-name) of the matrix job.
 The intent of display name filters is to be defined primarily as a top level variable at template queue time in the azure pipelines UI. It cannot be passed as parameter to the matrix generator template archetype, [`archetype-sdk-tests-generate.yml`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml).

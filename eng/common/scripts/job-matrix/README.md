@@ -246,7 +246,7 @@ If this is the case, they can be overridden with `displayNames`. For example:
 
 Matrix configs can also import another matrix config. The effect of this is the imported matrix will be generated,
 and then the importing config will be combined with that matrix as a product.
-Thus, if the imported matrix has `n` combinations and the importing matrix has `m` combinations, resulting
+Thus, if the imported matrix has `n` combinations and the importing matrix has `m` combinations, the resulting
 matrix will have `n * m` combinations.
 
 To import a matrix, add a parameter with the key `$IMPORT`:

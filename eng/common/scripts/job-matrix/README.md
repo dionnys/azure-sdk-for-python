@@ -45,7 +45,7 @@ or by calling [`Create-JobMatrix.ps1`](https://github.com/Azure/azure-sdk-tools/
 
 The pipeline usage is recommended.
 
-If you call the generator from the pipeline, you will rely on the [archetype](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml), which ends up calling `Create-JobMatrix.ps1` behind the scenes.
+If you call the generator from the pipeline, you will rely on the [generate template](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml), which ends up calling `Create-JobMatrix.ps1` behind the scenes.
 
 ## How to use matrix generator from your pipeline
 

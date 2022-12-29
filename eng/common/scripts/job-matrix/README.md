@@ -115,7 +115,7 @@ See also [Filters](#filters) and [Replace/Modify/Append Values](#replacemodifyap
 
 ## Matrix config file syntax
 
-Matrix config file is a [JSON](https://www.json.org/json-en.html) file.
+Matrix config file is a [JSON](https://www.json.org) file.
 
 The top-level element in the config is a JSON object having following keys:
 `matrix`, `include`, `exclude` and `displayNames`.

@@ -636,7 +636,7 @@ For example, the below config would generate a 2x2x1x1x1 matrix (five-dimensiona
 }
 ```
 
-The matrix is stored as a one-dimensional array, with a [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order)
+The matrix is stored as a one-dimensional array, with a [row-major](https://wikipedia.org/wiki/Row-_and_column-major_order)
 indexing scheme (e.g. `(2, 1, 0, 1, 0)`).
 
 ## Testing

@@ -517,7 +517,7 @@ named `ExcludedKey`, a `framework` parameter with value either `461` or `6.0`, a
   -Filters @("ExcludedKey=^$", "framework=(461|6\.0)", "SupportedClouds=^$|.*Public.*")
 ```
 
-Note that `Create-JobMatrix.ps1` is [called internally by the archetype](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml#L72) and you are never expected to call it directly.
+Note that `Create-JobMatrix.ps1` is [called internally by the generate template](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml#L72) and you are never expected to call it directly.
 Instead, use the generator from the pipelines, as explained in the [Matrix generator pipeline usage example](#matrix-generator-pipeline-usage-example).
 
 ### Replace/Modify/Append Values

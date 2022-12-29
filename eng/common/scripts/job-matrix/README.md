@@ -522,7 +522,7 @@ Instead, use use the generator from the pipelines, as explained in [Matrix gener
 
 ### Replace/Modify/Append Values
 
-Replacements for values can be passed to the matrix as an array of strings, in `MatrixReplace` parameter, each matching the format of `<keyRegex>=<valueRegex>/<replacementValue>`.
+Replacements for values can be passed to the matrix as an array of strings in the `MatrixReplace` parameter, each matching the format of `<keyRegex>=<valueRegex>/<replacementValue>`.
 The replace argument will find any combinations where the key fully matches the key regex and the value fully matches
 the value regex, and replace the value with the replacement specified.
 

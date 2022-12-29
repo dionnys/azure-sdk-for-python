@@ -490,7 +490,7 @@ The logic for generating display names works like this:
 
 * Join parameter values by `_`  
     a. If the parameter value exists as a key in [`displayNames`](#displaynames) in the matrix config, replace it with that value.  
-    b. For each name value, strip all non-alphanumeric characters (excluding "_").  
+    b. For each name value, strip all non-alphanumeric characters (excluding `_`).  
     c. If the name is greater than 100 characters, truncate it.
 
 ### Filters

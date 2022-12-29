@@ -518,7 +518,7 @@ named `ExcludedKey`, a `framework` parameter with value either `461` or `6.0`, a
 ```
 
 Note that `Create-JobMatrix.ps1` is [called internally by the archetype](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml#L72) and you are never expected to call it directly.
-Instead, use use the generator from the pipelines, as explained in [Matrix generator pipeline usage example](#matrix-generator-pipeline-usage-example).
+Instead, use the generator from the pipelines, as explained in the [Matrix generator pipeline usage example](#matrix-generator-pipeline-usage-example).
 
 ### Replace/Modify/Append Values
 

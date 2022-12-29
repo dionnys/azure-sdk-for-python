@@ -549,19 +549,30 @@ The logic for generating display names works like this:
 
 ### Filters
 
-Filters can be passed to the matrix as an array of strings, in `MatrixFilters` parameter, each matching the format of `<key>=<regex>`.
+Filters can be passed to the matrix as an array of strings in the `MatrixFilters` parameter,each matching the format of `<key>=<regex>`.
 When a matrix combination does not contain the specified key, it will default to a value of empty string for regex parsing.
 
-Interpreting missing key in given combination as a key with value being empty string enables following scenarios:
+Filters support filtering for scenarios in which some parameter values are missing. Specifically, you can do the following:
 
-* filter for combinations that do _not_ have a given parameter;
-* filter for combinations in which when a given parameter with a given key exists, it needs to have a specific value.
+1. filter for combinations that do _not_ have a given parameter;
+2. filter for combinations in which when a given parameter with a given key exists, it needs to have a specific value.
+
+Given the filters are regexs, to make these two scenarios possible a missing parameter is treated
+as a parameter whose key is present but value is an empty string.  
+For an example of case 1., if you want to exclude combinations that do not have parameter named `AbsentParam`
+(or, equivalently: you want to include only combinations that do have this parameter), you can create a filter
+with regex `AbsentParam=^$`.  
+For an example of case 2., if you want to include only combinations that either have `OptionalEnumParam` set to `foo` or `bar`,
+or don't have it at all, you can include filter of form `OptionalEnumParam=foo|bar|^$`
 
 Display name filters can also be passed as a single regex string that runs against the [generated display name](#generated-display-name) of the matrix job.
-The intent of display name filters is to be defined primarily as a top level variable at template queue time in the azure pipelines UI. It cannot be passed as parameter to the matrix generator template archetype, [`archetype-sdk-tests-generate.yml`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml).
+The intent of display name filters is to be defined primarily as a top level variable at template queue time in the azure pipelines UI.
+It cannot be passed as parameter to the matrix generator generate template,
+[`archetype-sdk-tests-generate.yml`](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml).
 
-For example, the below command will filter for matrix combinations  with `windows` in the job display name, no parameter variable
-named `ExcludedKey`, a `framework` parameter with value either `461` or `6.0`, and an optional parameter `SupportedClouds` that, if exists, must contain `Public`:
+For an example of all the various filters in action, the below command will filter for matrix combinations with
+`windows` in the job display name, no parameter variable named `ExcludedKey`, a `framework` parameter with value
+either `461` or `6.0`, and an optional parameter `SupportedClouds` that, if exists, must contain `Public`:
 
 ``` powershell
 ./Create-JobMatrix.ps1 `
@@ -571,7 +582,8 @@ named `ExcludedKey`, a `framework` parameter with value either `461` or `6.0`, a
   -Filters @("ExcludedKey=^$", "framework=(461|6\.0)", "SupportedClouds=^$|.*Public.*")
 ```
 
-Note that `Create-JobMatrix.ps1` is [called internally by the generate template](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml#L72) and you are never expected to call it directly.
+Note that `Create-JobMatrix.ps1` is [called internally by the generate template](https://github.com/Azure/azure-sdk-tools/blob/main/eng/common/pipelines/templates/jobs/archetype-sdk-tests-generate.yml#L72)
+and you are never expected to call it directly.
 Instead, use the generator from the pipelines, as explained in the [Matrix generator pipeline usage example](#matrix-generator-pipeline-usage-example).
 
 ### Replace/Modify/Append Values
